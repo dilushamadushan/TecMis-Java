@@ -14,14 +14,16 @@ Hi there! We're thrilled that you'd like to contribute to this project. Your hel
    - java
      - app
        - Admin
-       - > add your java package
-            > make your php document here for the use of otherts
-     - resources
-       - app -> add your fxml file
-       - media -> add your media
+       - add your java package
+           - > make your java class
+   - resources
+     - app
+       - create your file
+         - > add your fxml file
+     - media -> add your media
     
 ## Theme Colors:
 
 - Use these theme colors throughout:
   -  #00bb00
-  - #00d100
+  -  #00d100
