@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.tecmis.LoginController">
+   <children>
+      <Pane prefHeight="450.0" prefWidth="300.0" style="-fx-background-color: #00bb00;">
+         <children>
+            <ImageView fitHeight="192.0" fitWidth="294.0" layoutX="20.0" layoutY="140.0">
+               <image>
+                  <Image url="@../../media/home_logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="20.0" layoutY="44.0" text="Faculty of Technology">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="24.0" layoutY="80.0" text="Management Information System">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="96.0" layoutY="113.0" text="[ T E C M I S ]">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="66.0" layoutY="295.0" style="-fx-font-weight: bold;" text="University of Ruhuna">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="70.0" layoutY="342.0" text="E-Mail: tecmis@tec.ruh.ac.lk">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="26.0" layoutY="428.0" text="© Faculty of Technology, University of Ruhuna." textFill="#c8e4ce" />
+            <Label layoutX="98.0" layoutY="322.0" text="Matara-Sri Lanka">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Button fx:id="login_btn" layoutX="340.0" layoutY="323.0" mnemonicParsing="false" onAction="#loginBtn" prefHeight="47.0" prefWidth="226.0" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-background-color: #00d100;" text="Login" textOverrun="WORD_ELLIPSIS">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="403.0" layoutY="64.0" style="-fx-text-fill: #00bb00;" text="LOGIN">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="336.0" layoutY="135.0" text="Username" textFill="#616060">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="338.0" layoutY="225.0" text="Password" textFill="#616060">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="username" layoutX="339.0" layoutY="160.0" prefHeight="40.0" prefWidth="225.0" style="-fx-background-color: #fff; -fx-border-color: #fff;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="password" layoutX="339.0" layoutY="246.0" prefHeight="40.0" prefWidth="225.0" style="-fx-background-color: #fff; -fx-border-color: #fff;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </PasswordField>
+      <Line endX="118.0" layoutX="445.0" layoutY="200.0" startX="-106.79998779296875" stroke="#c1bebe" />
+      <Line endX="119.0" layoutX="446.0" layoutY="285.0" startX="-106.0" stroke="#c1bebe" />
+      <Label fx:id="loginError" layoutX="346.0" layoutY="391.0" prefHeight="25.0" prefWidth="234.0" textFill="#e10808">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="loginCloseBtn" layoutX="566.0" layoutY="14.0" onMouseClicked="#loginCloseBtn" style="-fx-font-weight: bold;" text="X" textFill="#00bb00">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
