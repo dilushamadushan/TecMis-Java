@@ -15,6 +15,9 @@ public class LoginController {
     private Label loginCloseBtn;
 
     @FXML
+    private Label loginError;
+
+    @FXML
     private Button login_btn;
 
     @FXML
@@ -24,7 +27,7 @@ public class LoginController {
     private TextField username;
 
     @FXML
-    void loginBtn(ActionEvent event) {
+    void loginBtn(ActionEvent event){
 
     }
 
