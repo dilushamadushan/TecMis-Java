@@ -12,15 +12,10 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.tecmis.LoginController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #fff;" stylesheets="@style_sheet/login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.tecmis.LoginController">
    <children>
-      <Pane prefHeight="450.0" prefWidth="350.0" style="-fx-background-color: #00bb00;">
+      <Pane prefHeight="450.0" prefWidth="350.0" style="-fx-background-color: #42a4f5;">
          <children>
-            <ImageView fitHeight="192.0" fitWidth="300.0" layoutX="36.0" layoutY="140.0" opacity="0.96">
-               <image>
-                  <Image url="@../../media/home_logo.png" />
-               </image>
-            </ImageView>
             <Label layoutX="40.0" layoutY="44.0" text="Faculty of Technology">
                <font>
                   <Font name="System Bold" size="25.0" />
@@ -52,9 +47,14 @@
                   <Font size="14.0" />
                </font>
             </Label>
+            <ImageView fitHeight="136.0" fitWidth="104.0" layoutX="118.0" layoutY="148.0" styleClass="logo">
+               <image>
+                  <Image url="@../../media/logo.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
-      <Button fx:id="login_btn" layoutX="409.0" layoutY="323.0" mnemonicParsing="false" onAction="#loginBtn" prefHeight="47.0" prefWidth="233.0" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-background-color: #00d100;" text="Login" textOverrun="WORD_ELLIPSIS">
+      <Button fx:id="login_btn" layoutX="409.0" layoutY="323.0" mnemonicParsing="false" onAction="#loginBtn" prefHeight="47.0" prefWidth="233.0" styleClass="login-btn" text="Login" textOverrun="WORD_ELLIPSIS">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -62,7 +62,7 @@
             <Insets />
          </opaqueInsets>
       </Button>
-      <Label layoutX="479.0" layoutY="66.0" style="-fx-text-fill: #00bb00;" text="LOGIN">
+      <Label layoutX="479.0" layoutY="66.0" style="-fx-text-fill: #42a4f5;" text="LOGIN">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
@@ -84,7 +84,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="loginCloseBtn" layoutX="673.0" layoutY="14.0" onMouseClicked="#loginCloseBtn" style="-fx-font-weight: bold;" text="X" textFill="#00bb00">
+      <Label fx:id="loginCloseBtn" layoutX="673.0" layoutY="14.0" onMouseClicked="#loginCloseBtn" styleClass="close-btn" text="X" textFill="#42a4f5">
          <font>
             <Font size="19.0" />
          </font>
