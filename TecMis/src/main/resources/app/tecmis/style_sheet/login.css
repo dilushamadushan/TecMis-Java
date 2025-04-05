@@ -1,0 +1,16 @@
+.logo{
+    -fx-blend-mode: MULTIPLY;
+}
+
+.close-btn{
+    -fx-font-weight: bold;
+}
+.login-btn{
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+    -fx-background-color:  #42a4f5;
+    -fx-background-radius: 20px;
+}
+.login-btn:hover{
+    -fx-background-color: rgba(66, 164, 245, 0.85);
+ }

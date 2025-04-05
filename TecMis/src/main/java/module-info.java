@@ -6,4 +6,6 @@ module app.tecmis {
 
     opens app.tecmis to javafx.fxml;
     exports app.tecmis;
+    exports app.tecmis.admin;
+    opens app.tecmis.admin to javafx.fxml;
 }
