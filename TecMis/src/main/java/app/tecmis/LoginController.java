@@ -35,7 +35,8 @@ public class LoginController {
     void loginBtn(ActionEvent event){
         System.out.println("Login button pressed");
         LoginController loginController = new LoginController();
-        loginController.adminWindow();
+        //loginController.adminWindow();
+        loginController.studentWindow();
     }
 
     public void adminWindow(){
@@ -49,6 +50,19 @@ public class LoginController {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
+    }
+
+    public void studentWindow(){
+        FXMLLoader loaderStu = new FXMLLoader(getClass().getResource("student-panel/student-panel.fxml"));
+        Scene sceneStu = null;
+        try {
+            sceneStu = new Scene(loaderStu.load(),1200,700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stageStu = new Stage();
+        stageStu.setScene(sceneStu);
+        stageStu.show();
     }
 
     @FXML
