@@ -36,7 +36,8 @@ public class LoginController {
         System.out.println("Login button pressed");
         LoginController loginController = new LoginController();
         //loginController.adminWindow();
-        loginController.studentWindow();
+        //loginController.studentWindow();
+        loginController.techOfficerWindow();
     }
 
     public void adminWindow(){
@@ -63,6 +64,19 @@ public class LoginController {
         Stage stageStu = new Stage();
         stageStu.setScene(sceneStu);
         stageStu.show();
+    }
+
+    public void techOfficerWindow(){
+        FXMLLoader loaderTO = new FXMLLoader(getClass().getResource("techOfficer-panel/techofficer_panel.fxml"));
+        Scene sceneTO = null;
+        try {
+            sceneTO = new Scene(loaderTO.load(),1200,700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stageTO = new Stage();
+        stageTO.setScene(sceneTO);
+        stageTO.show();
     }
 
     @FXML
