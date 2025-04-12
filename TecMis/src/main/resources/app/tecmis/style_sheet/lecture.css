@@ -1,5 +1,5 @@
-#Profile {
-    -fx-background-image: url("/media/lecture/Profile.png");
+.profile {
+    -fx-background-image: url('../media/lecture/Profile.png');
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-size: 30px 30px; /* Width height */

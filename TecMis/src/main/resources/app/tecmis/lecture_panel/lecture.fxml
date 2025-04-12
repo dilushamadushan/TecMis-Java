@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="707.0" stylesheets="@../style_sheet/lecture.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="500.0" prefWidth="707.0" stylesheets="@../style_sheet/lecture.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.tecmis.lecture.Lecture">
    <children>
       <AnchorPane layoutX="-9.0" prefHeight="130.0" prefWidth="717.0" style="-fx-background-color: #42a4f5;">
          <children>
@@ -18,12 +18,12 @@
             </Label>
             <ImageView fitHeight="92.0" fitWidth="99.0" layoutX="23.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../media/lecture/logo1.png" />
+                  <Image url="@../media/lecture/logo1.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <Button id="profile" fx:id="Profile" layoutX="34.0" layoutY="204.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="135.0" stylesheets="@../style_sheet/lecture.css" text="Profile" />
+      <Button id="profile" fx:id="Profile" layoutX="34.0" layoutY="204.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="135.0" styleClass="profile" stylesheets="@../style_sheet/lecture.css" text="Profile" />
       <Button fx:id="Courses" layoutX="200.0" layoutY="204.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="135.0" text="Cours" />
       <Button fx:id="Undergraduate" layoutX="544.0" layoutY="204.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="135.0" text="Undergraduate" />
       <Button fx:id="Eligibility" layoutX="34.0" layoutY="350.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="135.0" text="Eligibility" />
