@@ -37,20 +37,21 @@ public class LoginController {
         LoginController loginController = new LoginController();
         //loginController.adminWindow();
         //loginController.studentWindow();
-        loginController.techOfficerWindow();
+        //loginController.techOfficerWindow();
+        //loginController.lectureWindow();
     }
 
     public void adminWindow(){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("admin-panel/admin-panel.fxml"));
-            Scene scene = null;
+            FXMLLoader loaderAdmin = new FXMLLoader(getClass().getResource("admin-panel/admin-panel.fxml"));
+            Scene sceneAdmin = null;
             try {
-                scene = new Scene(loader.load(),1200,700);
+                sceneAdmin = new Scene(loaderAdmin.load(),1200,700);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
+            Stage stageAdmin = new Stage();
+            stageAdmin.setScene(sceneAdmin);
+            stageAdmin.show();
     }
 
     public void studentWindow(){
@@ -77,6 +78,19 @@ public class LoginController {
         Stage stageTO = new Stage();
         stageTO.setScene(sceneTO);
         stageTO.show();
+    }
+
+    public void lectureWindow(){
+        FXMLLoader loaderLec = new FXMLLoader(getClass().getResource("lecture_panel/lecture.fxml"));
+        Scene sceneLec = null;
+        try {
+            sceneLec = new Scene(loaderLec.load(),1200,700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stageLec = new Stage();
+        stageLec.setScene(sceneLec);
+        stageLec.show();
     }
 
     @FXML

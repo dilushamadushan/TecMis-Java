@@ -39,7 +39,7 @@
                               <Separator layoutX="26.0" layoutY="147.0" prefWidth="200.0" />
                            </children>
                         </AnchorPane>
-                        <Button layoutX="4.0" layoutY="162.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" styleClass="nav-btn" text="Dashbord">
+                        <Button fx:id="dashbordBtn" layoutX="4.0" layoutY="162.0" mnemonicParsing="false" onAction="#navBar_link" prefHeight="50.0" prefWidth="250.0" styleClass="nav-btn" text="Dashbord">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -49,22 +49,22 @@
                               <Font size="15.0" />
                            </font>
                         </FontAwesomeIconView>
-                        <Button layoutX="4.0" layoutY="212.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" styleClass="nav-btn" text="Lecture">
+                        <Button fx:id="lectureBtn" layoutX="4.0" layoutY="212.0" mnemonicParsing="false" onAction="#navBar_link" prefHeight="50.0" prefWidth="250.0" styleClass="nav-btn" text="Lecture">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Button>
-                        <Button layoutX="3.0" layoutY="462.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="255.0" styleClass="nav-btn" text="Time Table">
+                        <Button fx:id="timeTableBtn" layoutX="3.0" layoutY="462.0" mnemonicParsing="false" onAction="#navBar_link" prefHeight="50.0" prefWidth="255.0" styleClass="nav-btn" text="Time Table">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Button>
-                        <Button layoutX="4.0" layoutY="362.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" styleClass="nav-btn" text="Course">
+                        <Button fx:id="courseBtn" layoutX="4.0" layoutY="362.0" mnemonicParsing="false" onAction="#navBar_link" prefHeight="50.0" prefWidth="250.0" styleClass="nav-btn" text="Course">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Button>
-                        <Button layoutX="4.0" layoutY="412.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" styleClass="nav-btn" text="Notice">
+                        <Button fx:id="noticeBtn" layoutX="4.0" layoutY="412.0" mnemonicParsing="false" onAction="#navBar_link" prefHeight="50.0" prefWidth="250.0" styleClass="nav-btn" text="Notice">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -89,22 +89,22 @@
                               <Font size="15.0" />
                            </font>
                         </FontAwesomeIconView>
-                        <Button layoutX="4.0" layoutY="649.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" styleClass="nav-logout-btn" text="Logout">
+                        <Button layoutX="4.0" layoutY="649.0" mnemonicParsing="false" onAction="#logout" prefHeight="50.0" prefWidth="250.0" styleClass="nav-logout-btn" text="Logout">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Button>
                         <ImageView fitHeight="23.0" fitWidth="26.0" layoutX="36.0" layoutY="663.0">
                            <image>
-                              <Image url="@../../../media/logout.png" />
+                              <Image url="@../media/logout.png" />
                            </image>
                         </ImageView>
-                        <Button layoutX="3.0" layoutY="262.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="254.0" styleClass="nav-btn" text="Undergraduate">
+                        <Button fx:id="studentBtn" layoutX="3.0" layoutY="262.0" mnemonicParsing="false" onAction="#navBar_link" prefHeight="50.0" prefWidth="254.0" styleClass="nav-btn" text="Student">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Button>
-                        <Button layoutX="2.0" layoutY="312.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="254.0" styleClass="nav-btn" text="Tech Offiser">
+                        <Button fx:id="techofficerBtn" layoutX="2.0" layoutY="312.0" mnemonicParsing="false" onAction="#navBar_link" prefHeight="50.0" prefWidth="254.0" styleClass="nav-btn" text="Tech Offiser">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -115,7 +115,15 @@
                   </AnchorPane>
                </left>
                <center>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane fx:id="dashbord" prefHeight="700.0" prefWidth="946.0" visible="false">
+                           <children>
+                              <Label layoutX="147.0" layoutY="194.0" text="Dashbord" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="lecture" prefHeight="700.0" prefWidth="945.0" />
+                     </children></AnchorPane>
                </center>
             </BorderPane>
          </children></AnchorPane>

@@ -47,9 +47,9 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ImageView fitHeight="136.0" fitWidth="104.0" layoutX="118.0" layoutY="148.0" styleClass="logo">
+            <ImageView fitHeight="144.0" fitWidth="104.0" layoutX="118.0" layoutY="153.0" styleClass="logo">
                <image>
-                  <Image url="@../../media/logo.png" />
+                  <Image url="@media/logo.png" />
                </image>
             </ImageView>
          </children>
@@ -91,12 +91,12 @@
       </Label>
       <ImageView fitHeight="20.0" fitWidth="23.0" layoutX="409.0" layoutY="160.0" opacity="0.84" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../media/user.png" />
+            <Image url="@media/user.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="409.0" layoutY="236.0" opacity="0.84">
          <image>
-            <Image url="@../../media/padlock.png" />
+            <Image url="@media/padlock.png" />
          </image>
       </ImageView>
    </children>
