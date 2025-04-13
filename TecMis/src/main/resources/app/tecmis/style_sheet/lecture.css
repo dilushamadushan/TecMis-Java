@@ -1,14 +1,27 @@
 
 
-#Profile {
-
+#Profile,
+#Undergraduate,
+#Notice,
+#Eligibility,
+#AttendaceNMedical,
+#ExamMaks,
+#Courses,
+#GradeNGpa {
     -fx-scale-x: 1;
     -fx-scale-y: 1;
+    -fx-cursor: hand; /* Changes cursor to hand on hover */
 }
 
-/* Define hover pseudoclass to handle the zoom */
-#Profile:hover {
+/* Hover effect: Zoom in */
+#Profile:hover,
+#Undergraduate:hover,
+#Notice:hover,
+#Eligibility:hover,
+#AttendaceNMedical:hover,
+#ExamMaks:hover,
+#Courses:hover,
+#GradeNGpa:hover {
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
-    /* This doesn't create animation by itself */
 }

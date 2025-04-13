@@ -11,19 +11,19 @@
    <children>
       <AnchorPane prefHeight="142.0" prefWidth="1250.0" style="-fx-background-color: #42a4f5;">
          <children>
-            <Label layoutX="133.0" layoutY="30.0" prefHeight="70.0" prefWidth="382.0" text=" Welcome Lecture Name" textFill="WHITE">
+            <Label layoutX="129.0" layoutY="36.0" prefHeight="70.0" prefWidth="382.0" text=" Welcome Lecture Name" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <ImageView fitHeight="92.0" fitWidth="99.0" layoutX="23.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="99.0" fitWidth="129.0" layoutX="23.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../media/lecture/logo1.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <ImageView id="Profile" fx:id="Profile" fitHeight="150.0" fitWidth="200.0" layoutX="101.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="Profile" fx:id="Profile" fitHeight="189.0" fitWidth="150.0" layoutX="76.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../media/lecture/Profile.png" />
          </image>
@@ -31,80 +31,40 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </ImageView>
-      <Label layoutX="103.0" layoutY="366.0" text="Profile">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <ImageView id="GradeNGpa" fx:id="GradeNGpa" fitHeight="150.0" fitWidth="200.0" layoutX="367.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="GradeNGpa" fx:id="GradeNGpa" fitHeight="212.0" fitWidth="129.0" layoutX="352.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../media/lecture/Grades%20&amp;%20GPA.png" />
          </image>
       </ImageView>
-      <Label layoutX="327.0" layoutY="366.0" text="Grade &amp; Gpa">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="658.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="Courses" fitHeight="161.0" fitWidth="161.0" layoutX="625.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../media/lecture/Courses.png" />
          </image>
       </ImageView>
-      <Label layoutX="581.0" layoutY="390.0" text="Courses">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="941.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="ExamMaks" fitHeight="161.0" fitWidth="175.0" layoutX="918.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../media/lecture/Exam%20Marks.png" />
          </image>
       </ImageView>
-      <Label layoutX="847.0" layoutY="383.0" text="Exam Mark">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="92.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="AttendaceNMedical" fitHeight="228.0" fitWidth="129.0" layoutX="87.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../media/lecture/Attendance%20&amp;%20Medicals.png" />
          </image>
       </ImageView>
-      <Label layoutX="62.0" layoutY="629.0" text="Attendace &amp; Medical">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="339.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="Eligibility" fitHeight="171.0" fitWidth="126.0" layoutX="358.0" layoutY="447.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../media/lecture/Eligibility.png" />
          </image>
       </ImageView>
-      <Label layoutX="367.0" layoutY="638.0" text="Eligibility">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="550.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="Notice" fitHeight="171.0" fitWidth="161.0" layoutX="607.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../media/lecture/Notice.png" />
          </image>
       </ImageView>
-      <Label layoutX="581.0" layoutY="638.0" text="Notices">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="838.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="Undergraduate" fitHeight="161.0" fitWidth="161.0" layoutX="918.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../media/lecture/Undergraduate.png" />
          </image>
       </ImageView>
-      <Label layoutX="878.0" layoutY="638.0" text="Undergraduate">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>
