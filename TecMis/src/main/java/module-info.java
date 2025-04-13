@@ -10,8 +10,18 @@ module app.tecmis {
     exports app.tecmis.student;
     exports app.tecmis.techOfficer;
 
+
+
     opens app.tecmis.admin to javafx.fxml;
     opens app.tecmis.student to javafx.fxml;
     opens app.tecmis.techOfficer to javafx.fxml;
+
+
+
+
+
+
+
+
 
 }
