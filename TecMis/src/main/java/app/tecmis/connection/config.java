@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class config {
+public class Config {
     private static final  String _url = "jdbc:mysql://localhost:3306/tecmis";
     private static final  String _user = "root";
     private static final  String _password = "";
