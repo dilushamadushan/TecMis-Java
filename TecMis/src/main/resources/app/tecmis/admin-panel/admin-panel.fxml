@@ -141,85 +141,84 @@
                                           <Font name="System Bold" size="28.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="searchBar" layoutX="575.0" layoutY="31.0" prefHeight="35.0" prefWidth="335.0" promptText="Find User" styleClass="searchBar" />
-                                    <Button layoutX="897.0" layoutY="35.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="27.0" styleClass="searchBtn" />
-                                    <FontAwesomeIconView glyphName="SEARCH" layoutX="885.0" layoutY="57.0" onDragDetected="#searchBarBtn" size="20" text="" wrappingWidth="18.571428298950195" />
+                                    <TextField fx:id="searchBar" layoutX="575.0" layoutY="31.0" onMouseClicked="#lecSearchBar" prefHeight="35.0" prefWidth="335.0" promptText="Find User" styleClass="searchBar" />
+                                    <FontAwesomeIconView glyphName="SEARCH" layoutX="885.0" layoutY="57.0" size="20" text="" wrappingWidth="18.571428298950195" />
                                  </children>
                               </Pane>
-                              <Pane layoutX="17.0" layoutY="141.0" prefHeight="218.0" prefWidth="916.0" style="-fx-background-color: #F0F8FF; -fx-background-radius: 10px;" styleClass="shadow">
+                              <Pane layoutX="18.0" layoutY="141.0" prefHeight="270.0" prefWidth="916.0" style="-fx-background-color: #F0F8FF; -fx-background-radius: 10px;" styleClass="shadow">
                                  <children>
-                                    <TableView fx:id="lecTableView" layoutX="6.0" layoutY="4.0" onMouseClicked="#handleRowsLecTable" prefHeight="212.0" prefWidth="904.0">
+                                    <TableView fx:id="lecTableView" layoutX="7.0" layoutY="13.0" onMouseClicked="#handleRowsLecTable" prefHeight="247.0" prefWidth="903.0">
                                       <columns>
                                         <TableColumn fx:id="_userID" prefWidth="55.20001029968262" text="User ID" />
                                         <TableColumn fx:id="_userNIC" prefWidth="79.9999771118164" text="NIC" />
                                           <TableColumn fx:id="_userName" prefWidth="97.60000610351562" text="Name" />
                                           <TableColumn fx:id="_userAddress" prefWidth="70.4000244140625" text="Address" />
-                                          <TableColumn fx:id="_userEmail" prefWidth="78.4000244140625" text="Email" />
-                                          <TableColumn fx:id="_userGender" prefWidth="59.20001220703125" text="Gender" />
+                                          <TableColumn fx:id="_userEmail" prefWidth="100.79998779296875" text="Email" />
+                                          <TableColumn fx:id="_userGender" prefWidth="50.4000244140625" text="Gender" />
                                           <TableColumn fx:id="_userBOD" prefWidth="75.99996948242188" text="BOD" />
-                                          <TableColumn fx:id="_userContactNo" minWidth="0.0" prefWidth="77.60003662109375" text="Contact No" />
-                                          <TableColumn fx:id="_lecPosition" prefWidth="109.59991455078125" text="Position" />
-                                          <TableColumn fx:id="_userDepartment" minWidth="0.0" prefWidth="115.9998779296875" text="Department" />
+                                          <TableColumn fx:id="_userContactNo" minWidth="0.0" prefWidth="92.79998779296875" text="Contact No" />
+                                          <TableColumn fx:id="_lecPosition" prefWidth="118.39996337890625" text="Position" />
+                                          <TableColumn fx:id="_userDepartment" minWidth="0.0" prefWidth="81.59991455078125" text="Department" />
                                           <TableColumn fx:id="_userPassword" minWidth="0.0" prefWidth="81.60009765625" text="Password" />
                                       </columns>
                                     </TableView>
                                  </children>
                               </Pane>
-                              <Pane layoutX="16.0" layoutY="367.0" prefHeight="327.0" prefWidth="919.0">
+                              <Pane layoutX="16.0" layoutY="411.0" prefHeight="296.0" prefWidth="919.0">
                                  <children>
-                                    <TextField fx:id="_lecId" layoutX="75.0" layoutY="20.0" prefHeight="30.0" prefWidth="230.0" />
-                                    <TextField fx:id="_lecName" layoutX="75.0" layoutY="69.0" prefHeight="30.0" prefWidth="230.0" />
-                                    <TextField fx:id="_lecEmail" layoutX="75.0" layoutY="160.0" prefHeight="30.0" prefWidth="230.0" />
-                                    <TextField fx:id="_lecNIC" layoutX="75.0" layoutY="116.0" prefHeight="30.0" prefWidth="230.0" />
-                                    <TextField fx:id="_lecAddress" layoutX="75.0" layoutY="205.0" prefHeight="30.0" prefWidth="230.0" />
-                                    <TextField fx:id="_lecPositionTF" layoutX="431.0" layoutY="117.0" prefHeight="30.0" prefWidth="230.0" />
-                                    <TextField fx:id="_lecContactNo" layoutX="431.0" layoutY="69.0" prefHeight="30.0" prefWidth="230.0" />
-                                    <Label layoutX="14.0" layoutY="25.0" text="User ID">
+                                    <TextField fx:id="_lecId" layoutX="102.0" layoutY="18.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_lecName" layoutX="102.0" layoutY="67.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_lecEmail" layoutX="102.0" layoutY="158.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_lecNIC" layoutX="102.0" layoutY="114.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_lecAddress" layoutX="102.0" layoutY="203.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_lecPositionTF" layoutX="458.0" layoutY="115.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_lecContactNo" layoutX="458.0" layoutY="67.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <Label layoutX="41.0" layoutY="23.0" text="User ID">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="14.0" layoutY="74.0" text="Name">
+                                    <Label layoutX="41.0" layoutY="72.0" text="Name">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="11.0" layoutY="209.0" text="Address">
+                                    <Label layoutX="38.0" layoutY="207.0" text="Address">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="15.0" layoutY="165.0" text="Email">
+                                    <Label layoutX="42.0" layoutY="163.0" text="Email">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="12.0" layoutY="257.0" text="Gender">
+                                    <Label layoutX="252.0" layoutY="246.0" text="Gender">
                                        <font>
                                           <Font name="System Bold" size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="322.0" layoutY="25.0" text="Birth  Of Date">
+                                    <Label layoutX="349.0" layoutY="23.0" text="Birth Of Date">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="322.0" layoutY="74.0" text="Contact No">
+                                    <Label layoutX="349.0" layoutY="72.0" text="Contact No">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="322.0" layoutY="121.0" text="Position">
+                                    <Label layoutX="349.0" layoutY="119.0" text="Position">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="14.0" layoutY="121.0" text="NIC">
+                                    <Label layoutX="41.0" layoutY="119.0" text="NIC">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <RadioButton fx:id="_lecGenderM" layoutX="92.0" layoutY="258.0" mnemonicParsing="false" text="Male">
+                                    <RadioButton fx:id="_lecGenderM" layoutX="332.0" layoutY="247.0" mnemonicParsing="false" text="Male">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -227,68 +226,52 @@
                                           <ToggleGroup fx:id="gender" />
                                        </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton fx:id="_lecGenderF" layoutX="190.0" layoutY="259.0" mnemonicParsing="false" text="Female" toggleGroup="$gender">
+                                    <RadioButton fx:id="_lecGenderF" layoutX="430.0" layoutY="250.0" mnemonicParsing="false" text="Female" toggleGroup="$gender">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </RadioButton>
-                                    <DatePicker fx:id="_lecBOD" layoutX="431.0" layoutY="21.0" prefHeight="30.0" prefWidth="230.0" />
-                                    <Button layoutX="359.0" layoutY="255.0" mnemonicParsing="false" onAction="#addNewLectureBtn" prefHeight="30.0" prefWidth="120.0" text="Add">
+                                    <DatePicker fx:id="_lecBOD" layoutX="458.0" layoutY="19.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <Button layoutX="747.0" layoutY="17.0" mnemonicParsing="false" onAction="#addNewLectureBtn" prefHeight="35.0" prefWidth="150.0" text="Add">
                                        <styleClass>
                                           <String fx:value="addBtn" />
                                           <String fx:value="lecBtn" />
                                           <String fx:value="shadow" />
                                        </styleClass>
                                     </Button>
-                                    <Button layoutX="495.0" layoutY="255.0" mnemonicParsing="false" onAction="#lecUpdateBtn" prefHeight="30.0" prefWidth="120.0" text="Update">
+                                    <Button layoutX="747.0" layoutY="80.0" mnemonicParsing="false" onAction="#lecUpdateBtn" prefHeight="35.0" prefWidth="150.0" text="Update">
                                        <styleClass>
                                           <String fx:value="updateBtn" />
                                           <String fx:value="lecBtn" />
                                           <String fx:value="shadow" />
                                        </styleClass>
                                     </Button>
-                                    <Button layoutX="633.0" layoutY="255.0" mnemonicParsing="false" onAction="#lecDeleteBtn" prefHeight="30.0" prefWidth="120.0" text="Delete">
+                                    <Button layoutX="747.0" layoutY="141.0" mnemonicParsing="false" onAction="#lecDeleteBtn" prefHeight="35.0" prefWidth="150.0" text="Delete">
                                        <styleClass>
                                           <String fx:value="deleteBtn" />
                                           <String fx:value="shadow" />
                                           <String fx:value="lecBtn" />
                                        </styleClass>
                                     </Button>
-                                    <Button layoutX="773.0" layoutY="255.0" mnemonicParsing="false" onAction="#lecClearBtn" prefHeight="30.0" prefWidth="120.0" text="Clear">
+                                    <Button layoutX="747.0" layoutY="200.0" mnemonicParsing="false" onAction="#lecClearBtn" prefHeight="35.0" prefWidth="150.0" text="Clear">
                                        <styleClass>
                                           <String fx:value="clearBtn" />
                                           <String fx:value="shadow" />
                                           <String fx:value="lecBtn" />
                                        </styleClass>
                                     </Button>
-                                    <AnchorPane layoutX="716.0" layoutY="17.0" prefHeight="212.0" prefWidth="150.0">
-                                       <styleClass>
-                                          <String fx:value="lecImg" />
-                                          <String fx:value="shadow" />
-                                       </styleClass>
-                                    </AnchorPane>
-                                    <Label fx:id="_errorMsgLec" layoutX="332.0" layoutY="292.0" prefHeight="17.0" prefWidth="255.0" textFill="#e40808">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="_resultMsgLec" layoutX="333.0" layoutY="292.0" prefHeight="17.0" prefWidth="254.0" textFill="#008636">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="319.0" layoutY="165.0" text="Department">
+                                    <Label layoutX="348.0" layoutY="163.0" text="Department">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="326.0" layoutY="209.0" text="Password">
+                                    <Label layoutX="353.0" layoutY="207.0" text="Password">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <ComboBox fx:id="_lecDepartment" layoutX="431.0" layoutY="161.0" prefHeight="30.0" prefWidth="230.0" promptText="Choise" />
-                                    <PasswordField fx:id="_lecPassword" layoutX="432.0" layoutY="207.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <ComboBox fx:id="_lecDepartment" layoutX="458.0" layoutY="159.0" prefHeight="30.0" prefWidth="230.0" promptText="Choise" />
+                                    <PasswordField fx:id="_lecPassword" layoutX="459.0" layoutY="205.0" prefHeight="30.0" prefWidth="230.0" />
                                  </children>
                               </Pane>
                            </children></AnchorPane>

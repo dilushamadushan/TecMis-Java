@@ -4,19 +4,12 @@ import app.tecmis.connection.Config;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -104,11 +97,6 @@ public class Admin implements Initializable {
     @FXML
     private TextField _lecPositionTF;
 
-    @FXML
-    private Label _errorMsgLec;
-
-    @FXML
-    private Label _resultMsgLec;
 
     @FXML
     private ToggleGroup gender;
@@ -152,6 +140,10 @@ public class Admin implements Initializable {
     @FXML
     private TableColumn<LecDetails, String> _userDepartment;
 
+    @FXML
+    void lecSearchBar(MouseEvent event) {
+        lecSearch();
+    }
 
     @FXML
     void addNewLectureBtn(ActionEvent event) {
@@ -159,22 +151,15 @@ public class Admin implements Initializable {
     }
     @FXML
     void lecClearBtn(ActionEvent event) {
-
+        cleanLecTextFiled();
     }
-
     @FXML
     void lecDeleteBtn(ActionEvent event) {
         lecDelete();
     }
-
     @FXML
     void lecUpdateBtn(ActionEvent event) {
         lecUpdate();
-    }
-
-    @FXML
-    void searchBarBtn(MouseEvent event) {
-
     }
 
     @FXML
@@ -210,10 +195,11 @@ public class Admin implements Initializable {
         }else if(event.getSource()==lectureBtn){
             dashbord.setVisible(false);
             lecture.setVisible(true);
+            setDepName();
         }
     }
 
-    public ObservableList<String> getDepartment() {
+    public ObservableList<String> getDepartmentNameList() {
         ObservableList<String> listDepName = FXCollections.observableArrayList();
         Connection con = Config.getConfig();
         String depSql = "SELECT * FROM department";
@@ -230,14 +216,17 @@ public class Admin implements Initializable {
             System.out.println("Error: " + e.getMessage());
         }
         return listDepName;
-
     }
-
-    public String setDepId() {
+    public void setDepName(){
+        ObservableList<String> dep = getDepartmentNameList();
+        _lecDepartment.setItems(dep);
+    }
+    public String setDepId(Object lecDepName) {
         Connection conn2 = Config.getConfig();
-        String lecDepName = _lecDepartment.getSelectionModel().getSelectedItem().toString();
         String ld = "";
-
+        if(lecDepName != null){
+            lecDepName = lecDepName.toString();
+        }
         String depSql = "SELECT * FROM department";
         Statement depSt = null;
         ResultSet depRs = null;
@@ -306,7 +295,6 @@ public class Admin implements Initializable {
         lecTableView.setItems(List);
     }
     @FXML
-
     private void addNewLecture(){
         Connection conn = Config.getConfig();
         String lecId = _lecId.getText();
@@ -319,7 +307,27 @@ public class Admin implements Initializable {
         String lecContactNo = _lecContactNo.getText();
         String lecPosition  = _lecPositionTF.getText();
         String lecPassword = _lecPassword.getText();
-        String ld = setDepId();
+        Object lecDepName = _lecDepartment.getSelectionModel().getSelectedItem();
+        String ld = setDepId(lecDepName);
+
+        if (lecId.isEmpty()
+                || lecNIC.isEmpty()
+                || lecFullName.isEmpty()
+                || lecAddress.isEmpty()
+                || lecEmail.isEmpty()
+                || lecGender.isEmpty()
+                || lecBod == null
+                || lecContactNo.isEmpty()
+                || lecPosition.isEmpty()
+                || lecPassword.isEmpty()
+                || lecDepName == null) {
+            Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
+            errorAlert.setTitle("Missing Fields");
+            errorAlert.setHeaderText(null);
+            errorAlert.setContentText("Please fill in all the required fields before submitting.");
+            errorAlert.showAndWait();
+            return;
+        }
 
         String[] nameParts = lecFullName.split(" ");
         String first_name = nameParts[0];
@@ -354,12 +362,18 @@ public class Admin implements Initializable {
            contactStmt.setString(2, lecContactNo);
            contactStmt.executeUpdate();
 
+           Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+           successAlert.setTitle("Lecture Added");
+           successAlert.setHeaderText(null);
+           successAlert.setContentText("Lecture '" + lecId + "'added successfully!");
+           successAlert.showAndWait();
+
        } catch (Exception e){
            System.out.println("Error " + e.getMessage());
        }
        showLectureToTable();
+       cleanLecTextFiled();
     }
-
     public void lecUpdate(){
         Connection conn = Config.getConfig();
         String lecId = _lecId.getText();
@@ -372,7 +386,8 @@ public class Admin implements Initializable {
         String lecContactNo = _lecContactNo.getText();
         String lecPosition  = _lecPositionTF.getText();
         String lecPassword = _lecPassword.getText();
-        String ld = setDepId();
+        Object lecDepName = _lecDepartment.getSelectionModel().getSelectedItem();
+        String ld = setDepId(lecDepName);
 
         String[] nameParts = lecFullName.split(" ");
         String first_name = nameParts[0];
@@ -406,10 +421,17 @@ public class Admin implements Initializable {
             userPs.setString(8, lecPassword);
             userPs.setString(9, lecId);
             userPs.executeUpdate();
+
+            Alert updatedAlert = new Alert(Alert.AlertType.INFORMATION);
+            updatedAlert.setTitle("Lecture Updated");
+            updatedAlert.setHeaderText(null);
+            updatedAlert.setContentText("Lecture '" + lecId + "' updated successfully!");
+            updatedAlert.showAndWait();
         } catch (Exception e){
             System.out.println("Error " + e.getMessage());
         }
         showLectureToTable();
+        cleanLecTextFiled();
     }
     public void lecDelete(){
         Connection conn = Config.getConfig();
@@ -433,15 +455,65 @@ public class Admin implements Initializable {
             userPs.setString(1, lecId);
             userPs.executeUpdate();
 
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Lecture Deleted");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("Lecture '" + lecId + "'Deleted Successfully!");
+            successAlert.showAndWait();
+
         }catch (Exception e){
             System.out.println("Error " + e.getMessage());
         }
         showLectureToTable();
+        cleanLecTextFiled();
+    }
+    public void cleanLecTextFiled(){
+        _lecId.setText("");
+        _lecNIC.setText("");
+        _lecName.setText("");
+        _lecAddress.setText("");
+        _lecEmail.setText("");
+        _lecGenderM.setSelected(false);
+        _lecBOD.setValue(null);
+        _lecContactNo.setText("");
+        _lecPositionTF.setText("");
+        _lecPassword.setText("");
+        _lecDepartment.setValue(null);
+    }
+    public void lecSearch(){
+        FilteredList<LecDetails> filter = new FilteredList<>(getLecture(),e -> true);
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filter.setPredicate(predicateLecData ->{
+                if(newValue == null || newValue.isEmpty()) return true;
+
+                String searchKey = newValue.toLowerCase();
+
+                if (predicateLecData.getLecId().toLowerCase().contains(searchKey)) {
+                    return true;
+                }else if(predicateLecData.getLecFullName().toLowerCase().contains(searchKey)){
+                    return true;
+                } else if (predicateLecData.getLecAddress().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateLecData.getLecEmail().toLowerCase().contains(searchKey)) {
+                    return true;
+                }else if (predicateLecData.getLecGender().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateLecData.getLecDepName().toLowerCase().contains(searchKey)) {
+                    return true;
+                }else if (predicateLecData.getLecPosition().toLowerCase().contains(searchKey)) {
+                    return true;
+                }else{
+                    return false;
+                }
+            });
+        });
+        SortedList<LecDetails> sortedList = new SortedList<>(filter);
+         sortedList.comparatorProperty().bind(lecTableView.comparatorProperty());
+         lecTableView.setItems(sortedList);
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showLectureToTable();
-        ObservableList<String> dep = getDepartment();
-        _lecDepartment.setItems(dep);
+        setDepName();
     }
 }
