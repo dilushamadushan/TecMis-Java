@@ -47,6 +47,9 @@ public class Admin implements Initializable {
     private Button noticeBtn;
 
     @FXML
+    private AnchorPane student;
+
+    @FXML
     private Button studentBtn;
 
     @FXML
@@ -97,53 +100,121 @@ public class Admin implements Initializable {
     @FXML
     private TextField _lecPositionTF;
 
-
     @FXML
     private ToggleGroup gender;
 
     @FXML
-    private TextField searchBar;
+    private TextField lecSearchBar;
 
     @FXML
     private TableView<LecDetails> lecTableView;
 
     @FXML
-    private TableColumn<LecDetails, String> _userAddress;
+    private TableColumn<LecDetails, String> lec_Address;
 
     @FXML
-    private TableColumn<LecDetails, Date> _userBOD;
+    private TableColumn<LecDetails, Date> lec_BOD;
 
     @FXML
-    private TableColumn<LecDetails, String> _userContactNo;
+    private TableColumn<LecDetails, String> lec_ContactNo;
 
     @FXML
-    private TableColumn<LecDetails, String> _userEmail;
+    private TableColumn<LecDetails, String> lec_Email;
 
     @FXML
-    private TableColumn<LecDetails, String> _userGender;
+    private TableColumn<LecDetails, String> lec_Gender;
 
     @FXML
-    private TableColumn<LecDetails, String> _userID;
+    private TableColumn<LecDetails, String> lec_ID;
 
     @FXML
-    private TableColumn<LecDetails, String> _userNIC;
+    private TableColumn<LecDetails, String> lec_NIC;
 
     @FXML
-    private TableColumn<LecDetails, String> _userName;
+    private TableColumn<LecDetails, String> lec_Name;
 
     @FXML
-    private TableColumn<LecDetails, String> _lecPosition;
+    private TableColumn<LecDetails, String> lec_Position;
 
     @FXML
-    private TableColumn<LecDetails, String> _userPassword;
+    private TableColumn<LecDetails, String> lec_Password;
 
     @FXML
-    private TableColumn<LecDetails, String> _userDepartment;
+    private TableColumn<LecDetails, String> lec_Department;
+
+    //student
 
     @FXML
-    void lecSearchBar(MouseEvent event) {
-        lecSearch();
-    }
+    private TextField _stuAddress;
+
+    @FXML
+    private DatePicker _stuBOD;
+
+    @FXML
+    private TextField _stuContactNo;
+
+    @FXML
+    private ComboBox _stuDepartment;
+
+    @FXML
+    private TextField _stuEmail;
+
+    @FXML
+    private RadioButton _stuGenderF;
+
+    @FXML
+    private RadioButton _stuGenderM;
+
+    @FXML
+    private TextField _stuId;
+
+    @FXML
+    private TextField _stuNIC;
+
+    @FXML
+    private TextField _stuName;
+
+    @FXML
+    private PasswordField _stuPassword;
+
+    @FXML
+    private ToggleGroup gender1;
+
+    @FXML
+    private TextField stuSearchBar;
+
+    @FXML
+    private TableView<StudentDetails> stuTableView;
+
+    @FXML
+    private TableColumn<StudentDetails, String> stu_Address;
+
+    @FXML
+    private TableColumn<StudentDetails, Date> stu_BOD;
+
+    @FXML
+    private TableColumn<StudentDetails, String> stu_ContactNo;
+
+    @FXML
+    private TableColumn<StudentDetails, String> stu_Department;
+
+    @FXML
+    private TableColumn<StudentDetails, String> stu_Email;
+
+    @FXML
+    private TableColumn<StudentDetails, String> stu_Gender;
+
+    @FXML
+    private TableColumn<StudentDetails, String> stu_ID;
+
+    @FXML
+    private TableColumn<StudentDetails, String> stu_NIC;
+
+    @FXML
+    private TableColumn<StudentDetails, String> stu_Name;
+
+    @FXML
+    private TableColumn<StudentDetails, String> stu_Password;
 
     @FXML
     void addNewLectureBtn(ActionEvent event) {
@@ -161,6 +232,24 @@ public class Admin implements Initializable {
     void lecUpdateBtn(ActionEvent event) {
         lecUpdate();
     }
+
+    @FXML
+    void addNewStudentBtn(ActionEvent event) {
+        addNewStudent();
+    }
+    @FXML
+    void stuClearBtn(ActionEvent event) {
+
+    }
+    @FXML
+    void stuDeleteBtn(ActionEvent event) {
+
+    }
+    @FXML
+    void stuUpdateBtn(ActionEvent event) {
+
+    }
+
 
     @FXML
     void handleRowsLecTable(MouseEvent event) {
@@ -186,16 +275,49 @@ public class Admin implements Initializable {
         LocalDate localDate = LocalDate.parse(date);
         _lecBOD.setValue(localDate);
     }
+    @FXML
+    void handleRowsStuTable(MouseEvent event) {
+        StudentDetails stuDetails = stuTableView.getSelectionModel().getSelectedItem();
+        _stuId.setText(String.valueOf(stuDetails.getStuId()));
+        _stuNIC.setText(String.valueOf(stuDetails.getStuNic()));
+        _stuName.setText(String.valueOf(stuDetails.getStuFullName()));
+        _stuAddress.setText(String.valueOf(stuDetails.getStuAddress()));
+        _stuEmail.setText(String.valueOf(stuDetails.getStuEmail()));
+        _stuPassword.setText(String.valueOf(stuDetails.getStuPassword()));
+        _stuContactNo.setText(String.valueOf(stuDetails.getStuContactNo()));
+        _stuDepartment.setValue(stuDetails.getStuDepName());
+
+        String stuGender = String.valueOf(stuDetails.getStuGender());
+        if("M".equalsIgnoreCase(stuGender)){
+            _stuGenderM.setSelected(true);
+        }else if("F".equalsIgnoreCase(stuGender)){
+            _stuGenderF.setSelected(true);
+        }
+
+        String date = String.valueOf(stuDetails.getStuBod());
+        LocalDate localDate = LocalDate.parse(date);
+        _stuBOD.setValue(localDate);
+    }
+    @FXML
+    void userSearchBar(MouseEvent event) {
+        lecSearch();
+    }
 
     @FXML
     void navBar_link(ActionEvent event) {
         if(event.getSource()==dashbordBtn){
             dashbord.setVisible(true);
             lecture.setVisible(false);
+            student.setVisible(false);
         }else if(event.getSource()==lectureBtn){
             dashbord.setVisible(false);
             lecture.setVisible(true);
+            student.setVisible(false);
             setDepName();
+        }else if(event.getSource()==studentBtn){
+            dashbord.setVisible(false);
+            lecture.setVisible(false);
+            student.setVisible(true);
         }
     }
 
@@ -220,12 +342,13 @@ public class Admin implements Initializable {
     public void setDepName(){
         ObservableList<String> dep = getDepartmentNameList();
         _lecDepartment.setItems(dep);
+        _stuDepartment.setItems(dep);
     }
-    public String setDepId(Object lecDepName) {
+    public String setDepId(Object DepName) {
         Connection conn2 = Config.getConfig();
         String ld = "";
-        if(lecDepName != null){
-            lecDepName = lecDepName.toString();
+        if(DepName != null){
+            DepName = DepName.toString();
         }
         String depSql = "SELECT * FROM department";
         Statement depSt = null;
@@ -235,7 +358,7 @@ public class Admin implements Initializable {
             depRs = depSt.executeQuery(depSql);
             while(depRs.next()){
                 String depName = depRs.getString("dep_name");
-                if(depName.equals(lecDepName)){
+                if(depName.equals(DepName)){
                     ld = depRs.getString("dep_id");
                     break;
                 }
@@ -277,20 +400,19 @@ public class Admin implements Initializable {
         }
         return lecList;
     }
-
     public void showLectureToTable() {
         ObservableList<LecDetails> List = getLecture();
-        _userID.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecId"));
-        _userNIC.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecNic"));
-        _userName.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecFullName"));
-        _userAddress.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecAddress"));
-        _userEmail.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecEmail"));
-        _userGender.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecGender"));
-        _userBOD.setCellValueFactory(new PropertyValueFactory<LecDetails, Date>("lecBod"));
-        _userContactNo.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecContactNo"));
-        _lecPosition.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecPosition"));
-        _userDepartment.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecDepName"));
-        _userPassword.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecPassword"));
+        lec_ID.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecId"));
+        lec_NIC.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecNic"));
+        lec_Name.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecFullName"));
+        lec_Address.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecAddress"));
+        lec_Email.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecEmail"));
+        lec_Gender.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecGender"));
+        lec_BOD.setCellValueFactory(new PropertyValueFactory<LecDetails, Date>("lecBod"));
+        lec_ContactNo.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecContactNo"));
+        lec_Position.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecPosition"));
+        lec_Department.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecDepName"));
+        lec_Password.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecPassword"));
 
         lecTableView.setItems(List);
     }
@@ -482,7 +604,7 @@ public class Admin implements Initializable {
     }
     public void lecSearch(){
         FilteredList<LecDetails> filter = new FilteredList<>(getLecture(),e -> true);
-        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+        lecSearchBar.textProperty().addListener((observable, oldValue, newValue) -> {
             filter.setPredicate(predicateLecData ->{
                 if(newValue == null || newValue.isEmpty()) return true;
 
@@ -511,9 +633,134 @@ public class Admin implements Initializable {
          sortedList.comparatorProperty().bind(lecTableView.comparatorProperty());
          lecTableView.setItems(sortedList);
     }
+
+    public ObservableList<StudentDetails> getStudent(){
+        ObservableList<StudentDetails> stuList = FXCollections.observableArrayList();
+        Connection conn = Config.getConfig();
+        String stuSql = "SELECT * FROM student s JOIN user u ON s.student_id = u.userId LEFT JOIN user_contact uc ON u.userId = uc.userId INNER JOIN department d ON d.dep_id = s.dep_id";
+        Statement stmt = null;
+        ResultSet rs = null;
+        try{
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(stuSql);
+            StudentDetails stu;
+            while(rs.next()){
+                stu = new StudentDetails(rs.getString("userId"),
+                        rs.getString("nic"),
+                        rs.getString("f_name"),
+                        rs.getString("l_name"),
+                        rs.getString("address"),
+                        rs.getString("email"),
+                        rs.getString("gender"),
+                        rs.getDate("bod"),
+                        rs.getString("contact_no"),
+                        rs.getString("dep_name"),
+                        rs.getString("password")
+                );
+                stuList.add(stu);
+                //System.out.println("user id" + rs.getString("userId"));
+            }
+        }catch (Exception e){
+            System.out.println("Error " + e.getMessage());
+        }
+        return stuList;
+    }
+    public void showStudentToTable() {
+        ObservableList<StudentDetails> stuList = getStudent();
+        stu_ID.setCellValueFactory(new PropertyValueFactory<StudentDetails,String>("stuId"));
+        stu_NIC.setCellValueFactory(new PropertyValueFactory<StudentDetails,String>("stuNic"));
+        stu_Name.setCellValueFactory(new PropertyValueFactory<StudentDetails,String>("stuFullName"));
+        stu_Address.setCellValueFactory(new PropertyValueFactory<StudentDetails,String>("stuAddress"));
+        stu_Email.setCellValueFactory(new PropertyValueFactory<StudentDetails,String>("stuEmail"));
+        stu_Gender.setCellValueFactory(new PropertyValueFactory<StudentDetails,String>("stuGender"));
+        stu_BOD.setCellValueFactory(new PropertyValueFactory<StudentDetails, Date>("stuBod"));
+        stu_ContactNo.setCellValueFactory(new PropertyValueFactory<StudentDetails,String>("stuContactNo"));
+        stu_Department.setCellValueFactory(new PropertyValueFactory<StudentDetails,String>("stuDepName"));
+        stu_Password.setCellValueFactory(new PropertyValueFactory<StudentDetails,String>("stuPassword"));
+
+        stuTableView.setItems(stuList);
+    }
+    private void addNewStudent(){
+        Connection conn = Config.getConfig();
+        String stuId = _stuId.getText();
+        String stuNIC = _stuNIC.getText();
+        String stuFullName = _stuName.getText();
+        String stuAddress = _stuAddress.getText();
+        String stuEmail = _stuEmail.getText();
+        String stuGender = _stuGenderM.isSelected() ? "M" : "F";
+        LocalDate stuBod = _stuBOD.getValue();
+        String stuContactNo = _stuContactNo.getText();
+        String stuPassword = _stuPassword.getText();
+        Object stuDepName = _stuDepartment.getSelectionModel().getSelectedItem();
+        String ld = setDepId(stuDepName);
+
+        if (stuId.isEmpty()
+                || stuNIC.isEmpty()
+                || stuFullName.isEmpty()
+                || stuAddress.isEmpty()
+                || stuEmail.isEmpty()
+                || stuGender.isEmpty()
+                || stuBod == null
+                || stuContactNo.isEmpty()
+                || stuPassword.isEmpty()
+                || stuDepName == null) {
+            Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
+            errorAlert.setTitle("Missing Fields");
+            errorAlert.setHeaderText(null);
+            errorAlert.setContentText("Please fill in all the required fields before submitting.");
+            errorAlert.showAndWait();
+            return;
+        }
+
+        String[] nameParts = stuFullName.split(" ");
+        String first_name = nameParts[0];
+        String last_name = nameParts.length > 1 ? nameParts[1] : "";
+
+        String lecUserSql = "INSERT INTO user (userId,nic,password,user_type,f_name,l_name,address,email,gender,bod) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String lectureSql = "INSERT INTO student (student_id,state,dep_id) VALUES (?, ?, ?)";
+        String contactSql = "INSERT INTO user_contact (userId, contact_no) VALUES (?, ?)";
+
+        try{
+            PreparedStatement userPs = conn.prepareStatement(lecUserSql);
+            userPs.setString(1, stuId);
+            userPs.setString(2, stuNIC);
+            userPs.setString(3, stuPassword);
+            userPs.setString(4, "student");
+            userPs.setString(5, first_name);
+            userPs.setString(6, last_name);
+            userPs.setString(7, stuAddress);
+            userPs.setString(8, stuEmail);
+            userPs.setString(9, stuGender);
+            userPs.setString(10, stuBod.toString());
+            userPs.executeUpdate();
+
+            PreparedStatement stuStmt = conn.prepareStatement(lectureSql);
+            stuStmt.setString(1, stuId);
+            stuStmt.setString(2, "Active");
+            stuStmt.setString(3, ld);
+            stuStmt.executeUpdate();
+
+            PreparedStatement contactStmt = conn.prepareStatement(contactSql);
+            contactStmt.setString(1, stuId);
+            contactStmt.setString(2, stuContactNo);
+            contactStmt.executeUpdate();
+
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Student Added");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("Student '" + stuId + "'added successfully!");
+            successAlert.showAndWait();
+
+        } catch (Exception e){
+            System.out.println("Error " + e.getMessage());
+        }
+        showStudentToTable();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showLectureToTable();
+        showStudentToTable();
         setDepName();
     }
 }

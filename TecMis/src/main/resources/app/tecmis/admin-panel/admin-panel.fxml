@@ -132,7 +132,7 @@
                               <Label layoutX="147.0" layoutY="194.0" text="Dashbord" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="lecture" prefHeight="700.0" prefWidth="950.0">
+                        <AnchorPane fx:id="lecture" prefHeight="700.0" prefWidth="950.0" visible="false">
                            <children>
                               <Pane layoutY="32.0" prefHeight="100.0" prefWidth="946.0" style="-fx-background-color: #42a4f5;">
                                  <children>
@@ -141,7 +141,7 @@
                                           <Font name="System Bold" size="28.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="searchBar" layoutX="575.0" layoutY="31.0" onMouseClicked="#lecSearchBar" prefHeight="35.0" prefWidth="335.0" promptText="Find User" styleClass="searchBar" />
+                                    <TextField fx:id="lecSearchBar" layoutX="575.0" layoutY="31.0" onMouseClicked="#userSearchBar" prefHeight="35.0" prefWidth="335.0" promptText="Find User" styleClass="searchBar" />
                                     <FontAwesomeIconView glyphName="SEARCH" layoutX="885.0" layoutY="57.0" size="20" text="" wrappingWidth="18.571428298950195" />
                                  </children>
                               </Pane>
@@ -149,17 +149,17 @@
                                  <children>
                                     <TableView fx:id="lecTableView" layoutX="7.0" layoutY="13.0" onMouseClicked="#handleRowsLecTable" prefHeight="247.0" prefWidth="903.0">
                                       <columns>
-                                        <TableColumn fx:id="_userID" prefWidth="55.20001029968262" text="User ID" />
-                                        <TableColumn fx:id="_userNIC" prefWidth="79.9999771118164" text="NIC" />
-                                          <TableColumn fx:id="_userName" prefWidth="97.60000610351562" text="Name" />
-                                          <TableColumn fx:id="_userAddress" prefWidth="70.4000244140625" text="Address" />
-                                          <TableColumn fx:id="_userEmail" prefWidth="100.79998779296875" text="Email" />
-                                          <TableColumn fx:id="_userGender" prefWidth="50.4000244140625" text="Gender" />
-                                          <TableColumn fx:id="_userBOD" prefWidth="75.99996948242188" text="BOD" />
-                                          <TableColumn fx:id="_userContactNo" minWidth="0.0" prefWidth="92.79998779296875" text="Contact No" />
-                                          <TableColumn fx:id="_lecPosition" prefWidth="118.39996337890625" text="Position" />
-                                          <TableColumn fx:id="_userDepartment" minWidth="0.0" prefWidth="81.59991455078125" text="Department" />
-                                          <TableColumn fx:id="_userPassword" minWidth="0.0" prefWidth="81.60009765625" text="Password" />
+                                        <TableColumn fx:id="lec_ID" prefWidth="55.20001029968262" text="User ID" />
+                                        <TableColumn fx:id="lec_NIC" prefWidth="79.9999771118164" text="NIC" />
+                                          <TableColumn fx:id="lec_Name" prefWidth="97.60000610351562" text="Name" />
+                                          <TableColumn fx:id="lec_Address" prefWidth="70.4000244140625" text="Address" />
+                                          <TableColumn fx:id="lec_Email" prefWidth="100.79998779296875" text="Email" />
+                                          <TableColumn fx:id="lec_Gender" prefWidth="50.4000244140625" text="Gender" />
+                                          <TableColumn fx:id="lec_BOD" prefWidth="75.99996948242188" text="BOD" />
+                                          <TableColumn fx:id="lec_ContactNo" minWidth="0.0" prefWidth="92.79998779296875" text="Contact No" />
+                                          <TableColumn fx:id="lec_Position" prefWidth="118.39996337890625" text="Position" />
+                                          <TableColumn fx:id="lec_Department" minWidth="0.0" prefWidth="81.59991455078125" text="Department" />
+                                          <TableColumn fx:id="lec_Password" minWidth="0.0" prefWidth="81.60009765625" text="Password" />
                                       </columns>
                                     </TableView>
                                  </children>
@@ -275,6 +275,143 @@
                                  </children>
                               </Pane>
                            </children></AnchorPane>
+                        <AnchorPane fx:id="student" layoutY="5.0" prefHeight="700.0" prefWidth="950.0">
+                           <children>
+                              <Pane layoutY="32.0" prefHeight="100.0" prefWidth="946.0" style="-fx-background-color: #42a4f5;">
+                                 <children>
+                                    <Label layoutX="38.0" layoutY="30.0" text="STUDENT">
+                                       <font>
+                                          <Font name="System Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="stuSearchBar" layoutX="575.0" layoutY="31.0" onMouseClicked="#userSearchBar" prefHeight="35.0" prefWidth="335.0" promptText="Find User" styleClass="searchBar" />
+                                    <FontAwesomeIconView glyphName="SEARCH" layoutX="885.0" layoutY="57.0" size="20" text="" wrappingWidth="18.571428298950195" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="18.0" layoutY="141.0" prefHeight="270.0" prefWidth="916.0" style="-fx-background-color: #F0F8FF; -fx-background-radius: 10px;" styleClass="shadow">
+                                 <children>
+                                    <TableView fx:id="stuTableView" layoutX="12.0" layoutY="13.0" onMouseClicked="#handleRowsStuTable" prefHeight="247.0" prefWidth="891.0">
+                                       <columns>
+                                          <TableColumn fx:id="stu_ID" prefWidth="108.0000057220459" text="User ID" />
+                                          <TableColumn fx:id="stu_NIC" prefWidth="78.4000244140625" text="NIC" />
+                                          <TableColumn fx:id="stu_Name" prefWidth="105.5999755859375" text="Name" />
+                                          <TableColumn fx:id="stu_Address" prefWidth="98.4000244140625" text="Address" />
+                                          <TableColumn fx:id="stu_Email" prefWidth="98.39999389648438" text="Email" />
+                                          <TableColumn fx:id="stu_Gender" prefWidth="49.5999755859375" text="Gender" />
+                                          <TableColumn fx:id="stu_BOD" prefWidth="94.4000244140625" text="BOD" />
+                                          <TableColumn fx:id="stu_ContactNo" minWidth="0.0" prefWidth="88.00006103515625" text="Contact No" />
+                                          <TableColumn fx:id="stu_Department" minWidth="0.0" prefWidth="75.19989013671875" text="Department" />
+                                          <TableColumn fx:id="stu_Password" minWidth="0.0" prefWidth="112.79998779296875" text="Password" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="16.0" layoutY="411.0" prefHeight="296.0" prefWidth="919.0">
+                                 <children>
+                                    <TextField fx:id="_stuId" layoutX="102.0" layoutY="37.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_stuName" layoutX="102.0" layoutY="86.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_stuEmail" layoutX="102.0" layoutY="177.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_stuNIC" layoutX="102.0" layoutY="133.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_stuAddress" layoutX="102.0" layoutY="222.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_stuContactNo" layoutX="458.0" layoutY="86.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <Label layoutX="41.0" layoutY="42.0" text="User ID">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="41.0" layoutY="91.0" text="Name">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="38.0" layoutY="226.0" text="Address">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="42.0" layoutY="182.0" text="Email">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="349.0" layoutY="234.0" text="Gender">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="349.0" layoutY="42.0" text="Birth Of Date">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="349.0" layoutY="91.0" text="Contact No">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="41.0" layoutY="138.0" text="NIC">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <RadioButton fx:id="_stuGenderM" layoutX="460.0" layoutY="234.0" mnemonicParsing="false" text="Male">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="gender1" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="_stuGenderF" layoutX="558.0" layoutY="237.0" mnemonicParsing="false" text="Female" toggleGroup="$gender1">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </RadioButton>
+                                    <DatePicker fx:id="_stuBOD" layoutX="458.0" layoutY="38.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <Button layoutX="745.0" layoutY="34.0" mnemonicParsing="false" onAction="#addNewStudentBtn" prefHeight="35.0" prefWidth="150.0" text="Add">
+                                       <styleClass>
+                                          <String fx:value="addBtn" />
+                                          <String fx:value="lecBtn" />
+                                          <String fx:value="shadow" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button layoutX="745.0" layoutY="97.0" mnemonicParsing="false" onAction="#stuUpdateBtn" prefHeight="35.0" prefWidth="150.0" text="Update">
+                                       <styleClass>
+                                          <String fx:value="updateBtn" />
+                                          <String fx:value="lecBtn" />
+                                          <String fx:value="shadow" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button layoutX="745.0" layoutY="158.0" mnemonicParsing="false" onAction="#stuDeleteBtn" prefHeight="35.0" prefWidth="150.0" text="Delete">
+                                       <styleClass>
+                                          <String fx:value="deleteBtn" />
+                                          <String fx:value="shadow" />
+                                          <String fx:value="lecBtn" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button layoutX="745.0" layoutY="217.0" mnemonicParsing="false" onAction="#stuClearBtn" prefHeight="35.0" prefWidth="150.0" text="Clear">
+                                       <styleClass>
+                                          <String fx:value="clearBtn" />
+                                          <String fx:value="shadow" />
+                                          <String fx:value="lecBtn" />
+                                       </styleClass>
+                                    </Button>
+                                    <Label layoutX="349.0" layoutY="143.0" text="Department">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="349.0" layoutY="189.0" text="Password">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="_stuDepartment" layoutX="459.0" layoutY="139.0" prefHeight="30.0" prefWidth="230.0" promptText="Choise" />
+                                    <PasswordField fx:id="_stuPassword" layoutX="460.0" layoutY="185.0" prefHeight="30.0" prefWidth="230.0" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
                      </children></AnchorPane>
                </center>
             </BorderPane>
