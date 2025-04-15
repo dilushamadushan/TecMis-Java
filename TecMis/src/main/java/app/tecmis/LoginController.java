@@ -38,7 +38,7 @@ public class LoginController {
         //loginController.adminWindow();
         //loginController.studentWindow();
         //loginController.techOfficerWindow();
-        //loginController.lectureWindow();
+        loginController.lectureWindow();
     }
 
     public void adminWindow(){
