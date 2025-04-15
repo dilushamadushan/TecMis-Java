@@ -4,12 +4,14 @@
 #Undergraduate,
 #Notice,
 #Eligibility,
+
 #AttendaceNMedical,
 #ExamMaks,
 #Courses,
 #GradeNGpa {
     -fx-scale-x: 1;
     -fx-scale-y: 1;
+
     -fx-cursor: hand; /* Changes cursor to hand on hover */
 }
 
