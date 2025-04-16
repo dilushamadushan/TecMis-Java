@@ -239,15 +239,15 @@ public class Admin implements Initializable {
     }
     @FXML
     void stuClearBtn(ActionEvent event) {
-
+            cleanStuTextFiled();
     }
     @FXML
     void stuDeleteBtn(ActionEvent event) {
-
+            deleteStudent();
     }
     @FXML
     void stuUpdateBtn(ActionEvent event) {
-
+        updateStudent();
     }
 
 
@@ -300,7 +300,12 @@ public class Admin implements Initializable {
     }
     @FXML
     void userSearchBar(MouseEvent event) {
-        lecSearch();
+        if(event.getSource() == lecSearchBar){
+            lecSearch();
+        } else if(event.getSource() == stuSearchBar){
+            stuSearch();
+        }
+
     }
 
     @FXML
@@ -755,6 +760,139 @@ public class Admin implements Initializable {
             System.out.println("Error " + e.getMessage());
         }
         showStudentToTable();
+        cleanStuTextFiled();
+    }
+    private void updateStudent(){
+        Connection conn = Config.getConfig();
+        String stuId = _stuId.getText();
+        String stuNIC = _stuNIC.getText();
+        String stuFullName = _stuName.getText();
+        String stuAddress = _stuAddress.getText();
+        String stuEmail = _stuEmail.getText();
+        String stuGender = _stuGenderM.isSelected() ? "M" : "F";
+        LocalDate stuBod = _stuBOD.getValue();
+        String stuContactNo = _stuContactNo.getText();
+        String stuPassword = _stuPassword.getText();
+        Object stuDepName = _stuDepartment.getSelectionModel().getSelectedItem();
+        String ld = setDepId(stuDepName);
+
+        String[] nameParts = stuFullName.split(" ");
+        String first_name = nameParts[0];
+        String last_name = nameParts.length > 1 ? nameParts[1] : "";
+
+        String ucUpdateSql = "UPDATE user_contact SET contact_no=? WHERE userId=?";
+        String lecUpdateSql = "UPDATE student SET dep_id=? WHERE student_id=?";
+        String userUpdateSql = "UPDATE user SET f_name = ?,l_name = ?, nic = ?, address = ?,email = ?,gender = ?,bod = ?, password = ? WHERE userId = ?";
+
+        try{
+
+            PreparedStatement ucPs = conn.prepareStatement(ucUpdateSql);
+            ucPs.setString(1, stuContactNo);
+            ucPs.setString(2, stuId);
+            ucPs.executeUpdate();
+
+            PreparedStatement stuUpdateStmt = conn.prepareStatement(lecUpdateSql);
+            stuUpdateStmt.setString(1, ld);
+            stuUpdateStmt.setString(2, stuId);
+            stuUpdateStmt.executeUpdate();
+
+            PreparedStatement userPs = conn.prepareStatement(userUpdateSql);
+            userPs.setString(1, first_name);
+            userPs.setString(2, last_name);
+            userPs.setString(3, stuNIC);
+            userPs.setString(4, stuAddress);
+            userPs.setString(5, stuEmail);
+            userPs.setString(6, stuGender);
+            userPs.setString(7, stuBod.toString());
+            userPs.setString(8, stuPassword);
+            userPs.setString(9, stuId);
+            userPs.executeUpdate();
+
+            Alert updatedAlert = new Alert(Alert.AlertType.INFORMATION);
+            updatedAlert.setTitle("Student Updated");
+            updatedAlert.setHeaderText(null);
+            updatedAlert.setContentText("Student '" + stuId + "' updated successfully!");
+            updatedAlert.showAndWait();
+        } catch (Exception e){
+            System.out.println("Error " + e.getMessage());
+        }
+        showStudentToTable();
+        cleanStuTextFiled();
+    }
+    private void deleteStudent(){
+        Connection conn = Config.getConfig();
+        String stuId = _stuId.getText();
+
+        String deleteStuContactSql = "DELETE FROM user_contact WHERE  userId =  ? ";
+        String deleteStuSql = "DELETE FROM student WHERE student_id = ? ";
+        String deleteUserSql = "DELETE FROM user WHERE userId = ? ";
+
+        try{
+
+            PreparedStatement user_contactPs = conn.prepareStatement(deleteStuContactSql);
+            user_contactPs.setString(1, stuId);
+            user_contactPs.executeUpdate();
+
+            PreparedStatement stuStmt = conn.prepareStatement(deleteStuSql);
+            stuStmt.setString(1, stuId);
+            stuStmt.executeUpdate();
+
+            PreparedStatement userPs = conn.prepareStatement(deleteUserSql);
+            userPs.setString(1, stuId);
+            userPs.executeUpdate();
+
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Student Deleted");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("Student '" + stuId + "'Deleted Successfully!");
+            successAlert.showAndWait();
+
+        }catch (Exception e){
+            System.out.println("Error " + e.getMessage());
+        }
+        showStudentToTable();
+        cleanStuTextFiled();
+    }
+    public void cleanStuTextFiled(){
+        _stuId.setText("");
+        _stuNIC.setText("");
+        _stuName.setText("");
+        _stuAddress.setText("");
+        _stuEmail.setText("");
+        _stuGenderM.setSelected(false);
+        _stuBOD.setValue(null);
+        _stuContactNo.setText("");
+        _stuPassword.setText("");
+        _stuDepartment.setValue(null);
+    }
+    public void stuSearch(){
+        FilteredList<StudentDetails> filterStu = new FilteredList<>(getStudent(),e -> true);
+        stuSearchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterStu.setPredicate(predicateLecData ->{
+                if(newValue == null || newValue.isEmpty()) return true;
+
+                String searchKey = newValue.toLowerCase();
+
+                if (predicateLecData.getStuId().toLowerCase().contains(searchKey)) {
+                    return true;
+                }else if(predicateLecData.getStuFullName().toLowerCase().contains(searchKey)){
+                    return true;
+                } else if (predicateLecData.getStuAddress().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateLecData.getStuEmail().toLowerCase().contains(searchKey)) {
+                    return true;
+                }else if (predicateLecData.getStuGender().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateLecData.getStuDepName().toLowerCase().contains(searchKey)) {
+                    return true;
+                }else{
+                    return false;
+                }
+            });
+        });
+        SortedList<StudentDetails> sortedList = new SortedList<>(filterStu);
+        sortedList.comparatorProperty().bind(stuTableView.comparatorProperty());
+        stuTableView.setItems(sortedList);
     }
 
     @Override
