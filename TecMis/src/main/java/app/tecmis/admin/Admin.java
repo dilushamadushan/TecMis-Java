@@ -56,6 +56,9 @@ public class Admin implements Initializable {
     private Button techofficerBtn;
 
     @FXML
+    private AnchorPane techOfficer;
+
+    @FXML
     private Button timeTableBtn;
 
     @FXML
@@ -216,6 +219,87 @@ public class Admin implements Initializable {
     @FXML
     private TableColumn<StudentDetails, String> stu_Password;
 
+    // Tech Officer
+
+    @FXML
+    private TextField _tecAddress;
+
+    @FXML
+    private DatePicker _tecBOD;
+
+    @FXML
+    private TextField _tecContactNo;
+
+    @FXML
+    private TextField tecSearchBar;
+
+    @FXML
+    private TextField _tecEmail;
+
+    @FXML
+    private RadioButton _tecGenderF;
+
+    @FXML
+    private RadioButton _tecGenderM;
+
+    @FXML
+    private TextField _tecId;
+
+    @FXML
+    private TextField _tecNIC;
+
+    @FXML
+    private TextField _tecName;
+
+    @FXML
+    private PasswordField _tecPassword;
+
+    @FXML
+    private TextField _tecRoleTF;
+
+    @FXML
+    private ToggleGroup gender2;
+
+    @FXML
+    private ComboBox _tecDepartment;
+
+    @FXML
+    private TableView<TechOfficerDetails> tecTableView;
+
+    @FXML
+    private TableColumn<TechOfficerDetails, String> tec_Address;
+
+    @FXML
+    private TableColumn<TechOfficerDetails, Date> tec_BOD;
+
+    @FXML
+    private TableColumn<TechOfficerDetails, String> tec_ContactNo;
+
+    @FXML
+    private TableColumn<TechOfficerDetails, String> tec_Department;
+
+    @FXML
+    private TableColumn<TechOfficerDetails, String> tec_Email;
+
+    @FXML
+    private TableColumn<TechOfficerDetails, String> tec_Gender;
+
+    @FXML
+    private TableColumn<TechOfficerDetails, String> tec_ID;
+
+    @FXML
+    private TableColumn<TechOfficerDetails, String> tec_NIC;
+
+    @FXML
+    private TableColumn<TechOfficerDetails, String> tec_Name;
+
+    @FXML
+    private TableColumn<TechOfficerDetails, String> tec_Password;
+
+    @FXML
+    private TableColumn<TechOfficerDetails, String> tec_Role;
+
+
     @FXML
     void addNewLectureBtn(ActionEvent event) {
         addNewLecture();
@@ -250,6 +334,22 @@ public class Admin implements Initializable {
         updateStudent();
     }
 
+    @FXML
+    void addNewTechOfficerBtn(ActionEvent event) {
+        addNewTechOfficer();
+    }
+    @FXML
+    void tecOfficerDeleteBtn(ActionEvent event) {
+        techOfficerDelete();
+    }
+    @FXML
+    void techOfficerClearBtn(ActionEvent event) {
+        cleanTechOfficerTextFiled();
+    }
+    @FXML
+    void techOfficerUpdateBtn(ActionEvent event) {
+        techOfficerUpdate();
+    }
 
     @FXML
     void handleRowsLecTable(MouseEvent event) {
@@ -299,11 +399,37 @@ public class Admin implements Initializable {
         _stuBOD.setValue(localDate);
     }
     @FXML
+    void handleRowsTecTable(MouseEvent event) {
+        TechOfficerDetails tecDetails = tecTableView.getSelectionModel().getSelectedItem();
+        _tecId.setText(String.valueOf(tecDetails.getToId()));
+        _tecNIC.setText(String.valueOf(tecDetails.getToNic()));
+        _tecName.setText(String.valueOf(tecDetails.getToFullName()));
+        _tecAddress.setText(String.valueOf(tecDetails.getToAddress()));
+        _tecEmail.setText(String.valueOf(tecDetails.getToEmail()));
+        _tecPassword.setText(String.valueOf(tecDetails.getToPassword()));
+        _tecContactNo.setText(String.valueOf(tecDetails.getToContactNo()));
+        _tecRoleTF.setText(String.valueOf(tecDetails.getToRole()));
+        _tecDepartment.setValue(tecDetails.getToDepName());
+
+        String tecGender = String.valueOf(tecDetails.getToGender());
+        if("M".equalsIgnoreCase(tecGender)){
+            _tecGenderM.setSelected(true);
+        }else if("F".equalsIgnoreCase(tecGender)){
+            _tecGenderF.setSelected(true);
+        }
+
+        String date = String.valueOf(tecDetails.getToBod());
+        LocalDate localDate = LocalDate.parse(date);
+        _tecBOD.setValue(localDate);
+    }
+    @FXML
     void userSearchBar(MouseEvent event) {
         if(event.getSource() == lecSearchBar){
             lecSearch();
         } else if(event.getSource() == stuSearchBar){
             stuSearch();
+        } else if(event.getSource() == tecSearchBar){
+            tecSearch();
         }
 
     }
@@ -314,15 +440,23 @@ public class Admin implements Initializable {
             dashbord.setVisible(true);
             lecture.setVisible(false);
             student.setVisible(false);
+            techOfficer.setVisible(false);
         }else if(event.getSource()==lectureBtn){
             dashbord.setVisible(false);
             lecture.setVisible(true);
             student.setVisible(false);
+            techOfficer.setVisible(false);
             setDepName();
         }else if(event.getSource()==studentBtn){
             dashbord.setVisible(false);
             lecture.setVisible(false);
             student.setVisible(true);
+            techOfficer.setVisible(false);
+        }else if(event.getSource()==techofficerBtn){
+            dashbord.setVisible(false);
+            lecture.setVisible(false);
+            student.setVisible(false);
+            techOfficer.setVisible(true);
         }
     }
 
@@ -348,6 +482,7 @@ public class Admin implements Initializable {
         ObservableList<String> dep = getDepartmentNameList();
         _lecDepartment.setItems(dep);
         _stuDepartment.setItems(dep);
+        _tecDepartment.setItems(dep);
     }
     public String setDepId(Object DepName) {
         Connection conn2 = Config.getConfig();
@@ -663,7 +798,6 @@ public class Admin implements Initializable {
                         rs.getString("password")
                 );
                 stuList.add(stu);
-                //System.out.println("user id" + rs.getString("userId"));
             }
         }catch (Exception e){
             System.out.println("Error " + e.getMessage());
@@ -895,10 +1029,276 @@ public class Admin implements Initializable {
         stuTableView.setItems(sortedList);
     }
 
+    public ObservableList<TechOfficerDetails> getTechOfficers() {
+        ObservableList<TechOfficerDetails> techOfficerList = FXCollections.observableArrayList();
+        Connection conn = Config.getConfig();
+        String toSql = "SELECT * FROM technical_officer t JOIN user u ON t.tech_officer_id = u.userId LEFT JOIN user_contact uc ON u.userId = uc.userId INNER JOIN department d ON d.dep_id = t.dep_id";
+        Statement stmt = null;
+        ResultSet rs = null;
+        try{
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(toSql);
+            TechOfficerDetails tod;
+            while(rs.next()){
+                tod = new TechOfficerDetails(rs.getString("userId"),
+                        rs.getString("nic"),
+                        rs.getString("f_name"),
+                        rs.getString("l_name"),
+                        rs.getString("address"),
+                        rs.getString("email"),
+                        rs.getString("gender"),
+                        rs.getDate("bod"),
+                        rs.getString("contact_no"),
+                        rs.getString("role"),
+                        rs.getString("dep_name"),
+                        rs.getString("password")
+                );
+                techOfficerList.add(tod);
+            }
+        }catch (Exception e){
+            System.out.println("Error " + e.getMessage());
+        }
+        return techOfficerList;
+    }
+    public void showTechOfficerToTable() {
+        ObservableList<TechOfficerDetails> tecList = getTechOfficers();
+        tec_ID.setCellValueFactory(new PropertyValueFactory<TechOfficerDetails,String>("toId"));
+        tec_NIC.setCellValueFactory(new PropertyValueFactory<TechOfficerDetails,String>("toNic"));
+        tec_Name.setCellValueFactory(new PropertyValueFactory<TechOfficerDetails,String>("toFullName"));
+        tec_Address.setCellValueFactory(new PropertyValueFactory<TechOfficerDetails,String>("toAddress"));
+        tec_Email.setCellValueFactory(new PropertyValueFactory<TechOfficerDetails,String>("toEmail"));
+        tec_Gender.setCellValueFactory(new PropertyValueFactory<TechOfficerDetails,String>("toGender"));
+        tec_BOD.setCellValueFactory(new PropertyValueFactory<TechOfficerDetails, Date>("toBod"));
+        tec_ContactNo.setCellValueFactory(new PropertyValueFactory<TechOfficerDetails,String>("toContactNo"));
+        tec_Role.setCellValueFactory(new PropertyValueFactory<TechOfficerDetails,String>("toRole"));
+        tec_Department.setCellValueFactory(new PropertyValueFactory<TechOfficerDetails,String>("toDepName"));
+        tec_Password.setCellValueFactory(new PropertyValueFactory<TechOfficerDetails,String>("toPassword"));
+
+        tecTableView.setItems(tecList);
+    }
+    private void addNewTechOfficer() {
+        Connection conn = Config.getConfig();
+        String tecId = _tecId.getText();
+        String tecNIC = _tecNIC.getText();
+        String tecFullName = _tecName.getText();
+        String tecAddress = _tecAddress.getText();
+        String tecEmail = _tecEmail.getText();
+        String tecGender = _tecGenderM.isSelected() ? "M" : "F";
+        LocalDate tecBod = _tecBOD.getValue();
+        String tecContactNo = _tecContactNo.getText();
+        String tecRole = _tecRoleTF.getText();
+        String tecPassword = _tecPassword.getText();
+        Object tecDepName = _tecDepartment.getSelectionModel().getSelectedItem();
+        String ld = setDepId(tecDepName);
+
+        if (tecId.isEmpty()
+                || tecNIC.isEmpty()
+                || tecFullName.isEmpty()
+                || tecAddress.isEmpty()
+                || tecEmail.isEmpty()
+                || tecGender.isEmpty()
+                || tecBod == null
+                || tecContactNo.isEmpty()
+                || tecRole.isEmpty()
+                || tecPassword.isEmpty()
+                || tecDepName == null) {
+            Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
+            errorAlert.setTitle("Missing Fields");
+            errorAlert.setHeaderText(null);
+            errorAlert.setContentText("Please fill in all the required fields before submitting.");
+            errorAlert.showAndWait();
+            return;
+        }
+
+        String[] nameParts = tecFullName.split(" ");
+        String first_name = nameParts[0];
+        String last_name = nameParts.length > 1 ? nameParts[1] : "";
+
+        String tecUserSql = "INSERT INTO user (userId,nic,password,user_type,f_name,l_name,address,email,gender,bod) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String tecSql = "INSERT INTO technical_officer (tech_officer_id,role,dep_id) VALUES (?, ?, ?)";
+        String contactSql = "INSERT INTO user_contact (userId, contact_no) VALUES (?, ?)";
+
+        try{
+            PreparedStatement userPs = conn.prepareStatement(tecUserSql);
+            userPs.setString(1, tecId);
+            userPs.setString(2, tecNIC);
+            userPs.setString(3, tecPassword);
+            userPs.setString(4, "tech");
+            userPs.setString(5, first_name);
+            userPs.setString(6, last_name);
+            userPs.setString(7, tecAddress);
+            userPs.setString(8, tecEmail);
+            userPs.setString(9, tecGender);
+            userPs.setString(10, tecBod.toString());
+            userPs.executeUpdate();
+
+            PreparedStatement stuStmt = conn.prepareStatement(tecSql);
+            stuStmt.setString(1, tecId);
+            stuStmt.setString(2, tecRole);
+            stuStmt.setString(3, ld);
+            stuStmt.executeUpdate();
+
+            PreparedStatement contactStmt = conn.prepareStatement(contactSql);
+            contactStmt.setString(1, tecId);
+            contactStmt.setString(2, tecContactNo);
+            contactStmt.executeUpdate();
+
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Student Added");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("Student '" + tecId + "'added successfully!");
+            successAlert.showAndWait();
+
+        } catch (Exception e){
+            System.out.println("Error " + e.getMessage());
+        }
+        showTechOfficerToTable();
+        cleanTechOfficerTextFiled();
+    }
+    public void techOfficerUpdate(){
+        Connection conn = Config.getConfig();
+        String tecId = _tecId.getText();
+        String tecNIC = _tecNIC.getText();
+        String tecFullName = _tecName.getText();
+        String tecAddress = _tecAddress.getText();
+        String tecEmail = _tecEmail.getText();
+        String tecGender = _tecGenderM.isSelected() ? "M" : "F";
+        LocalDate tecBod = _tecBOD.getValue();
+        String tecContactNo = _tecContactNo.getText();
+        String tecRole  = _tecRoleTF.getText();
+        String tecPassword = _tecPassword.getText();
+        Object tecDepName = _tecDepartment.getSelectionModel().getSelectedItem();
+        String ld = setDepId(tecDepName);
+
+        String[] nameParts = tecFullName.split(" ");
+        String first_name = nameParts[0];
+        String last_name = nameParts.length > 1 ? nameParts[1] : "";
+
+        String ucUpdateSql = "UPDATE user_contact SET contact_no=? WHERE userId=?";
+        String tecUpdateSql = "UPDATE  technical_officer  SET role=?, dep_id=? WHERE tech_officer_id=?";
+        String userUpdateSql = "UPDATE user SET f_name = ?,l_name = ?, nic = ?, address = ?,email = ?,gender = ?,bod = ?, password = ? WHERE userId = ?";
+
+        try{
+
+            PreparedStatement ucPs = conn.prepareStatement(ucUpdateSql);
+            ucPs.setString(1, tecContactNo);
+            ucPs.setString(2, tecId);
+            ucPs.executeUpdate();
+
+            PreparedStatement tecUpdateStmt = conn.prepareStatement(tecUpdateSql);
+            tecUpdateStmt.setString(1, tecRole);
+            tecUpdateStmt.setString(2, ld);
+            tecUpdateStmt.setString(3, tecId);
+            tecUpdateStmt.executeUpdate();
+
+            PreparedStatement userPs = conn.prepareStatement(userUpdateSql);
+            userPs.setString(1, first_name);
+            userPs.setString(2, last_name);
+            userPs.setString(3, tecNIC);
+            userPs.setString(4, tecAddress);
+            userPs.setString(5, tecEmail);
+            userPs.setString(6, tecGender);
+            userPs.setString(7, tecBod.toString());
+            userPs.setString(8, tecPassword);
+            userPs.setString(9, tecId);
+            userPs.executeUpdate();
+
+            Alert updatedAlert = new Alert(Alert.AlertType.INFORMATION);
+            updatedAlert.setTitle("Lecture Updated");
+            updatedAlert.setHeaderText(null);
+            updatedAlert.setContentText("Lecture '" + tecId + "' updated successfully!");
+            updatedAlert.showAndWait();
+        } catch (Exception e){
+            System.out.println("Error " + e.getMessage());
+        }
+        showTechOfficerToTable();
+        cleanTechOfficerTextFiled();
+    }
+    public void techOfficerDelete(){
+        Connection conn = Config.getConfig();
+        String tecId = _tecId.getText();
+
+        String deleteTechContactSql = "DELETE FROM user_contact WHERE  userId =  ? ";
+        String deleteTechSql = "DELETE FROM technical_officer WHERE tech_officer_id = ? ";
+        String deleteUserSql = "DELETE FROM user WHERE userId = ? ";
+
+        try{
+
+            PreparedStatement user_contactPs = conn.prepareStatement(deleteTechContactSql);
+            user_contactPs.setString(1, tecId);
+            user_contactPs.executeUpdate();
+
+            PreparedStatement toStmt = conn.prepareStatement(deleteTechSql);
+            toStmt.setString(1, tecId);
+            toStmt.executeUpdate();
+
+            PreparedStatement userPs = conn.prepareStatement(deleteUserSql);
+            userPs.setString(1, tecId);
+            userPs.executeUpdate();
+
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Lecture Deleted");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("Lecture '" + tecId + "'Deleted Successfully!");
+            successAlert.showAndWait();
+
+        }catch (Exception e){
+            System.out.println("Error " + e.getMessage());
+        }
+        showTechOfficerToTable();
+        cleanTechOfficerTextFiled();
+    }
+    public void cleanTechOfficerTextFiled(){
+        _tecId.setText("");
+        _tecNIC.setText("");
+        _tecName.setText("");
+        _tecAddress.setText("");
+        _tecEmail.setText("");
+        _tecGenderM.setSelected(false);
+        _tecBOD.setValue(null);
+        _tecContactNo.setText("");
+        _tecRoleTF.setText("");
+        _tecPassword.setText("");
+        _tecDepartment.setValue(null);
+    }
+    public void tecSearch(){
+        FilteredList<TechOfficerDetails> filter = new FilteredList<>(getTechOfficers(),e -> true);
+        tecSearchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filter.setPredicate(predicateLecData ->{
+                if(newValue == null || newValue.isEmpty()) return true;
+
+                String searchKey = newValue.toLowerCase();
+
+                if (predicateLecData.getToId().toLowerCase().contains(searchKey)) {
+                    return true;
+                }else if(predicateLecData.getToFullName().toLowerCase().contains(searchKey)){
+                    return true;
+                } else if (predicateLecData.getToAddress().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateLecData.getToEmail().toLowerCase().contains(searchKey)) {
+                    return true;
+                }else if (predicateLecData.getToGender().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateLecData.getToDepName().toLowerCase().contains(searchKey)) {
+                    return true;
+                }else if (predicateLecData.getToRole().toLowerCase().contains(searchKey)) {
+                    return true;
+                }else{
+                    return false;
+                }
+            });
+        });
+        SortedList<TechOfficerDetails> sortedList = new SortedList<>(filter);
+        sortedList.comparatorProperty().bind(tecTableView.comparatorProperty());
+        tecTableView.setItems(sortedList);
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showLectureToTable();
         showStudentToTable();
+        showTechOfficerToTable();
         setDepName();
     }
 }

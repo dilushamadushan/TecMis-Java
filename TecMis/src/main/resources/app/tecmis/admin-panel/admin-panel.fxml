@@ -275,7 +275,7 @@
                                  </children>
                               </Pane>
                            </children></AnchorPane>
-                        <AnchorPane fx:id="student" layoutY="5.0" prefHeight="700.0" prefWidth="950.0">
+                        <AnchorPane fx:id="student" layoutY="5.0" prefHeight="700.0" prefWidth="950.0" visible="false">
                            <children>
                               <Pane layoutY="32.0" prefHeight="100.0" prefWidth="946.0" style="-fx-background-color: #42a4f5;">
                                  <children>
@@ -408,6 +408,150 @@
                                     </Label>
                                     <ComboBox fx:id="_stuDepartment" layoutX="459.0" layoutY="139.0" prefHeight="30.0" prefWidth="230.0" promptText="Choise" />
                                     <PasswordField fx:id="_stuPassword" layoutX="460.0" layoutY="185.0" prefHeight="30.0" prefWidth="230.0" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="techOfficer" layoutY="5.0" prefHeight="700.0" prefWidth="950.0">
+                           <children>
+                              <Pane layoutY="32.0" prefHeight="100.0" prefWidth="946.0" style="-fx-background-color: #42a4f5;">
+                                 <children>
+                                    <Label layoutX="38.0" layoutY="30.0" text="TECHNICAL OFFICER">
+                                       <font>
+                                          <Font name="System Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tecSearchBar" layoutX="575.0" layoutY="31.0" onMouseClicked="#userSearchBar" prefHeight="35.0" prefWidth="335.0" promptText="Find User" styleClass="searchBar" />
+                                    <FontAwesomeIconView glyphName="SEARCH" layoutX="885.0" layoutY="57.0" size="20" text="" wrappingWidth="18.571428298950195" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="18.0" layoutY="141.0" prefHeight="270.0" prefWidth="916.0" style="-fx-background-color: #F0F8FF; -fx-background-radius: 10px;" styleClass="shadow">
+                                 <children>
+                                    <TableView fx:id="tecTableView" layoutX="7.0" layoutY="13.0" onMouseClicked="#handleRowsTecTable" prefHeight="247.0" prefWidth="903.0">
+                                       <columns>
+                                          <TableColumn fx:id="tec_ID" prefWidth="55.20001029968262" text="User ID" />
+                                          <TableColumn fx:id="tec_NIC" prefWidth="79.9999771118164" text="NIC" />
+                                          <TableColumn fx:id="tec_Name" prefWidth="97.60000610351562" text="Name" />
+                                          <TableColumn fx:id="tec_Address" prefWidth="70.4000244140625" text="Address" />
+                                          <TableColumn fx:id="tec_Email" prefWidth="100.79998779296875" text="Email" />
+                                          <TableColumn fx:id="tec_Gender" prefWidth="50.4000244140625" text="Gender" />
+                                          <TableColumn fx:id="tec_BOD" prefWidth="75.99996948242188" text="BOD" />
+                                          <TableColumn fx:id="tec_ContactNo" minWidth="0.0" prefWidth="92.79998779296875" text="Contact No" />
+                                          <TableColumn fx:id="tec_Role" prefWidth="118.39996337890625" text="Role" />
+                                          <TableColumn fx:id="tec_Department" minWidth="0.0" prefWidth="81.59991455078125" text="Department" />
+                                          <TableColumn fx:id="tec_Password" minWidth="0.0" prefWidth="81.60009765625" text="Password" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="16.0" layoutY="411.0" prefHeight="296.0" prefWidth="919.0">
+                                 <children>
+                                    <TextField fx:id="_tecId" layoutX="102.0" layoutY="18.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_tecName" layoutX="102.0" layoutY="67.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_tecEmail" layoutX="102.0" layoutY="158.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_tecNIC" layoutX="102.0" layoutY="114.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_tecAddress" layoutX="102.0" layoutY="203.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_tecRoleTF" layoutX="458.0" layoutY="115.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <TextField fx:id="_tecContactNo" layoutX="458.0" layoutY="67.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <Label layoutX="41.0" layoutY="23.0" text="User ID">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="41.0" layoutY="72.0" text="Name">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="38.0" layoutY="207.0" text="Address">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="42.0" layoutY="163.0" text="Email">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="252.0" layoutY="246.0" text="Gender">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="349.0" layoutY="23.0" text="Birth Of Date">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="349.0" layoutY="72.0" text="Contact No">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="349.0" layoutY="119.0" text="Role">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="41.0" layoutY="119.0" text="NIC">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <RadioButton fx:id="_tecGenderM" layoutX="332.0" layoutY="247.0" mnemonicParsing="false" text="Male">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="gender2" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="_tecGenderF" layoutX="430.0" layoutY="250.0" mnemonicParsing="false" text="Female" toggleGroup="$gender2">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </RadioButton>
+                                    <DatePicker fx:id="_tecBOD" layoutX="458.0" layoutY="19.0" prefHeight="30.0" prefWidth="230.0" />
+                                    <Button layoutX="747.0" layoutY="17.0" mnemonicParsing="false" onAction="#addNewTechOfficerBtn" prefHeight="35.0" prefWidth="150.0" text="Add">
+                                       <styleClass>
+                                          <String fx:value="addBtn" />
+                                          <String fx:value="lecBtn" />
+                                          <String fx:value="shadow" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button layoutX="747.0" layoutY="80.0" mnemonicParsing="false" onAction="#techOfficerUpdateBtn" prefHeight="35.0" prefWidth="150.0" text="Update">
+                                       <styleClass>
+                                          <String fx:value="updateBtn" />
+                                          <String fx:value="lecBtn" />
+                                          <String fx:value="shadow" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button layoutX="747.0" layoutY="141.0" mnemonicParsing="false" onAction="#tecOfficerDeleteBtn" prefHeight="35.0" prefWidth="150.0" text="Delete">
+                                       <styleClass>
+                                          <String fx:value="deleteBtn" />
+                                          <String fx:value="shadow" />
+                                          <String fx:value="lecBtn" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button layoutX="747.0" layoutY="200.0" mnemonicParsing="false" onAction="#techOfficerClearBtn" prefHeight="35.0" prefWidth="150.0" text="Clear">
+                                       <styleClass>
+                                          <String fx:value="clearBtn" />
+                                          <String fx:value="shadow" />
+                                          <String fx:value="lecBtn" />
+                                       </styleClass>
+                                    </Button>
+                                    <Label layoutX="348.0" layoutY="163.0" text="Department">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="353.0" layoutY="207.0" text="Password">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="_tecDepartment" layoutX="458.0" layoutY="159.0" prefHeight="30.0" prefWidth="230.0" promptText="Choise" />
+                                    <PasswordField fx:id="_tecPassword" layoutX="459.0" layoutY="205.0" prefHeight="30.0" prefWidth="230.0" />
                                  </children>
                               </Pane>
                            </children>
