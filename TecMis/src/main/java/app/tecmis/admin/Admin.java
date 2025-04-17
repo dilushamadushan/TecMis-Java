@@ -394,18 +394,19 @@ public class Admin implements Initializable {
 
     @FXML
     void DeleteCourseBtn(ActionEvent event) {
+        deleteCourse();
     }
     @FXML
     void newCourseAddBtn(ActionEvent event) {
-
+        addNewCourse();
     }
     @FXML
     void resetCourseBtn(ActionEvent event) {
-
+        clearCourseTextFiled();
     }
     @FXML
     void updateCourseBtn(ActionEvent event) {
-
+        updateCourse();
     }
 
     @FXML
@@ -497,6 +498,8 @@ public class Admin implements Initializable {
             stuSearch();
         } else if(event.getSource() == tecSearchBar){
             tecSearch();
+        } else if(event.getSource() == courseSearchBar){
+            courseSearch();
         }
 
     }
@@ -1394,7 +1397,7 @@ public class Admin implements Initializable {
                         rs.getInt("course_credit"),
                         rs.getInt("course_houre"),
                         rs.getString("course_type"),
-                        rs.getString("dep_id")
+                        rs.getString("dep_name")
                 );
                 courseList.add(cd);
             }
@@ -1413,6 +1416,150 @@ public class Admin implements Initializable {
         c_dep.setCellValueFactory(new PropertyValueFactory<CourseDetails,String>("courseDepartment"));
 
         _courseTableView.setItems(courseDetails);
+    }
+    public void addNewCourse(){
+        Connection con = Config.getConfig();
+        String c_code = _cCode.getText();
+        String c_name = _cName.getText();
+        int c_cradit = Integer.parseInt(_cCredit.getText());
+        int c_houres = Integer.parseInt(_cHoure.getText());
+        String c_type = _cType.getSelectionModel().getSelectedItem();
+        String c_dep = _cDep.getSelectionModel().getSelectedItem();
+        String c_depId = setDepId(c_dep);
+
+        if(c_code.isEmpty()
+                || c_name.isEmpty()
+                || c_cradit == 0
+                || c_houres == 0
+                || c_type == null
+                || c_dep == null
+        ){
+            Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
+            errorAlert.setTitle("Missing Fields");
+            errorAlert.setHeaderText(null);
+            errorAlert.setContentText("Please fill in all the required fields before submitting.");
+            errorAlert.showAndWait();
+            return;
+        }
+        String insertSql = "INSERT INTO course VALUE(?,?,?,?,?,?)";
+
+        try{
+            PreparedStatement ps = con.prepareStatement(insertSql);
+            ps.setString(1, c_code);
+            ps.setString(2, c_name);
+            ps.setInt(3, c_cradit);
+            ps.setInt(4, c_houres);
+            ps.setString(5, c_type);
+            ps.setString(6,c_depId);
+            ps.executeUpdate();
+
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("New Course Added");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("Course '" + c_code + "' added successfully!");
+            successAlert.showAndWait();
+        } catch (Exception e) {
+            System.out.println("Error"+ e.getMessage());
+        }
+        showCourseToTable();
+        clearCourseTextFiled();
+    }
+    public void updateCourse(){
+        Connection con = Config.getConfig();
+
+        String c_code = _cCode.getText();
+        String c_name = _cName.getText();
+        int c_cradit = Integer.parseInt(_cCredit.getText());
+        int c_houres = Integer.parseInt(_cHoure.getText());
+        String c_type = _cType.getSelectionModel().getSelectedItem();
+        String c_dep = _cDep.getSelectionModel().getSelectedItem();
+        String c_depId = setDepId(c_dep);
+
+        String upSql = "UPDATE course SET course_name = ?,course_credit = ?,course_houre = ?,course_type = ?,dep_id = ? WHERE course_code = ?";
+        try{
+           PreparedStatement ps = con.prepareStatement(upSql);
+           ps.setString(1, c_name);
+           ps.setInt(2, c_cradit);
+           ps.setInt(3, c_houres);
+           ps.setString(4, c_type);
+           ps.setString(5, c_depId);
+           ps.setString(6, c_code);
+           ps.executeUpdate();
+
+           Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+           successAlert.setTitle("Course Updated");
+           successAlert.setHeaderText(null);
+           successAlert.setContentText("Course '" + c_code + "' Updated successfully!");
+           successAlert.showAndWait();
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
+        showCourseToTable();
+        clearCourseTextFiled();
+    }
+    public void deleteCourse(){
+        Connection con = Config.getConfig();
+        String c_code = _cCode.getText();
+        String c_name = _cName.getText();
+        int c_cradit = Integer.parseInt(_cCredit.getText());
+        int c_houres = Integer.parseInt(_cHoure.getText());
+        String c_type = _cType.getSelectionModel().getSelectedItem();
+        String c_dep = _cDep.getSelectionModel().getSelectedItem();
+        String c_depId = setDepId(c_dep);
+
+        String DeleteSql = "DELETE FROM course WHERE course_code = ?";
+
+        try{
+            PreparedStatement ps = con.prepareStatement(DeleteSql);
+            ps.setString(1, c_code);
+            ps.executeUpdate();
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Course Deleted");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("Course '" + c_code + "' deleted successfully!");
+            successAlert.showAndWait();
+        }catch (Exception e){
+            System.out.println("Error"+ e.getMessage());
+        }
+        showCourseToTable();
+        clearCourseTextFiled();
+    }
+    public void clearCourseTextFiled(){
+        _cCode.setText("");
+        _cName.setText("");
+        _cCredit.setText("");
+        _cHoure.setText("");
+        _cType.setValue(null);
+        _cDep.setValue(null);
+    }
+    public void courseSearch(){
+        FilteredList<CourseDetails> filter = new FilteredList<>(getCourseDetails(),e -> true);
+        courseSearchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filter.setPredicate(predicateLecData ->{
+                if(newValue == null || newValue.isEmpty()) return true;
+
+                String searchKey = newValue.toLowerCase();
+
+                if (predicateLecData.getCourseCode().toLowerCase().contains(searchKey)) {
+                    return true;
+                }else if(predicateLecData.getCourseName().toLowerCase().contains(searchKey)){
+                    return true;
+                } else if (predicateLecData.getCourseDepartment().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateLecData.getCourseType().toLowerCase().contains(searchKey)) {
+                    return true;
+                }else if (String.valueOf(predicateLecData.getCourseCredit()).contains(searchKey)){
+                    return true;
+                } else if (String.valueOf(predicateLecData.getCourseHoures()).contains(searchKey)) {
+                    return true;
+                }else{
+                    return false;
+                }
+            });
+        });
+        SortedList<CourseDetails> sortedList = new SortedList<>(filter);
+        sortedList.comparatorProperty().bind(_courseTableView.comparatorProperty());
+        _courseTableView.setItems(sortedList);
     }
 
     @Override
