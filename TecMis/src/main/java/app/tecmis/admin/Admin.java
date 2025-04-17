@@ -8,17 +8,17 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -30,6 +30,9 @@ public class Admin implements Initializable {
 
     @FXML
     private Button courseBtn;
+
+    @FXML
+    private AnchorPane course;
 
     @FXML
     private AnchorPane dashbord;
@@ -61,14 +64,9 @@ public class Admin implements Initializable {
     @FXML
     private Button timeTableBtn;
 
-    @FXML
-    void logout(ActionEvent event) {
-        Platform.exit();
-    }
-
     // lecture
     @FXML
-    private ComboBox _lecDepartment;
+    private ComboBox<String> _lecDepartment;
 
     @FXML
     private TextField _lecAddress;
@@ -157,7 +155,7 @@ public class Admin implements Initializable {
     private TextField _stuContactNo;
 
     @FXML
-    private ComboBox _stuDepartment;
+    private ComboBox<String> _stuDepartment;
 
     @FXML
     private TextField _stuEmail;
@@ -261,7 +259,7 @@ public class Admin implements Initializable {
     private ToggleGroup gender2;
 
     @FXML
-    private ComboBox _tecDepartment;
+    private ComboBox<String> _tecDepartment;
 
     @FXML
     private TableView<TechOfficerDetails> tecTableView;
@@ -299,6 +297,49 @@ public class Admin implements Initializable {
     @FXML
     private TableColumn<TechOfficerDetails, String> tec_Role;
 
+    //Course
+
+    @FXML
+    private TextField _cCode;
+
+    @FXML
+    private TextField _cCredit;
+
+    @FXML
+    private ComboBox<String> _cDep;
+
+    @FXML
+    private TextField _cHoure;
+
+    @FXML
+    private TextField _cName;
+
+    @FXML
+    private ComboBox<String> _cType;
+
+    @FXML
+    private TableView<CourseDetails> _courseTableView;
+
+    @FXML
+    private TableColumn<CourseDetails, String> c_code;
+
+    @FXML
+    private TableColumn<CourseDetails, Integer> c_credit;
+
+    @FXML
+    private TableColumn<CourseDetails, String> c_dep;
+
+    @FXML
+    private TableColumn<CourseDetails, Integer> c_houre;
+
+    @FXML
+    private TableColumn<CourseDetails, String> c_name;
+
+    @FXML
+    private TableColumn<CourseDetails, String> c_type;
+
+    @FXML
+    private TextField courseSearchBar;
 
     @FXML
     void addNewLectureBtn(ActionEvent event) {
@@ -349,6 +390,22 @@ public class Admin implements Initializable {
     @FXML
     void techOfficerUpdateBtn(ActionEvent event) {
         techOfficerUpdate();
+    }
+
+    @FXML
+    void DeleteCourseBtn(ActionEvent event) {
+    }
+    @FXML
+    void newCourseAddBtn(ActionEvent event) {
+
+    }
+    @FXML
+    void resetCourseBtn(ActionEvent event) {
+
+    }
+    @FXML
+    void updateCourseBtn(ActionEvent event) {
+
     }
 
     @FXML
@@ -423,6 +480,16 @@ public class Admin implements Initializable {
         _tecBOD.setValue(localDate);
     }
     @FXML
+    void handleCourseRows(MouseEvent event) {
+        CourseDetails cd = _courseTableView.getSelectionModel().getSelectedItem();
+        _cCode.setText(cd.getCourseCode());
+        _cName.setText(cd.getCourseName());
+        _cCredit.setText(String.valueOf(cd.getCourseCredit()));
+        _cHoure.setText(String.valueOf(cd.getCourseHoures()));
+        _cType.setValue(cd.getCourseType());
+        _cDep.setValue(cd.getCourseDepartment());
+    }
+    @FXML
     void userSearchBar(MouseEvent event) {
         if(event.getSource() == lecSearchBar){
             lecSearch();
@@ -441,22 +508,31 @@ public class Admin implements Initializable {
             lecture.setVisible(false);
             student.setVisible(false);
             techOfficer.setVisible(false);
+            course.setVisible(false);
         }else if(event.getSource()==lectureBtn){
             dashbord.setVisible(false);
             lecture.setVisible(true);
             student.setVisible(false);
             techOfficer.setVisible(false);
-            setDepName();
+            course.setVisible(false);
         }else if(event.getSource()==studentBtn){
             dashbord.setVisible(false);
             lecture.setVisible(false);
             student.setVisible(true);
             techOfficer.setVisible(false);
+            course.setVisible(false);
         }else if(event.getSource()==techofficerBtn){
             dashbord.setVisible(false);
             lecture.setVisible(false);
             student.setVisible(false);
             techOfficer.setVisible(true);
+            course.setVisible(false);
+        }else if(event.getSource()==courseBtn){
+            dashbord.setVisible(false);
+            lecture.setVisible(false);
+            student.setVisible(false);
+            techOfficer.setVisible(false);
+            course.setVisible(true);
         }
     }
 
@@ -483,6 +559,7 @@ public class Admin implements Initializable {
         _lecDepartment.setItems(dep);
         _stuDepartment.setItems(dep);
         _tecDepartment.setItems(dep);
+        _cDep.setItems(dep);
     }
     public String setDepId(Object DepName) {
         Connection conn2 = Config.getConfig();
@@ -507,6 +584,11 @@ public class Admin implements Initializable {
             System.out.println("Error: " + e.getMessage());
         }
         return ld;
+    }
+    public String courseType(){
+        ObservableList<String> courseTypeList = FXCollections.observableArrayList("Theory","Practical","Theory & Practical");
+        _cType.setItems(courseTypeList);
+        return String.valueOf(courseTypeList);
     }
 
     public ObservableList<LecDetails> getLecture(){
@@ -1293,12 +1375,64 @@ public class Admin implements Initializable {
         tecTableView.setItems(sortedList);
     }
 
+    public ObservableList<CourseDetails> getCourseDetails(){
+        ObservableList<CourseDetails> courseList = FXCollections.observableArrayList();
+        Connection con = Config.getConfig();
+
+        String courseSql = "SELECT * FROM course c INNER JOIN department d ON d.dep_id = c.dep_id ";
+        Statement st = null;
+        ResultSet rs = null;
+
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(courseSql);
+            CourseDetails cd;
+            while (rs.next()) {
+                cd = new CourseDetails(
+                        rs.getString("course_code"),
+                        rs.getString("course_name"),
+                        rs.getInt("course_credit"),
+                        rs.getInt("course_houre"),
+                        rs.getString("course_type"),
+                        rs.getString("dep_id")
+                );
+                courseList.add(cd);
+            }
+        } catch (Exception e){
+            System.out.println("Error " + e.getMessage());
+        }
+        return courseList;
+    }
+    public void showCourseToTable(){
+        ObservableList<CourseDetails> courseDetails = getCourseDetails();
+        c_code.setCellValueFactory(new PropertyValueFactory<CourseDetails,String>("courseCode"));
+        c_name.setCellValueFactory(new PropertyValueFactory<CourseDetails,String>("courseName"));
+        c_credit.setCellValueFactory(new PropertyValueFactory<CourseDetails,Integer>("courseCredit"));
+        c_houre.setCellValueFactory(new PropertyValueFactory<CourseDetails,Integer>("courseHoures"));
+        c_type.setCellValueFactory(new PropertyValueFactory<CourseDetails,String>("courseType"));
+        c_dep.setCellValueFactory(new PropertyValueFactory<CourseDetails,String>("courseDepartment"));
+
+        _courseTableView.setItems(courseDetails);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showLectureToTable();
         showStudentToTable();
         showTechOfficerToTable();
+        showCourseToTable();
         setDepName();
+        courseType();
     }
+
+    @FXML
+    void logout(ActionEvent event) {
+        try{
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
+        }catch (Exception e){
+            System.out.println("Error " + e.getMessage());
+        }
+    }
+
 }
