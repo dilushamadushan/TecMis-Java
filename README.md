@@ -13,7 +13,7 @@ TecMis is a Java-based project designed to manage and streamline technical proce
 ## Technologies Used
 - Programming Language: Java
 - Database: MySQL
-- GUI Framework: Java Swing
+- GUI Framework: JavaFx
 
 ## Installation
 1. Clone the repository:
@@ -28,8 +28,5 @@ TecMis is a Java-based project designed to manage and streamline technical proce
 
 > [!IMPORTANT]  
 > All group members must read [CONTRIBUTION GUIDE](.github/CONTRIBUTING.md)
-
-## License
-This project is licensed under the MIT License.
 
 Don't forget to hit the :star: if you like this repo.
