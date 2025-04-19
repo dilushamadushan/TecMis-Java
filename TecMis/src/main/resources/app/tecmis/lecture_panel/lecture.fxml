@@ -1,66 +1,167 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="700.0" prefWidth="1200.0" stylesheets="@../style_sheet/lecture.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.tecmis.lecture.Lecture">
    <children>
-      <AnchorPane layoutX="-9.0" prefHeight="130.0" prefWidth="1213.0" style="-fx-background-color: #42a4f5;" stylesheets="@../style_sheet/lecture.css">
-         <children>
-            <Label layoutX="133.0" layoutY="30.0" prefHeight="70.0" prefWidth="382.0" text=" Welcome Lecture Name" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="92.0" fitWidth="99.0" layoutX="23.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../media/lecture/logo1.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <ImageView id="Profile" fitHeight="168.0" fitWidth="159.0" layoutX="105.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../media/lecture/Profile.png" />
-         </image>
-      </ImageView>
-      <ImageView id="Courses" fitHeight="168.0" fitWidth="132.0" layoutX="384.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../media/lecture/Courses.png" />
-         </image>
-      </ImageView>
-      <ImageView id="ExamMaks" fitHeight="168.0" fitWidth="163.0" layoutX="663.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../media/lecture/Exam%20Marks.png" />
-         </image>
-      </ImageView>
-      <ImageView id="Undergraduate" fitHeight="168.0" fitWidth="163.0" layoutX="928.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../media/lecture/Undergraduate.png" />
-         </image>
-      </ImageView>
-      <ImageView id="Eligibility" fitHeight="168.0" fitWidth="131.0" layoutX="121.0" layoutY="465.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../media/lecture/Eligibility.png" />
-         </image>
-      </ImageView>
-      <ImageView id="GradeNGpa" fitHeight="168.0" fitWidth="115.0" layoutX="392.0" layoutY="465.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../media/lecture/Grades%20&amp;%20GPA.png" />
-         </image>
-      </ImageView>
-      <ImageView id="Attendace_Medical" fitHeight="168.0" fitWidth="131.0" layoutX="679.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../media/lecture/Attendance%20&amp;%20Medicals.png" />
-         </image>
-      </ImageView>
-      <ImageView id="Notice" fitHeight="168.0" fitWidth="163.0" layoutX="928.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../media/lecture/Notice.png" />
-         </image>
-      </ImageView>
+      <BorderPane prefHeight="700.0" prefWidth="1200.0">
+         <top>
+            <AnchorPane prefHeight="164.0" prefWidth="1200.0" style="-fx-background-color: #42a4f5;" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../media/lecture/logo1.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="204.0" layoutY="78.0" text="Welcome Lecture name">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="68.0" fitWidth="67.0" layoutX="1113.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@log_out.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane fx:id="main_panel" prefHeight="200.0" prefWidth="200.0" stylesheets="@../style_sheet/lecture.css" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane fx:id="all_profile_window" prefHeight="493.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView id="profile" fx:id="profile" fitHeight="172.0" fitWidth="165.0" layoutX="81.0" layoutY="48.0" onMouseClicked="#handleAllprofile" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../media/lecture/Profile.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView id="gpa" fx:id="grade_gpa_photo" fitHeight="177.0" fitWidth="127.0" layoutX="683.0" layoutY="280.0" onMouseClicked="#handleAllprofile" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../media/lecture/Grades-GPA.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView id="eligibilty" fx:id="eligibility_photo" fitHeight="172.0" fitWidth="128.0" layoutX="387.0" layoutY="279.0" onMouseClicked="#handleAllprofile" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../media/lecture/Eligibility.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView id="notice" fx:id="notice_photo" fitHeight="184.0" fitWidth="184.0" layoutX="64.0" layoutY="277.0" onMouseClicked="#handleAllprofile" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../media/lecture/Notice.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView id="attendance" fx:id="attendeance_photo" fitHeight="183.0" fitWidth="141.0" layoutX="957.0" layoutY="279.0" onMouseClicked="#handleAllprofile" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../media/lecture/Attendance-Medicals.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView id="undergraduate" fx:id="undergraduate_photo" fitHeight="174.0" fitWidth="167.0" layoutX="944.0" layoutY="58.0" onMouseClicked="#handleAllprofile" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../media/lecture/Undergraduate.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView id="exam_mark" fx:id="exam_mark" fitHeight="186.0" fitWidth="170.0" layoutX="658.0" layoutY="57.0" onMouseClicked="#handleAllprofile" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../media/lecture/Exam-Marks.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView id="courss" fx:id="courses" fitHeight="157.0" fitWidth="164.0" layoutX="384.0" layoutY="56.0" onMouseClicked="#handleAllprofile" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../media/lecture/Courses.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="profile_window" prefHeight="595.0" prefWidth="1260.0" style="-fx-background-color: red;" visible="false">
+                     <children>
+                        <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#backtoALLprofile" prefHeight="50.0" prefWidth="103.0" text="go back" />
+                        <Label layoutX="521.0" layoutY="199.0" text="profile winow">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="courses_window" prefHeight="593.0" prefWidth="1260.0" visible="false">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#backtoALLprofile" prefHeight="50.0" prefWidth="103.0" text="go back" />
+                        <Label layoutX="544.0" layoutY="278.0" text="course window">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="exam_window" layoutX="10.0" layoutY="10.0" prefHeight="585.0" prefWidth="1250.0" visible="false">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#backtoALLprofile" prefHeight="50.0" prefWidth="103.0" text="go back" />
+                        <Label layoutX="544.0" layoutY="278.0" text="Ecam window">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="undergraduate_window" layoutX="-5.0" layoutY="-2.0" prefHeight="599.0" prefWidth="1260.0" visible="false">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#backtoALLprofile" prefHeight="50.0" prefWidth="103.0" text="go back" />
+                        <Label layoutX="544.0" layoutY="278.0" text="undergraduate window">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="notice_window" layoutX="-2.0" prefHeight="597.0" prefWidth="1260.0" visible="false">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#backtoALLprofile" prefHeight="50.0" prefWidth="103.0" text="go back" />
+                        <Label layoutX="544.0" layoutY="278.0" text="Notice window">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="eligibility_window" layoutX="-2.0" layoutY="1.0" prefHeight="597.0" prefWidth="1260.0" visible="false">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#backtoALLprofile" prefHeight="50.0" prefWidth="103.0" text="go back" />
+                        <Label layoutX="544.0" layoutY="278.0" text="eligability window">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="grade_window" layoutX="-2.0" layoutY="-4.0" prefHeight="604.0" prefWidth="1260.0" visible="false">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#backtoALLprofile" prefHeight="50.0" prefWidth="103.0" text="go back" />
+                        <Label layoutX="544.0" layoutY="278.0" text="gpa window">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="attenfance_window" prefHeight="600.0" prefWidth="1260.0" visible="false">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#backtoALLprofile" prefHeight="50.0" prefWidth="103.0" text="go back" />
+                        <Label layoutX="544.0" layoutY="278.0" text="medicalwinfow">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>
