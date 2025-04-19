@@ -85,6 +85,17 @@
     -fx-text-fill: #fff;
     -fx-font-weight: bold;
 }
+
 .lecBtn:hover{
     -fx-text-fill: black;
+}
+.notice{
+    -fx-background-color:  #F0F8FF;
+    -fx-border-color: #fff;
+    -fx-font-family: Consolas;
+    -fx-font-size: 15;
+}
+.noticeTable{
+    -fx-border-color: #F0F8FF ;
+
 }
