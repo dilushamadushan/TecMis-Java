@@ -9,12 +9,92 @@ import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx .scene.layout.Pane;
 
+//profile window
+
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+
+
+
+
+//========================
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
 public class Lecture implements Initializable {
+
+//profile
+    @FXML
+    private ImageView change_photo_icon;
+
+    @FXML
+    private Button edit_profile_btn;
+
+    @FXML
+    private Label information_lebal;
+
+    @FXML
+    private Label security_lebal;
+
+
+    @FXML
+    private TextField first_name_textfield;
+
+    @FXML
+    private TextField last_name_textfield;
+
+    @FXML
+    private TextField contact_number_textfield;
+
+
+    @FXML
+    private TextField gmail_textfield;
+
+    @FXML
+    private Button save_changes_butten;
+
+    @FXML
+    private Button edit_infor_btn;
+
+
+    @FXML
+    private AnchorPane profile_part2_infor_panel;
+
+    @FXML
+    private AnchorPane profile_window_inside_part1;
+
+    @FXML
+    private AnchorPane profile_part2_Securitiy_panel;
+
+
+
+    @FXML
+    void information_lebal_click(MouseEvent event) {
+
+        if(event.getSource() == information_lebal) {
+            profile_part2_infor_panel.setVisible(true);
+            profile_part2_Securitiy_panel.setVisible(false);
+
+        } else if (event.getSource() == security_lebal) {
+
+            profile_part2_infor_panel.setVisible(false);
+            profile_part2_Securitiy_panel.setVisible(true);
+
+
+
+        }
+    }
+
+    //===================
+
+
+    @FXML
+    private ImageView logout_photo;
+
 
 
     @FXML
@@ -74,6 +154,9 @@ public class Lecture implements Initializable {
     @FXML
     private Button go_back_btn;
 
+
+
+
     @FXML
     void handleAllprofile(MouseEvent event) {
         if (event.getSource() == profile) {
@@ -88,6 +171,8 @@ public class Lecture implements Initializable {
             grade_window.setVisible(false);
             attenfance_window.setVisible(false);
             notice_window.setVisible(false);
+
+
 
         }
         else if (event.getSource() == courses) {
@@ -207,6 +292,8 @@ public class Lecture implements Initializable {
 
 
     }
+
+
     @FXML
     void backtoALLprofile(ActionEvent event) {
 

@@ -35,7 +35,7 @@ public class LoginController {
     void loginBtn(ActionEvent event){
         System.out.println("Login button pressed");
         LoginController loginController = new LoginController();
-        //loginController.adminWindow();
+       // loginController.adminWindow();
         //loginController.studentWindow();
         //loginController.techOfficerWindow();
         loginController.lectureWindow();
