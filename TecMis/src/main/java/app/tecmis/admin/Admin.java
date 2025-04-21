@@ -15,12 +15,18 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -347,6 +353,7 @@ public class Admin implements Initializable {
 
     //Notice
 
+
     @FXML
     private Label n_id;
 
@@ -445,10 +452,6 @@ public class Admin implements Initializable {
     @FXML
     void addNotice(ActionEvent event) {
         addNewNotice();
-    }
-    @FXML
-    void attachNotice(ActionEvent event) {
-
     }
     @FXML
     void clearNotice(ActionEvent event) {
@@ -1655,8 +1658,7 @@ public class Admin implements Initializable {
                         rs.getInt("notice_id"),
                         rs.getString("notice_title"),
                         rs.getString("description"),
-                        rs.getDate("date"),
-                        rs.getString("notice_path")
+                        rs.getDate("date")
                 );
                 noticeList.add(nd);
             }
@@ -1678,6 +1680,7 @@ public class Admin implements Initializable {
         String nDes = n_description.getText();
         LocalDate nDate = LocalDate.now();
 
+
         if(nTittle.isEmpty()
                 || nDes.isEmpty()
         ){
@@ -1688,14 +1691,13 @@ public class Admin implements Initializable {
             errorAlert.showAndWait();
             return;
         }
-        String insertSql = "INSERT INTO notice (description,date,notice_title,notice_path) VALUE(?,?,?,?)";
+        String insertSql = "INSERT INTO notice (description,date,notice_title) VALUE(?,?,?)";
 
         try{
             PreparedStatement ps = con.prepareStatement(insertSql);
             ps.setString(1, nDes);
             ps.setDate(2, java.sql.Date.valueOf(nDate));
             ps.setString(3, nTittle);
-            ps.setString(4, "upload/");
             ps.executeUpdate();
 
             Alert successAlert = new Alert(Alert.AlertType.INFORMATION);

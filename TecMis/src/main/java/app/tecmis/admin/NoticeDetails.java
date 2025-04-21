@@ -7,14 +7,12 @@ public class NoticeDetails {
     private String noticeTitle;
     private String noticeDescription;
     private Date noticeDate;
-    private String noticePath;
 
-    public NoticeDetails(int noticeId, String noticeTitle, String noticeDescription, Date noticeDate, String noticePath) {
+    public NoticeDetails(int noticeId, String noticeTitle, String noticeDescription, Date noticeDate) {
         this.noticeId = noticeId;
         this.noticeTitle = noticeTitle;
         this.noticeDescription = noticeDescription;
         this.noticeDate = noticeDate;
-        this.noticePath = noticePath;
     }
 
     public int getNoticeId() {
@@ -33,7 +31,4 @@ public class NoticeDetails {
         return noticeDate;
     }
 
-    public String getNoticePath() {
-        return noticePath;
-    }
 }
