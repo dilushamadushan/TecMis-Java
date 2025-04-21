@@ -1,26 +1,33 @@
 package app.tecmis.admin;
 
 import app.tecmis.connection.Config;
-import javafx.application.Platform;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Admin implements Initializable {
@@ -48,6 +55,9 @@ public class Admin implements Initializable {
 
     @FXML
     private Button noticeBtn;
+
+    @FXML
+    private AnchorPane notise;
 
     @FXML
     private AnchorPane student;
@@ -341,6 +351,36 @@ public class Admin implements Initializable {
     @FXML
     private TextField courseSearchBar;
 
+    //Notice
+
+
+    @FXML
+    private Label n_id;
+
+    @FXML
+    private TextArea n_description;
+
+    @FXML
+    private TextField n_tittle;
+    
+    @FXML
+    private Label noticeDate;
+
+    @FXML
+    private TextField noticeSearchBar;
+
+    @FXML
+    private TableView<NoticeDetails> noticeTableView;
+
+    @FXML
+    private TableColumn<NoticeDetails, Date> _noticeDate;
+
+    @FXML
+    private TableColumn<NoticeDetails, Integer> _noticeId;
+
+    @FXML
+    private TableColumn<NoticeDetails, String> _noticeTittle;
+
     @FXML
     void addNewLectureBtn(ActionEvent event) {
         addNewLecture();
@@ -407,6 +447,23 @@ public class Admin implements Initializable {
     @FXML
     void updateCourseBtn(ActionEvent event) {
         updateCourse();
+    }
+
+    @FXML
+    void addNotice(ActionEvent event) {
+        addNewNotice();
+    }
+    @FXML
+    void clearNotice(ActionEvent event) {
+        cleanNoticeFiled();
+    }
+    @FXML
+    void deleteNotice(ActionEvent event) {
+        deleteNotice();
+    }
+    @FXML
+    void editNotice(ActionEvent event) {
+        noticeEdit();
     }
 
     @FXML
@@ -491,6 +548,14 @@ public class Admin implements Initializable {
         _cDep.setValue(cd.getCourseDepartment());
     }
     @FXML
+    void handleNoticeRows(MouseEvent event) {
+        NoticeDetails noticeDetails = noticeTableView.getSelectionModel().getSelectedItem();
+        n_tittle.setText(String.valueOf(noticeDetails.getNoticeTitle()));
+        n_description.setText(String.valueOf(noticeDetails.getNoticeDescription()));
+        noticeDate.setText(String.valueOf(noticeDetails.getNoticeDate()));
+        n_id.setText(String.valueOf(noticeDetails.getNoticeId()));
+    }
+    @FXML
     void userSearchBar(MouseEvent event) {
         if(event.getSource() == lecSearchBar){
             lecSearch();
@@ -500,6 +565,8 @@ public class Admin implements Initializable {
             tecSearch();
         } else if(event.getSource() == courseSearchBar){
             courseSearch();
+        } else  if(event.getSource() == noticeSearchBar){
+            noticeSearch();
         }
 
     }
@@ -512,30 +579,42 @@ public class Admin implements Initializable {
             student.setVisible(false);
             techOfficer.setVisible(false);
             course.setVisible(false);
+            notise.setVisible(false);
         }else if(event.getSource()==lectureBtn){
             dashbord.setVisible(false);
             lecture.setVisible(true);
             student.setVisible(false);
             techOfficer.setVisible(false);
             course.setVisible(false);
+            notise.setVisible(false);
         }else if(event.getSource()==studentBtn){
             dashbord.setVisible(false);
             lecture.setVisible(false);
             student.setVisible(true);
             techOfficer.setVisible(false);
             course.setVisible(false);
+            notise.setVisible(false);
         }else if(event.getSource()==techofficerBtn){
             dashbord.setVisible(false);
             lecture.setVisible(false);
             student.setVisible(false);
             techOfficer.setVisible(true);
             course.setVisible(false);
+            notise.setVisible(false);
         }else if(event.getSource()==courseBtn){
             dashbord.setVisible(false);
             lecture.setVisible(false);
             student.setVisible(false);
             techOfficer.setVisible(false);
             course.setVisible(true);
+            notise.setVisible(false);
+        }else if(event.getSource()==noticeBtn){
+            dashbord.setVisible(false);
+            lecture.setVisible(false);
+            student.setVisible(false);
+            techOfficer.setVisible(false);
+            course.setVisible(false);
+            notise.setVisible(true);
         }
     }
 
@@ -1562,12 +1641,170 @@ public class Admin implements Initializable {
         _courseTableView.setItems(sortedList);
     }
 
+    public ObservableList<NoticeDetails> getNoticeList() {
+        ObservableList<NoticeDetails> noticeList = FXCollections.observableArrayList();
+        Connection con = Config.getConfig();
+
+        String noticeSql = "SELECT * FROM notice ORDER BY  notice_id DESC";
+        Statement st = null;
+        ResultSet rs = null;
+
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(noticeSql);
+            NoticeDetails nd;
+            while (rs.next()) {
+                nd = new NoticeDetails(
+                        rs.getInt("notice_id"),
+                        rs.getString("notice_title"),
+                        rs.getString("description"),
+                        rs.getDate("date")
+                );
+                noticeList.add(nd);
+            }
+        } catch (Exception e){
+            System.out.println("Error " + e.getMessage());
+        }
+        return noticeList;
+    }
+    public void showNoticeToTable(){
+        ObservableList<NoticeDetails> noticeDetails = getNoticeList();
+        _noticeId.setCellValueFactory(new PropertyValueFactory<NoticeDetails,Integer>("noticeId"));
+        _noticeTittle.setCellValueFactory(new PropertyValueFactory<NoticeDetails,String>("noticeTitle"));
+        _noticeDate.setCellValueFactory(new PropertyValueFactory<NoticeDetails,Date>("noticeDate"));
+        noticeTableView.setItems(noticeDetails);
+    }
+    public void addNewNotice(){
+        Connection con = Config.getConfig();
+        String nTittle = n_tittle.getText();
+        String nDes = n_description.getText();
+        LocalDate nDate = LocalDate.now();
+
+
+        if(nTittle.isEmpty()
+                || nDes.isEmpty()
+        ){
+            Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
+            errorAlert.setTitle("Missing Fields");
+            errorAlert.setHeaderText(null);
+            errorAlert.setContentText("Please fill in all the required fields before submitting.");
+            errorAlert.showAndWait();
+            return;
+        }
+        String insertSql = "INSERT INTO notice (description,date,notice_title) VALUE(?,?,?)";
+
+        try{
+            PreparedStatement ps = con.prepareStatement(insertSql);
+            ps.setString(1, nDes);
+            ps.setDate(2, java.sql.Date.valueOf(nDate));
+            ps.setString(3, nTittle);
+            ps.executeUpdate();
+
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("New Notice Added");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("Notice '" + nTittle + "' added successfully!");
+            successAlert.showAndWait();
+        } catch (Exception e) {
+            System.out.println("Error"+ e.getMessage());
+        }
+        showNoticeToTable();
+    }
+    public void noticeEdit(){
+        Connection con = Config.getConfig();
+        String nTittle = n_tittle.getText();
+        String nDes = n_description.getText();
+        int nId = Integer.parseInt(n_id.getText());
+
+        if(nTittle.isEmpty()
+                || nDes.isEmpty()
+        ){
+            Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
+            errorAlert.setTitle("Missing Fields");
+            errorAlert.setHeaderText(null);
+            errorAlert.setContentText("Please fill in all the required fields before submitting.");
+            errorAlert.showAndWait();
+            return;
+        }
+
+        String upSql = "UPDATE notice SET notice_title = ?,description = ? WHERE notice_id = ?";
+
+        try{
+            PreparedStatement ps = con.prepareStatement(upSql);
+            ps.setString(1, nTittle);
+            ps.setString(2, nDes);
+            ps.setInt(3, nId);
+            ps.executeUpdate();
+
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Notice Edited");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("Notice '" + nTittle + "' edited successfully!");
+            successAlert.showAndWait();
+        } catch (Exception e) {
+            System.out.println("Error"+ e.getMessage());
+        }
+        showNoticeToTable();
+        cleanNoticeFiled();
+    }
+    public void deleteNotice(){
+        Connection con = Config.getConfig();
+        int nId = Integer.parseInt(n_id.getText());
+        String nTittle = n_tittle.getText();
+        String deleteSql = "DELETE FROM notice WHERE notice_id = ?";
+        try{
+            PreparedStatement ps = con.prepareStatement(deleteSql);
+            ps.setInt(1, nId);
+            ps.executeUpdate();
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Notice Deleted");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("Notice '" + nTittle  + "' deleted successfully!");
+            successAlert.showAndWait();
+
+        }catch (Exception e){
+            System.out.println("Error"+ e.getMessage());
+        }
+        showNoticeToTable();
+        cleanNoticeFiled();
+    }
+    public void cleanNoticeFiled(){
+        n_id.setText("");
+        n_tittle.setText("");
+        n_description.setText("");
+        noticeDate.setText("");
+    }
+    public void noticeSearch(){
+        FilteredList<NoticeDetails> filter = new FilteredList<>(getNoticeList(),e -> true);
+        noticeSearchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filter.setPredicate(predicateLecData ->{
+                if(newValue == null || newValue.isEmpty()) return true;
+
+                String searchKey = newValue.toLowerCase();
+
+                if (predicateLecData.getNoticeTitle().toLowerCase().contains(searchKey)) {
+                    return true;
+                }else if(String.valueOf(predicateLecData.getNoticeId()).contains(searchKey)){
+                    return true;
+                } else if (String.valueOf(predicateLecData.getNoticeDate()).contains(searchKey)) {
+                    return true;
+                }else{
+                    return false;
+                }
+            });
+        });
+        SortedList<NoticeDetails> sortedList = new SortedList<>(filter);
+        sortedList.comparatorProperty().bind(noticeTableView.comparatorProperty());
+        noticeTableView.setItems(sortedList);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showLectureToTable();
         showStudentToTable();
         showTechOfficerToTable();
         showCourseToTable();
+        showNoticeToTable();
         setDepName();
         courseType();
     }
