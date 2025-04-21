@@ -97,5 +97,12 @@
 }
 .noticeTable{
     -fx-border-color: #F0F8FF ;
-
+}
+.attach_icon{
+    -fx-background-color: #fff;
+    -fx-border-color: #fff;
+    -fx-background-radius: 50%;
+}
+.attach_icon:hover{
+   -fx-background-color: #cebfbf;
 }

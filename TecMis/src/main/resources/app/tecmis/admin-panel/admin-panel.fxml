@@ -685,46 +685,51 @@
                                           <Font size="15.0" />
                                        </font>
                                     </TextField>
-                                    <TextArea fx:id="n_description" layoutX="25.0" layoutY="97.0" prefHeight="274.0" prefWidth="400.0" promptText="Description" styleClass="notice">
+                                    <TextArea fx:id="n_description" layoutX="25.0" layoutY="88.0" prefHeight="274.0" prefWidth="400.0" promptText="Description" styleClass="notice">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </TextArea>
                                     <Separator layoutX="25.0" layoutY="60.0" prefHeight="3.0" prefWidth="399.0" />
-                                    <Button layoutX="148.0" layoutY="386.0" mnemonicParsing="false" onAction="#attachNotice" prefHeight="42.0" prefWidth="114.0" text="Attach">
-                                       <styleClass>
-                                          <String fx:value="shadow" />
-                                          <String fx:value="lecBtn" />
-                                          <String fx:value="clearBtn" />
-                                       </styleClass>
-                                    </Button>
-                                    <Button layoutX="82.0" layoutY="443.0" mnemonicParsing="false" onAction="#deleteNotice" prefHeight="42.0" prefWidth="114.0" text="Delete">
+                                    <Button layoutX="68.0" layoutY="446.0" mnemonicParsing="false" onAction="#deleteNotice" prefHeight="42.0" prefWidth="144.0" text="Delete">
                                        <styleClass>
                                           <String fx:value="shadow" />
                                           <String fx:value="deleteBtn" />
                                           <String fx:value="lecBtn" />
                                        </styleClass>
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
                                     </Button>
-                                    <Button layoutX="272.0" layoutY="386.0" mnemonicParsing="false" onAction="#editNotice" prefHeight="42.0" prefWidth="114.0" text="Edit">
+                                    <Button layoutX="232.0" layoutY="389.0" mnemonicParsing="false" onAction="#editNotice" prefHeight="42.0" prefWidth="142.0" text="Edit">
                                        <styleClass>
                                           <String fx:value="updateBtn" />
                                           <String fx:value="shadow" />
                                           <String fx:value="lecBtn" />
                                        </styleClass>
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
                                     </Button>
-                                    <Button layoutX="25.0" layoutY="386.0" mnemonicParsing="false" onAction="#addNotice" prefHeight="42.0" prefWidth="114.0" text="Add">
+                                    <Button layoutX="69.0" layoutY="389.0" mnemonicParsing="false" onAction="#addNotice" prefHeight="42.0" prefWidth="142.0" text="Add">
                                        <styleClass>
                                           <String fx:value="addBtn" />
                                           <String fx:value="shadow" />
                                           <String fx:value="lecBtn" />
                                        </styleClass>
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
                                     </Button>
-                                    <Button layoutX="215.0" layoutY="443.0" mnemonicParsing="false" onAction="#clearNotice" prefHeight="42.0" prefWidth="114.0" text="Clear">
+                                    <Button layoutX="232.0" layoutY="446.0" mnemonicParsing="false" onAction="#clearNotice" prefHeight="42.0" prefWidth="142.0" text="Clear">
                                        <styleClass>
                                           <String fx:value="clearBtn" />
                                           <String fx:value="shadow" />
                                           <String fx:value="lecBtn" />
                                        </styleClass>
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
                                     </Button>
                                     <Label fx:id="noticeDate" layoutX="348.0" layoutY="33.0" prefHeight="17.0" prefWidth="76.0" textAlignment="RIGHT" textFill="#696969" />
                                     <Label fx:id="n_id" layoutX="31.0" layoutY="31.0">
