@@ -1,5 +1,6 @@
 package app.tecmis.lecture;
 
+import app.tecmis.connection.Config;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
@@ -22,10 +23,14 @@ import javafx.scene.image.Image;
 
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 
 public class Lecture implements Initializable {
+
 
 //profile
     @FXML
@@ -88,6 +93,10 @@ public class Lecture implements Initializable {
 
         }
     }
+
+
+
+
 
     //===================
 
@@ -312,8 +321,11 @@ public class Lecture implements Initializable {
     }
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
 
     }
 

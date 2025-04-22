@@ -39,7 +39,7 @@
          <center>
             <AnchorPane fx:id="main_panel" prefHeight="200.0" prefWidth="200.0" stylesheets="@../style_sheet/lecture.css" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="all_profile_window" prefHeight="493.0" prefWidth="1200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="all_profile_window" prefHeight="493.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <ImageView id="profile" fx:id="profile" fitHeight="172.0" fitWidth="165.0" layoutX="81.0" layoutY="48.0" onMouseClicked="#handleAllprofile" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -83,7 +83,7 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="profile_window" prefHeight="595.0" prefWidth="1260.0">
+                  <AnchorPane fx:id="profile_window" prefHeight="595.0" prefWidth="1260.0" visible="false">
                      <children>
                         <AnchorPane fx:id="profile_part2_infor_panel" layoutX="437.0" layoutY="-1.0" prefHeight="605.0" prefWidth="997.0">
                            <children>
@@ -125,10 +125,10 @@
                               </VBox>
                               <VBox layoutX="427.0" layoutY="77.0" prefHeight="383.0" prefWidth="286.0" spacing="80.0">
                                  <children>
-                                    <TextField id="first_name_textfield" fx:id="first_name_textfield" alignment="CENTER" editable="false" prefHeight="20.0" prefWidth="286.0" stylesheets="@../style_sheet/lecture.css" text="ishan" />
-                                    <TextField id="sivmal_textfield" fx:id="last_name_textfield" alignment="CENTER" editable="false" layoutX="10.0" layoutY="10.0" text="sivmal" />
-                                    <TextField id="contact_number_textfield" fx:id="contact_number_textfield" alignment="CENTER" editable="false" layoutX="10.0" layoutY="35.0" text="0703181091" />
-                                    <TextField id="email_textfield" fx:id="gmail_textfield" alignment="CENTER" editable="false" layoutX="10.0" layoutY="35.0" text="ishansivmal@gmail.com" />
+                                    <TextField id="first_name_textfield" fx:id="first_name_textfield" alignment="CENTER" editable="false" prefHeight="20.0" prefWidth="286.0" stylesheets="@../style_sheet/lecture.css" />
+                                    <TextField id="sivmal_textfield" fx:id="last_name_textfield" alignment="CENTER" editable="false" layoutX="10.0" layoutY="10.0" />
+                                    <TextField id="contact_number_textfield" fx:id="contact_number_textfield" alignment="CENTER" editable="false" layoutX="10.0" layoutY="35.0" />
+                                    <TextField id="email_textfield" fx:id="gmail_textfield" alignment="CENTER" editable="false" layoutX="10.0" layoutY="35.0" />
                                  </children>
                               </VBox>
                               <Button id="save_changes_btn" fx:id="save_changes_butten" layoutX="471.0" layoutY="463.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" style="-fx-background-color: #1ab41a;" text="Save changes" />
