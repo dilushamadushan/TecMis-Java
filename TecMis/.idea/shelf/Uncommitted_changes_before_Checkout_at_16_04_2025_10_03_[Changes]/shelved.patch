@@ -1,0 +1,142 @@
+Index: src/main/java/app/tecmis/LoginController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package app.tecmis;\r\n\r\nimport javafx.application.Platform;\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.Button;\r\nimport javafx.scene.control.Label;\r\nimport javafx.scene.control.PasswordField;\r\nimport javafx.scene.control.TextField;\r\nimport javafx.scene.input.MouseEvent;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\n\r\npublic class LoginController {\r\n\r\n    @FXML\r\n    private Label loginCloseBtn;\r\n\r\n    @FXML\r\n    private Label loginError;\r\n\r\n    @FXML\r\n    private Button login_btn;\r\n\r\n    @FXML\r\n    private PasswordField password;\r\n\r\n    @FXML\r\n    private TextField username;\r\n\r\n    @FXML\r\n    void loginBtn(ActionEvent event){\r\n        System.out.println(\"Login button pressed\");\r\n        LoginController loginController = new LoginController();\r\n        //loginController.adminWindow();\r\n        //loginController.studentWindow();\r\n        //loginController.techOfficerWindow();\r\n        //loginController.lectureWindow();\r\n    }\r\n\r\n    public void adminWindow(){\r\n            FXMLLoader loaderAdmin = new FXMLLoader(getClass().getResource(\"admin-panel/admin-panel.fxml\"));\r\n            Scene sceneAdmin = null;\r\n            try {\r\n                sceneAdmin = new Scene(loaderAdmin.load(),1200,700);\r\n            } catch (IOException e) {\r\n                throw new RuntimeException(e);\r\n            }\r\n            Stage stageAdmin = new Stage();\r\n            stageAdmin.setScene(sceneAdmin);\r\n            stageAdmin.show();\r\n    }\r\n\r\n    public void studentWindow(){\r\n        FXMLLoader loaderStu = new FXMLLoader(getClass().getResource(\"student-panel/student-panel.fxml\"));\r\n        Scene sceneStu = null;\r\n        try {\r\n            sceneStu = new Scene(loaderStu.load(),1200,700);\r\n        } catch (IOException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n        Stage stageStu = new Stage();\r\n        stageStu.setScene(sceneStu);\r\n        stageStu.show();\r\n    }\r\n\r\n    public void techOfficerWindow(){\r\n        FXMLLoader loaderTO = new FXMLLoader(getClass().getResource(\"techOfficer-panel/techofficer_panel.fxml\"));\r\n        Scene sceneTO = null;\r\n        try {\r\n            sceneTO = new Scene(loaderTO.load(),1200,700);\r\n        } catch (IOException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n        Stage stageTO = new Stage();\r\n        stageTO.setScene(sceneTO);\r\n        stageTO.show();\r\n    }\r\n\r\n    public void lectureWindow(){\r\n        FXMLLoader loaderLec = new FXMLLoader(getClass().getResource(\"lecture_panel/lecture.fxml\"));\r\n        Scene sceneLec = null;\r\n        try {\r\n            sceneLec = new Scene(loaderLec.load(),1200,700);\r\n        } catch (IOException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n        Stage stageLec = new Stage();\r\n        stageLec.setScene(sceneLec);\r\n        stageLec.show();\r\n    }\r\n\r\n    @FXML\r\n    void loginCloseBtn(MouseEvent event) {\r\n        Platform.exit();\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/app/tecmis/LoginController.java b/src/main/java/app/tecmis/LoginController.java
+--- a/src/main/java/app/tecmis/LoginController.java	(revision 4be336ac62e62c19747c125f3123949bf11c97ad)
++++ b/src/main/java/app/tecmis/LoginController.java	(date 1744777890319)
+@@ -35,7 +35,7 @@
+     void loginBtn(ActionEvent event){
+         System.out.println("Login button pressed");
+         LoginController loginController = new LoginController();
+-        //loginController.adminWindow();
++        loginController.adminWindow();
+         //loginController.studentWindow();
+         //loginController.techOfficerWindow();
+         //loginController.lectureWindow();
+Index: src/main/resources/app/tecmis/lecture_panel/lecture.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.Label?>\r\n<?import javafx.scene.image.Image?>\r\n<?import javafx.scene.image.ImageView?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.text.Font?>\r\n\r\n<AnchorPane prefHeight=\"500.0\" prefWidth=\"707.0\" stylesheets=\"@../style_sheet/lecture.css\" xmlns=\"http://javafx.com/javafx/23.0.1\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"app.tecmis.lecture.Lecture\">\r\n   <children>\r\n      <AnchorPane layoutX=\"-9.0\" prefHeight=\"130.0\" prefWidth=\"717.0\" style=\"-fx-background-color: #42a4f5;\">\r\n         <children>\r\n            <Label layoutX=\"133.0\" layoutY=\"30.0\" prefHeight=\"70.0\" prefWidth=\"382.0\" text=\" Welcome Lecture Name\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font name=\"System Bold\" size=\"30.0\" />\r\n               </font>\r\n            </Label>\r\n            <ImageView fitHeight=\"92.0\" fitWidth=\"99.0\" layoutX=\"23.0\" layoutY=\"19.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n               <image>\r\n                  <Image url=\"@../media/lecture/logo1.png\" />\r\n               </image>\r\n            </ImageView>\r\n         </children>\r\n      </AnchorPane>\r\n      <Button id=\"profile\" fx:id=\"Profile\" layoutX=\"34.0\" layoutY=\"204.0\" mnemonicParsing=\"false\" prefHeight=\"113.0\" prefWidth=\"135.0\" styleClass=\"profile\" stylesheets=\"@../style_sheet/lecture.css\" text=\"Profile\" />\r\n      <Button fx:id=\"Courses\" layoutX=\"200.0\" layoutY=\"204.0\" mnemonicParsing=\"false\" prefHeight=\"113.0\" prefWidth=\"135.0\" text=\"Cours\" />\r\n      <Button fx:id=\"Undergraduate\" layoutX=\"544.0\" layoutY=\"204.0\" mnemonicParsing=\"false\" prefHeight=\"113.0\" prefWidth=\"135.0\" text=\"Undergraduate\" />\r\n      <Button fx:id=\"Eligibility\" layoutX=\"34.0\" layoutY=\"350.0\" mnemonicParsing=\"false\" prefHeight=\"113.0\" prefWidth=\"135.0\" text=\"Eligibility\" />\r\n      <Button fx:id=\"ExamMarks\" layoutX=\"373.0\" layoutY=\"204.0\" mnemonicParsing=\"false\" prefHeight=\"113.0\" prefWidth=\"135.0\" text=\"Exam Marks\" />\r\n      <Button fx:id=\"GradeNGpa\" layoutX=\"200.0\" layoutY=\"350.0\" mnemonicParsing=\"false\" prefHeight=\"113.0\" prefWidth=\"135.0\" text=\"Grade &amp; Gpa\" />\r\n      <Button fx:id=\"AttendaceMedical\" layoutX=\"373.0\" layoutY=\"350.0\" mnemonicParsing=\"false\" prefHeight=\"113.0\" prefWidth=\"135.0\" text=\"Attendace &amp; Medical\" />\r\n      <Button fx:id=\"Notices\" layoutX=\"544.0\" layoutY=\"350.0\" mnemonicParsing=\"false\" prefHeight=\"113.0\" prefWidth=\"135.0\" text=\"Notices\" />\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/app/tecmis/lecture_panel/lecture.fxml b/src/main/resources/app/tecmis/lecture_panel/lecture.fxml
+--- a/src/main/resources/app/tecmis/lecture_panel/lecture.fxml	(revision 4be336ac62e62c19747c125f3123949bf11c97ad)
++++ b/src/main/resources/app/tecmis/lecture_panel/lecture.fxml	(date 1744777667378)
+@@ -1,15 +1,14 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ 
+-<?import javafx.scene.control.Button?>
+ <?import javafx.scene.control.Label?>
+ <?import javafx.scene.image.Image?>
+ <?import javafx.scene.image.ImageView?>
+ <?import javafx.scene.layout.AnchorPane?>
+ <?import javafx.scene.text.Font?>
+ 
+-<AnchorPane prefHeight="500.0" prefWidth="707.0" stylesheets="@../style_sheet/lecture.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.tecmis.lecture.Lecture">
++<AnchorPane prefHeight="700.0" prefWidth="1200.0" stylesheets="@../style_sheet/lecture.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.tecmis.lecture.Lecture">
+    <children>
+-      <AnchorPane layoutX="-9.0" prefHeight="130.0" prefWidth="717.0" style="-fx-background-color: #42a4f5;">
++      <AnchorPane layoutX="-9.0" prefHeight="130.0" prefWidth="1213.0" style="-fx-background-color: #42a4f5;" stylesheets="@../style_sheet/lecture.css">
+          <children>
+             <Label layoutX="133.0" layoutY="30.0" prefHeight="70.0" prefWidth="382.0" text=" Welcome Lecture Name" textFill="WHITE">
+                <font>
+@@ -23,13 +22,45 @@
+             </ImageView>
+          </children>
+       </AnchorPane>
+-      <Button id="profile" fx:id="Profile" layoutX="34.0" layoutY="204.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="135.0" styleClass="profile" stylesheets="@../style_sheet/lecture.css" text="Profile" />
+-      <Button fx:id="Courses" layoutX="200.0" layoutY="204.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="135.0" text="Cours" />
+-      <Button fx:id="Undergraduate" layoutX="544.0" layoutY="204.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="135.0" text="Undergraduate" />
+-      <Button fx:id="Eligibility" layoutX="34.0" layoutY="350.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="135.0" text="Eligibility" />
+-      <Button fx:id="ExamMarks" layoutX="373.0" layoutY="204.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="135.0" text="Exam Marks" />
+-      <Button fx:id="GradeNGpa" layoutX="200.0" layoutY="350.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="135.0" text="Grade &amp; Gpa" />
+-      <Button fx:id="AttendaceMedical" layoutX="373.0" layoutY="350.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="135.0" text="Attendace &amp; Medical" />
+-      <Button fx:id="Notices" layoutX="544.0" layoutY="350.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="135.0" text="Notices" />
++      <ImageView id="Profile" fitHeight="168.0" fitWidth="159.0" layoutX="105.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
++         <image>
++            <Image url="@../media/lecture/Profile.png" />
++         </image>
++      </ImageView>
++      <ImageView id="Courses" fitHeight="168.0" fitWidth="132.0" layoutX="384.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
++         <image>
++            <Image url="@../media/lecture/Courses.png" />
++         </image>
++      </ImageView>
++      <ImageView id="ExamMaks" fitHeight="168.0" fitWidth="163.0" layoutX="663.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
++         <image>
++            <Image url="@../media/lecture/Exam%20Marks.png" />
++         </image>
++      </ImageView>
++      <ImageView id="Undergraduate" fitHeight="168.0" fitWidth="163.0" layoutX="928.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
++         <image>
++            <Image url="@../media/lecture/Undergraduate.png" />
++         </image>
++      </ImageView>
++      <ImageView id="Eligibility" fitHeight="168.0" fitWidth="131.0" layoutX="121.0" layoutY="465.0" pickOnBounds="true" preserveRatio="true">
++         <image>
++            <Image url="@../media/lecture/Eligibility.png" />
++         </image>
++      </ImageView>
++      <ImageView id="GradeNGpa" fitHeight="168.0" fitWidth="115.0" layoutX="392.0" layoutY="465.0" pickOnBounds="true" preserveRatio="true">
++         <image>
++            <Image url="@../media/lecture/Grades%20&amp;%20GPA.png" />
++         </image>
++      </ImageView>
++      <ImageView id="Attendace_Medical" fitHeight="168.0" fitWidth="131.0" layoutX="679.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true">
++         <image>
++            <Image url="@../media/lecture/Attendance%20&amp;%20Medicals.png" />
++         </image>
++      </ImageView>
++      <ImageView id="Notice" fitHeight="168.0" fitWidth="163.0" layoutX="928.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true">
++         <image>
++            <Image url="@../media/lecture/Notice.png" />
++         </image>
++      </ImageView>
+    </children>
+ </AnchorPane>
+Index: src/main/resources/app/tecmis/style_sheet/lecture.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.profile {\r\n    -fx-background-image: url('../media/lecture/Profile.png');\r\n    -fx-background-repeat: no-repeat;\r\n    -fx-background-position: center;\r\n    -fx-background-size: 30px 30px; /* Width height */\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/app/tecmis/style_sheet/lecture.css b/src/main/resources/app/tecmis/style_sheet/lecture.css
+--- a/src/main/resources/app/tecmis/style_sheet/lecture.css	(revision 4be336ac62e62c19747c125f3123949bf11c97ad)
++++ b/src/main/resources/app/tecmis/style_sheet/lecture.css	(date 1744777667397)
+@@ -1,6 +1,25 @@
+-.profile {
+-    -fx-background-image: url('../media/lecture/Profile.png');
+-    -fx-background-repeat: no-repeat;
+-    -fx-background-position: center;
+-    -fx-background-size: 30px 30px; /* Width height */
++#Profile,
++#Undergraduate,
++#Notice,
++#Eligibility,
++#Attendace_Medical,
++#ExamMaks,
++#Courses,
++#GradeNGpa {
++    -fx-scale-x: 1;
++    -fx-scale-y: 1;
++    -fx-cursor: hand; /* Changes cursor to hand on hover */
++}
++
++/* Hover effect: Zoom in */
++#Profile:hover,
++#Undergraduate:hover,
++#Notice:hover,
++#Eligibility:hover,
++#Attendace_Medical:hover,
++#ExamMaks:hover,
++#Courses:hover,
++#GradeNGpa:hover {
++    -fx-scale-x: 1.1;
++    -fx-scale-y: 1.1;
+ }

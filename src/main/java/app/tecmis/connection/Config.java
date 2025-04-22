@@ -18,6 +18,7 @@ public class Config {
                 System.out.println("Connection established");
             }catch (SQLException e){
                 System.out.println("Connection failed " + e.getMessage());
+                e.printStackTrace();
             }
         }
         return con;

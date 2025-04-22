@@ -12,8 +12,14 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 700, 450);
-        stage.initStyle(StageStyle.UNDECORATED);
+        //FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("lecture_panel/lecture.fxml"));
+        //FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("techOfficer-panel/techofficer_panel.fxml"));
+        //FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("student-panel/student-panel.fxml"));
+        //FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("admin-panel/admin-panel.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1200, 700);
+        stage.initStyle(StageStyle.UTILITY);
+//        Scene scene = new Scene(fxmlLoader.load(), 700, 450);
+//        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
     }
