@@ -22,9 +22,11 @@ Hi there! We're thrilled that you'd like to contribute to this project. Your hel
          - > add your fxml file
        - style-sheet
          - > add your css sheet
-     - media -> make directory and add your media
+       - media 
+         - > make directory and add your media
     
 ## Theme Colors:
 
 - Use these theme colors throughout:
-  -  #42a4f5
+  -  #42a4f5 (Main Color)
+  - #1ab41a, #44a7f1, #ef3c3c, #f8b840(Button Colors)

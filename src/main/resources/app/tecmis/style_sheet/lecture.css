@@ -1,0 +1,65 @@
+#profile,
+#undergraduate,
+#notice,
+#eligibilty,
+#attendance,
+#exam_mark,
+#courss,
+#gpa {
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-cursor: hand; /* Changes cursor to hand on hover */
+}
+
+/* Hover effect: Zoom in */
+#profile:hover,
+#undergraduate:hover,
+#notice:hover,
+#eligibilty:hover,
+#attendance:hover,
+#exam_mark:hover,
+#courss:hover,
+#gpa:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+
+
+
+/*pofile butten*/
+
+#edit_profile_btn {
+    -fx-background-color: #1ab41a;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);
+    -fx-padding: 4 8 4 8;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+
+#information_lebal,#security_lebal {
+    -fx-text-fill: black; /* default color */
+    -fx-cursor: default;  /* default cursor */
+}
+
+#information_lebal:hover,#security_lebal:hover{
+    -fx-text-fill: blue;  /* color on hover */
+    -fx-cursor: hand;     /* hand cursor on hover */
+}
+#save_changes_btn,#edit_info_btn{
+
+    -fx-text-fill: white;
+    -fx-cursor: default;
+    -fx-background-radius: 10   ;
+
+
+}
+
+
+
+
+
+/*===============*/
