@@ -654,7 +654,7 @@
                               </Pane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="notise" layoutY="12.0" prefHeight="710.0" prefWidth="950.0" visible="false">
+                        <AnchorPane fx:id="notise" layoutY="12.0" prefHeight="710.0" prefWidth="950.0">
                            <children>
                               <Pane layoutY="32.0" prefHeight="100.0" prefWidth="946.0" style="-fx-background-color: #42a4f5;">
                                  <children>
@@ -737,64 +737,6 @@
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                 </children>
-                              </Pane>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane fx:id="timeTable" layoutY="16.0" prefHeight="710.0" prefWidth="950.0">
-                           <children>
-                              <Pane layoutY="32.0" prefHeight="100.0" prefWidth="946.0" style="-fx-background-color: #42a4f5;">
-                                 <children>
-                                    <Label layoutX="38.0" layoutY="30.0" text="TIME TABLE">
-                                       <font>
-                                          <Font name="System Bold" size="28.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="noticeSearchBar1" layoutX="575.0" layoutY="31.0" onMouseClicked="#userSearchBar" prefHeight="35.0" prefWidth="335.0" promptText="Find TimeTable" styleClass="searchBar" />
-                                    <FontAwesomeIconView glyphName="SEARCH" layoutX="885.0" layoutY="57.0" size="20" text="" wrappingWidth="18.571428298950195" />
-                                 </children>
-                              </Pane>
-                              <Pane layoutX="441.0" layoutY="154.0" prefHeight="522.0" prefWidth="485.0" style="-fx-background-color: #F0F8FF; -fx-background-radius: 10PX;" styleClass="shadow">
-                                 <children>
-                                    <TableView layoutX="14.0" layoutY="14.0" prefHeight="496.0" prefWidth="458.0">
-                                      <columns>
-                                        <TableColumn prefWidth="104.79995727539062" text="Department" />
-                                        <TableColumn prefWidth="95.20001220703125" text="Level" />
-                                          <TableColumn prefWidth="95.99993896484375" text="Semester" />
-                                          <TableColumn prefWidth="162.40008544921875" text="Download" />
-                                      </columns>
-                                    </TableView>
-                                 </children>
-                              </Pane>
-                              <Pane layoutX="48.0" layoutY="165.0" prefHeight="495.0" prefWidth="370.0">
-                                 <children>
-                                    <ComboBox layoutX="154.0" layoutY="148.0" prefHeight="35.0" prefWidth="200.0" />
-                                    <ComboBox layoutX="153.0" layoutY="93.0" prefHeight="35.0" prefWidth="200.0" />
-                                    <ComboBox layoutX="154.0" layoutY="32.0" prefHeight="35.0" prefWidth="200.0" />
-                                    <Button layoutX="154.0" layoutY="201.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" text="Button" />
-                                    <Label layoutX="25.0" layoutY="34.0" text="Department">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="27.0" layoutY="208.0" text="Add pdf">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="25.0" layoutY="100.0" text="Level">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="24.0" layoutY="155.0" text="Semester">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Button layoutX="130.0" layoutY="348.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="218.0" text="Button" />
-                                    <Button layoutX="22.0" layoutY="287.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="221.0" text="Button" />
-                                    <Button layoutX="21.0" layoutY="405.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="218.0" text="Button" />
                                  </children>
                               </Pane>
                            </children>
