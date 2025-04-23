@@ -310,8 +310,6 @@ public class Lecture implements Initializable {
             notice_window.setVisible(false);
 
     }
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

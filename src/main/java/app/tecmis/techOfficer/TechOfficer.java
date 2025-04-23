@@ -11,46 +11,52 @@ import javafx.scene.layout.Pane;
 public class TechOfficer {
 
     @FXML
-    private Button add_attendence_btn;
+    private Button Medical_btn;
+
+    @FXML
+    private Button Medical_details_btn;
+
+    @FXML
+    private Button Medical_edit_btn;
+
+    @FXML
+    private Button Medical_logout_btn;
+
+    @FXML
+    private Button Medical_notice_btn;
 
     @FXML
     private Button attendence_btn;
 
     @FXML
-    private Button attendence_btn11;
-
-    @FXML
-    private Button back_btn;
-
-    @FXML
-    private MenuButton course_selecte_btn;
+    private Pane attendence_stage2;
 
     @FXML
     private Button details_btn;
 
     @FXML
-    private Button details_btn11;
-
-    @FXML
     private Button edit_btn;
 
     @FXML
-    private Button edit_btn11;
-
-    @FXML
-    private Button logout_btn;
-
-    @FXML
-    private Button logout_btn11;
+    private Button logout_btn1;
 
     @FXML
     private AnchorPane main_page1;
 
     @FXML
-    private CheckBox mark_all_present_btn;
+    private Button notice_btn;
 
     @FXML
-    private Button save_attendence_btn;
+    private Pane secondStage1;
+
+    @FXML
+    private Pane secondStage2;
+
+    @FXML
+    private Pane secondStage3;
+
+    @FXML
+    private Pane secondstage4;
 
     @FXML
     private Pane stage1;
@@ -65,46 +71,13 @@ public class TechOfficer {
     private Pane stage4;
 
     @FXML
-    private Button notice_btn;
-
-    @FXML
-    private Pane attendence_stage1;
-
-    @FXML
-    private Pane attendence_stage2;
-
-    @FXML
     private Button submit_attendence_btn;
 
     @FXML
-    void addAttendenceBtn(ActionEvent event) {
-
-    }
+    private Button submit_attendence_btn1;
 
     @FXML
-    void attendenceBtn(ActionEvent event) {
-
-    }
-
-    @FXML
-    void backBtn(ActionEvent event) {
-
-    }
-
-    @FXML
-    void courseSelecteBtn(ActionEvent event) {
-
-    }
-
-    @FXML
-    void detailsBtn(ActionEvent event) {
-
-    }
-
-    @FXML
-    void editBtn(ActionEvent event) {
-
-    }
+    private Button submit_attendence_btn11;
 
     @FXML
     void logOutBtn(ActionEvent event) {
@@ -112,17 +85,40 @@ public class TechOfficer {
     }
 
     @FXML
-    void markAllPresentBtn(ActionEvent event) {
-
-    }
-
-    @FXML
-    void saveAttendenceBtn(ActionEvent event) {
-
-    }
-
-    @FXML
     void submitAttendenceBtn(ActionEvent event) {
+
+    }
+
+    @FXML
+    void SecondswitchPage(ActionEvent event) {
+        if (event.getSource() == Medical_details_btn) {
+            System.out.println("Medical details button pressed");
+            secondStage1.setVisible(true);
+            secondStage2.setVisible(false);
+            secondStage3.setVisible(false);
+            secondstage4.setVisible(false);
+        }
+        else if (event.getSource() == Medical_edit_btn) {
+            System.out.println("Medical edit button pressed");
+            secondStage1.setVisible(false);
+            secondStage2.setVisible(true);
+            secondStage3.setVisible(false);
+            secondstage4.setVisible(false);
+        }
+        else if (event.getSource() == Medical_btn) {
+            System.out.println("Medical button pressed");
+            secondStage1.setVisible(false);
+            secondStage2.setVisible(false);
+            secondStage3.setVisible(true);
+            secondstage4.setVisible(false);
+        }
+        else if (event.getSource() == Medical_notice_btn) {
+            System.out.println("Medical notice button pressed");
+            secondStage1.setVisible(false);
+            secondStage2.setVisible(false);
+            secondStage3.setVisible(false);
+            secondstage4.setVisible(true);
+        }
 
     }
 
