@@ -11,23 +11,17 @@ import javafx.fxml.FXML;
 
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Admin implements Initializable {
@@ -353,7 +347,6 @@ public class Admin implements Initializable {
 
     //Notice
 
-
     @FXML
     private Label n_id;
 
@@ -380,6 +373,28 @@ public class Admin implements Initializable {
 
     @FXML
     private TableColumn<NoticeDetails, String> _noticeTittle;
+
+    // Admin
+
+    @FXML
+    private Label total_lec;
+
+    @FXML
+    private Label total_student;
+
+    @FXML
+    private Label total_tecOfficer;
+
+
+    @FXML
+    private PieChart pi_chart;
+
+
+    @FXML
+    private BarChart<String, Number> chart_1;
+
+    @FXML
+    private LineChart<String, Number> chart_2;
 
     @FXML
     void addNewLectureBtn(ActionEvent event) {
@@ -580,6 +595,9 @@ public class Admin implements Initializable {
             techOfficer.setVisible(false);
             course.setVisible(false);
             notise.setVisible(false);
+            total_student.setText(getCountUser("student"));
+            total_lec.setText(getCountUser("lecture"));
+            total_tecOfficer.setText(getCountUser("tech"));
         }else if(event.getSource()==lectureBtn){
             dashbord.setVisible(false);
             lecture.setVisible(true);
@@ -1798,6 +1816,91 @@ public class Admin implements Initializable {
         noticeTableView.setItems(sortedList);
     }
 
+    public String getCountUser(String uType){
+        Connection con = Config.getConfig();
+        String selectSql = "SELECT COUNT(userId) FROM user WHERE user_type = '"+uType +"'";
+        String temp = "";
+        try{
+            PreparedStatement ps = con.prepareStatement(selectSql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                temp = rs.getString(1);
+
+            }
+        } catch (Exception e){
+            System.out.println("Error"+ e.getMessage());
+        }
+        return temp;
+    }
+    public void dashboardLineChart() {
+        Connection con = Config.getConfig();
+        chart_2.getData().clear();
+        String sql = "SELECT COUNT(notice_id) AS total_notices, date FROM notice GROUP BY date";
+
+        try {
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String date = rs.getString("date");
+                int count = rs.getInt("total_notices");
+                series.getData().add(new XYChart.Data<>(date, count));
+            }
+            chart_2.getData().add(series);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    public void loadCourseTypePieChart() {
+        Connection con = Config.getConfig();
+        pi_chart.getData().clear(); // Clear old data
+
+        String sql = "SELECT course_type, COUNT(*) AS total FROM course GROUP BY course_type";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String type = rs.getString("course_type");
+                int total = rs.getInt("total");
+                PieChart.Data slice = new PieChart.Data(type, total);
+                pi_chart.getData().add(slice);
+            }
+
+            pi_chart.setTitle("Courses by Type");
+            pi_chart.setLegendVisible(true);
+            pi_chart.setLabelsVisible(true);
+        } catch (Exception e) {
+            System.out.println("Error loading pie chart: " + e.getMessage());
+        }
+    }
+    public void loadCourseEnrollmentBarChart() {
+        Connection con = Config.getConfig();
+        chart_1.getData().clear(); // Clear previous data
+
+        String sql = "SELECT course_code, COUNT(student_id) AS student_count FROM student_course GROUP BY course_code";
+
+        try {
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName("Enrollments per Course");
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String courseCode = rs.getString("course_code");
+                int studentCount = rs.getInt("student_count");
+                series.getData().add(new XYChart.Data<>(courseCode, studentCount));
+            }
+
+            chart_1.getData().add(series);
+        } catch (Exception e) {
+            System.out.println("Error loading bar chart: " + e.getMessage());
+        }
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showLectureToTable();
@@ -1807,6 +1910,12 @@ public class Admin implements Initializable {
         showNoticeToTable();
         setDepName();
         courseType();
+        total_student.setText(getCountUser("student"));
+        total_lec.setText(getCountUser("lecture"));
+        total_tecOfficer.setText(getCountUser("tech"));
+        dashboardLineChart();
+        loadCourseTypePieChart();
+        loadCourseEnrollmentBarChart();
     }
 
     @FXML
