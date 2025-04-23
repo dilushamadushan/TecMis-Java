@@ -385,16 +385,28 @@ public class Admin implements Initializable {
     @FXML
     private Label total_tecOfficer;
 
-
     @FXML
     private PieChart pi_chart;
-
 
     @FXML
     private BarChart<String, Number> chart_1;
 
     @FXML
     private LineChart<String, Number> chart_2;
+
+    // Time Table
+
+    @FXML
+    private ComboBox<String> tt_dep;
+
+    @FXML
+    private Button tt_img;
+
+    @FXML
+    private ComboBox<String> tt_level;
+
+    @FXML
+    private ComboBox<String> tt_sem;
 
     @FXML
     void addNewLectureBtn(ActionEvent event) {
@@ -660,6 +672,7 @@ public class Admin implements Initializable {
         _stuDepartment.setItems(dep);
         _tecDepartment.setItems(dep);
         _cDep.setItems(dep);
+        tt_dep.setItems(dep);
     }
     public String setDepId(Object DepName) {
         Connection conn2 = Config.getConfig();
@@ -689,6 +702,16 @@ public class Admin implements Initializable {
         ObservableList<String> courseTypeList = FXCollections.observableArrayList("Theory","Practical","Theory & Practical");
         _cType.setItems(courseTypeList);
         return String.valueOf(courseTypeList);
+    }
+    public String selectLevel(){
+        ObservableList<String> List = FXCollections.observableArrayList("Level 1","Level 2","Level 3","Level 4");
+        tt_level.setItems(List);
+        return String.valueOf(List);
+    }
+    public String selectSem(){
+        ObservableList<String> List = FXCollections.observableArrayList("Semester 1","Semester 2");
+        tt_sem.setItems(List);
+        return String.valueOf(List);
     }
 
     public ObservableList<LecDetails> getLecture(){
@@ -1916,6 +1939,8 @@ public class Admin implements Initializable {
         dashboardLineChart();
         loadCourseTypePieChart();
         loadCourseEnrollmentBarChart();
+        selectLevel();
+        selectSem();
     }
 
     @FXML

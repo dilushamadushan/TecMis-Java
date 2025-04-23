@@ -133,7 +133,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="dashbord" prefHeight="714.0" prefWidth="950.0">
+                        <AnchorPane fx:id="dashbord" prefHeight="714.0" prefWidth="950.0" visible="false">
                            <children>
                               <Pane layoutX="1.0" layoutY="50.0" prefHeight="100.0" prefWidth="946.0" style="-fx-background-color: #42a4f5;">
                                  <children>
@@ -832,6 +832,90 @@
                                     </Label>
                                  </children>
                               </Pane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="timeTable" layoutY="16.0" prefHeight="710.0" prefWidth="950.0">
+                           <children>
+                              <Pane layoutY="32.0" prefHeight="100.0" prefWidth="946.0" style="-fx-background-color: #42a4f5;">
+                                 <children>
+                                    <Label layoutX="38.0" layoutY="30.0" text="TIME TABLE">
+                                       <font>
+                                          <Font name="System Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="noticeSearchBar1" layoutX="575.0" layoutY="31.0" onMouseClicked="#userSearchBar" prefHeight="35.0" prefWidth="335.0" promptText="Find Time Table" styleClass="searchBar" />
+                                    <FontAwesomeIconView glyphName="SEARCH" layoutX="885.0" layoutY="57.0" size="20" text="" wrappingWidth="18.571428298950195" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="417.0" layoutY="156.0" prefHeight="334.0" prefWidth="504.0" style="-fx-background-color: #F0F8FF; -fx-background-radius: 10px;" styleClass="shadow">
+                                 <children>
+                                    <ImageView fitHeight="295.0" fitWidth="474.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children></Pane>
+                              <Pane layoutX="14.0" layoutY="156.0" prefHeight="337.0" prefWidth="398.0">
+                                 <children>
+                                    <ComboBox fx:id="tt_level" layoutX="165.0" layoutY="22.0" prefHeight="35.0" prefWidth="216.0" promptText="Select Level" />
+                                    <ComboBox fx:id="tt_dep" layoutX="165.0" layoutY="73.0" prefHeight="35.0" prefWidth="216.0" promptText="Select Department" />
+                                    <ComboBox fx:id="tt_sem" layoutX="165.0" layoutY="122.0" prefHeight="35.0" prefWidth="216.0" promptText="Select Semester" />
+                                    <Button fx:id="tt_img" layoutX="165.0" layoutY="177.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="216.0" text="Attach Image" />
+                                    <Label layoutX="18.0" layoutY="29.0" text="Level">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="18.0" layoutY="80.0" text="Department">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="18.0" layoutY="129.0" text="Semester">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="18.0" layoutY="184.0" text="Attach Time Table">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Button layoutX="43.0" layoutY="230.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="142.0" text="Add">
+                                       <styleClass>
+                                          <String fx:value="shadow" />
+                                          <String fx:value="addBtn" />
+                                          <String fx:value="lecBtn" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button layoutX="213.0" layoutY="230.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="142.0" text="Delete">
+                                       <styleClass>
+                                          <String fx:value="shadow" />
+                                          <String fx:value="lecBtn" />
+                                          <String fx:value="deleteBtn" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button layoutX="213.0" layoutY="282.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="142.0" text="Clear">
+                                       <styleClass>
+                                          <String fx:value="shadow" />
+                                          <String fx:value="lecBtn" />
+                                          <String fx:value="clearBtn" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button layoutX="43.0" layoutY="282.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="142.0" text="Edit">
+                                       <styleClass>
+                                          <String fx:value="shadow" />
+                                          <String fx:value="lecBtn" />
+                                          <String fx:value="updateBtn" />
+                                       </styleClass>
+                                    </Button>
+                                    <FontAwesomeIconView glyphName="PAPERCLIP" layoutX="213.0" layoutY="198.0" />
+                                 </children></Pane>
+                              <TableView layoutX="39.0" layoutY="500.0" prefHeight="184.0" prefWidth="882.0">
+                                <columns>
+                                  <TableColumn prefWidth="109.60001373291016" text="No" />
+                                  <TableColumn prefWidth="106.39996337890625" text="Level" />
+                                    <TableColumn prefWidth="162.40005493164062" text="Department" />
+                                    <TableColumn prefWidth="203.99996948242188" text="Semester" />
+                                    <TableColumn prefWidth="300.00006103515625" text="Time Table" />
+                                </columns>
+                              </TableView>
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>
