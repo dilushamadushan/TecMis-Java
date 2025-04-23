@@ -13,12 +13,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.Date;
@@ -67,6 +77,9 @@ public class Admin implements Initializable {
 
     @FXML
     private Button timeTableBtn;
+
+    @FXML
+    private AnchorPane timeTable;
 
     // lecture
     @FXML
@@ -395,18 +408,35 @@ public class Admin implements Initializable {
     private LineChart<String, Number> chart_2;
 
     // Time Table
+    private File scFile;
+    private File imgPath;
+
+    @FXML
+    private ImageView imgView;
 
     @FXML
     private ComboBox<String> tt_dep;
-
-    @FXML
-    private Button tt_img;
 
     @FXML
     private ComboBox<String> tt_level;
 
     @FXML
     private ComboBox<String> tt_sem;
+
+    @FXML
+    private TableColumn<TimeTableDetails, String> _ttDep;
+
+    @FXML
+    private TableColumn<TimeTableDetails, String> _ttLevel;
+
+    @FXML
+    private TableColumn<TimeTableDetails, Integer> _ttNo;
+
+    @FXML
+    private TableColumn<TimeTableDetails, String> _ttSem;
+
+    @FXML
+    private TableView<TimeTableDetails> tt_view;
 
     @FXML
     void addNewLectureBtn(ActionEvent event) {
@@ -491,6 +521,28 @@ public class Admin implements Initializable {
     @FXML
     void editNotice(ActionEvent event) {
         noticeEdit();
+    }
+
+
+    @FXML
+    void tt_addBtn(ActionEvent event) {
+        addNewTimeTable();
+    }
+    @FXML
+    void tt_clearBtn(ActionEvent event) {
+
+    }
+    @FXML
+    void tt_deleteBtn(ActionEvent event) {
+
+    }
+    @FXML
+    void tt_editBtn(ActionEvent event) {
+
+    }
+    @FXML
+    void tt_imgBtn(ActionEvent event) {
+        takeImg();
     }
 
     @FXML
@@ -583,6 +635,14 @@ public class Admin implements Initializable {
         n_id.setText(String.valueOf(noticeDetails.getNoticeId()));
     }
     @FXML
+    void timeTableRowHandle(MouseEvent event) {
+        TimeTableDetails ttDet = tt_view.getSelectionModel().getSelectedItem();
+        tt_level.setValue(ttDet.getTtLevel());
+        tt_dep.setValue(ttDet.getTtDepName());
+        tt_sem.setValue(ttDet.getTtSem());
+        imgView.setImage(new Image(new File(ttDet.getTtImgPath()).toURI().toString()));
+    }
+    @FXML
     void userSearchBar(MouseEvent event) {
         if(event.getSource() == lecSearchBar){
             lecSearch();
@@ -607,6 +667,7 @@ public class Admin implements Initializable {
             techOfficer.setVisible(false);
             course.setVisible(false);
             notise.setVisible(false);
+            timeTable.setVisible(false);
             total_student.setText(getCountUser("student"));
             total_lec.setText(getCountUser("lecture"));
             total_tecOfficer.setText(getCountUser("tech"));
@@ -617,6 +678,7 @@ public class Admin implements Initializable {
             techOfficer.setVisible(false);
             course.setVisible(false);
             notise.setVisible(false);
+            timeTable.setVisible(false);
         }else if(event.getSource()==studentBtn){
             dashbord.setVisible(false);
             lecture.setVisible(false);
@@ -624,6 +686,7 @@ public class Admin implements Initializable {
             techOfficer.setVisible(false);
             course.setVisible(false);
             notise.setVisible(false);
+            timeTable.setVisible(false);
         }else if(event.getSource()==techofficerBtn){
             dashbord.setVisible(false);
             lecture.setVisible(false);
@@ -631,6 +694,7 @@ public class Admin implements Initializable {
             techOfficer.setVisible(true);
             course.setVisible(false);
             notise.setVisible(false);
+            timeTable.setVisible(false);
         }else if(event.getSource()==courseBtn){
             dashbord.setVisible(false);
             lecture.setVisible(false);
@@ -638,6 +702,7 @@ public class Admin implements Initializable {
             techOfficer.setVisible(false);
             course.setVisible(true);
             notise.setVisible(false);
+            timeTable.setVisible(false);
         }else if(event.getSource()==noticeBtn){
             dashbord.setVisible(false);
             lecture.setVisible(false);
@@ -645,6 +710,15 @@ public class Admin implements Initializable {
             techOfficer.setVisible(false);
             course.setVisible(false);
             notise.setVisible(true);
+            timeTable.setVisible(false);
+        }else if(event.getSource()==timeTableBtn){
+            dashbord.setVisible(false);
+            lecture.setVisible(false);
+            student.setVisible(false);
+            techOfficer.setVisible(false);
+            course.setVisible(false);
+            notise.setVisible(false);
+            timeTable.setVisible(true);
         }
     }
 
@@ -1923,6 +1997,91 @@ public class Admin implements Initializable {
         }
     }
 
+    public ObservableList<TimeTableDetails> getTimeTableList() {
+        ObservableList<TimeTableDetails> list = FXCollections.observableArrayList();
+        Connection con = Config.getConfig();
+        String ttSql = "SELECT * FROM timetable t INNER JOIN department d ON t.dep_id = d.dep_id";
+        Statement st = null;
+        ResultSet rs = null;
+
+        try{
+            st = con.createStatement();
+            rs = st.executeQuery(ttSql);
+            TimeTableDetails ttD;
+            while (rs.next()) {
+                ttD = new TimeTableDetails(
+                        rs.getInt("ttid"),
+                        rs.getString("level"),
+                        rs.getString("dep_id"),
+                        rs.getString("semester"),
+                        rs.getString("pdf_path"),
+                        rs.getString("dep_name")
+                );
+                list.add(ttD);
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return list;
+    }
+    public void addNewTimeTable(){
+        Connection con = Config.getConfig();
+        String depName = tt_dep.getSelectionModel().getSelectedItem();
+        String depId = setDepId(depName);
+        String semester = tt_sem.getSelectionModel().getSelectedItem();
+        String level = tt_level.getSelectionModel().getSelectedItem();
+
+        if(imgPath.equals("")){
+            System.out.println("Image Path is empty");
+            return;
+        }
+
+        String ttSql = "INSERT INTO timetable(level,dep_id,semester,pdf_path) VALUES(?,?,?,?)";
+        try{
+            PreparedStatement ps = con.prepareStatement(ttSql);
+            ps.setString(1, level);
+            ps.setString(2, depId);
+            ps.setString(3, semester);
+            ps.setString(4, String.valueOf(imgPath));
+            ps.executeUpdate();
+            System.out.println("Added time table");
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        showTimeTable();
+    }
+    public void showTimeTable(){
+        ObservableList<TimeTableDetails> ttList = getTimeTableList();
+        _ttNo.setCellValueFactory(new PropertyValueFactory<TimeTableDetails,Integer>("ttId"));
+        _ttLevel.setCellValueFactory(new PropertyValueFactory<TimeTableDetails,String>("ttLevel"));
+        _ttDep.setCellValueFactory(new PropertyValueFactory<TimeTableDetails,String>("ttDepName"));
+        _ttSem.setCellValueFactory(new PropertyValueFactory<TimeTableDetails,String>("ttSem"));
+
+         tt_view.setItems(ttList);
+    }
+    public void takeImg(){
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Choose Image");
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
+        scFile = fc.showOpenDialog(null);
+        if(scFile != null){
+            try{
+                File uploadDir = new File("upload");
+                if(!uploadDir.exists()) uploadDir.mkdir();
+
+                File destFile = new File(uploadDir,scFile.getName());
+                imgPath = destFile;
+                Files.copy(scFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                imgView.setImage(new Image(destFile.toURI().toString()));
+
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -1931,6 +2090,7 @@ public class Admin implements Initializable {
         showTechOfficerToTable();
         showCourseToTable();
         showNoticeToTable();
+        showTimeTable();
         setDepName();
         courseType();
         total_student.setText(getCountUser("student"));
