@@ -1,5 +1,6 @@
 package app.tecmis;
 
+import app.tecmis.connection.Config;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,8 +14,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class LoginController {
+
+    private String _userName;
+    private String _pass;
+    private String user_type;
+
+    public static String uID,uPass,stuTg,lecTg,techOfficerTg;
 
     @FXML
     private Label loginCloseBtn;
@@ -33,12 +43,47 @@ public class LoginController {
 
     @FXML
     void loginBtn(ActionEvent event){
-        System.out.println("Login button pressed");
+
+        _userName = username.getText();
+        _pass = password.getText();
+
+        Connection conn = Config.getConfig();
         LoginController loginController = new LoginController();
-       // loginController.adminWindow();
-        //loginController.studentWindow();
-        //loginController.techOfficerWindow();
-        loginController.lectureWindow();
+//        loginController.studentWindow();
+//        loginController.lectureWindow();
+//        loginController.techOfficerWindow();
+//        loginController.adminWindow();
+
+        String userQuery = "SELECT * FROM user";
+        Statement st = null;
+        ResultSet rs = null;
+
+//        try{
+//            st = conn.createStatement();
+//            rs = st.executeQuery(userQuery);
+//
+//            while(rs.next()){
+//                user_type = rs.getString("user_type");
+//                uID = rs.getString("userId");
+//                uPass = rs.getString("password");
+//
+//                if(_userName.equals(uID) && _pass.equals(uPass) && user_type.equals("admin")){
+//                    loginController.adminWindow();
+//                }else if(_userName.equals(uID) && _pass.equals(uPass) && user_type.equals("lecture")){
+//                    lecTg = _userName;
+//                    loginController.lectureWindow();
+//                }else if(_userName.equals(uID) && _pass.equals(uPass) && user_type.equals("tech")){
+//                    techOfficerTg = _userName;
+//                    loginController.techOfficerWindow();
+//                }else if(_userName.equals(uID) && _pass.equals(uPass) && user_type.equals("student")){
+//                    stuTg = _userName;
+//                    loginController.studentWindow();
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.out.println("Error : " + e.getMessage());
+//        }
+//        System.out.println("Login button pressed");
     }
 
     public void adminWindow(){
