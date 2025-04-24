@@ -1,6 +1,396 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.tecmis.student.Student" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.tecmis.student.Student">
+   <children>
+      <BorderPane layoutX="-14.0" prefHeight="700.0" prefWidth="1200.0">
+         <top>
+            <AnchorPane prefHeight="164.0" prefWidth="1250.0" style="-fx-background-color: #42a4f5;" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="71.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../media/student/logo1.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="name" layoutX="274.0" layoutY="55.0" prefHeight="53.0" prefWidth="555.0" text="Wellcome to K.M.M.S.Chathuranga">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="129.0" fitWidth="101.0" layoutX="1066.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../media/student/logout.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </top>
+         <left>
+            <AnchorPane fx:id="newprofile" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane fx:id="profile_panal" layoutX="12.0" layoutY="-2.0" prefHeight="539.0" prefWidth="1188.0" style="-fx-background-color: red;" visible="false">
+                     <children>
+                        <BorderPane layoutY="-2.0" prefHeight="541.0" prefWidth="1200.0">
+                           <left>
+                              <AnchorPane fx:id="profile_image_panal" prefHeight="516.0" prefWidth="332.0" visible="false" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <ImageView blendMode="DARKEN" fitHeight="195.0" fitWidth="203.0" layoutX="66.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../media/student/Profile.png" />
+                                       </image>
+                                       <effect>
+                                          <Glow />
+                                       </effect>
+                                    </ImageView>
+                                    <Label layoutX="53.0" layoutY="273.0" prefHeight="59.0" prefWidth="250.0" text="k.m.m.s.chathuranga">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Button layoutX="63.0" layoutY="399.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="175.0" text="Update image" />
+                                 </children>
+                              </AnchorPane>
+                           </left>
+                           <center>
+                              <AnchorPane fx:id="edit_profile_panals" prefHeight="516.0" prefWidth="868.0" style="-fx-background-color: yellow;" visible="false" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Button layoutX="751.0" layoutY="482.0" mnemonicParsing="false" onAction="#back_p" prefHeight="38.0" prefWidth="81.0" text="Go back" />
+                                    <Label layoutX="141.0" layoutY="117.0" text="First Name :">
+                                       <font>
+                                          <Font name="System Bold Italic" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="141.0" layoutY="209.0" text="Last Name :">
+                                       <font>
+                                          <Font name="System Bold Italic" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="141.0" layoutY="302.0" text="E-mail :">
+                                       <font>
+                                          <Font name="System Bold Italic" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField layoutX="297.0" layoutY="118.0" prefHeight="25.0" prefWidth="255.0" />
+                                    <TextField layoutX="297.0" layoutY="210.0" prefHeight="25.0" prefWidth="245.0" />
+                                    <TextField layoutX="297.0" layoutY="303.0" prefHeight="25.0" prefWidth="239.0" />
+                                    <Button layoutX="353.0" layoutY="461.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="89.0" text="Update" />
+                                    <Button layoutX="504.0" layoutY="461.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="90.0" text="Clear" />
+                                 </children>
+                              </AnchorPane>
+                           </center>
+                        </BorderPane>
+                        <AnchorPane fx:id="display_profile_panal" layoutX="1.0" prefHeight="538.0" prefWidth="1200.0" style="-fx-background-color: yellow;" visible="false">
+                           <children>
+                              <ImageView fitHeight="173.0" fitWidth="200.0" layoutX="117.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../media/student/Profile.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="126.0" layoutY="316.0" text="First Name :">
+                                 <font>
+                                    <Font name="System Bold Italic" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="127.0" layoutY="408.0" text="Last Name :">
+                                 <font>
+                                    <Font name="System Bold Italic" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="591.0" layoutY="126.0" text="NIC Number :">
+                                 <font>
+                                    <Font name="System Bold Italic" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="607.0" layoutY="221.0" text="BOD :">
+                                 <font>
+                                    <Font name="System Bold Italic" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="593.0" layoutY="316.0" text="Address :">
+                                 <font>
+                                    <Font name="System Bold Italic" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="585.0" layoutY="408.0" text="E-mail addres :">
+                                 <font>
+                                    <Font name="System Bold Italic" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="293.0" layoutY="321.0" prefHeight="17.0" prefWidth="176.0" text="Label" />
+                              <Label layoutX="293.0" layoutY="413.0" prefHeight="17.0" prefWidth="149.0" text="Label" />
+                              <Label layoutX="742.0" layoutY="140.0" prefHeight="17.0" prefWidth="170.0" text="Label" />
+                              <Label layoutX="756.0" layoutY="246.0" prefHeight="17.0" prefWidth="169.0" text="Label" />
+                              <Label layoutX="770.0" layoutY="435.0" prefHeight="17.0" prefWidth="99.0" text="Label" />
+                              <Label layoutX="756.0" layoutY="348.0" prefHeight="17.0" prefWidth="146.0" text="Label" />
+                              <Button layoutX="448.0" layoutY="489.0" mnemonicParsing="false" onAction="#Editprofile" prefHeight="41.0" prefWidth="207.0" text="Edit Profile" />
+                              <Button layoutX="1004.0" layoutY="482.0" mnemonicParsing="false" onAction="#back" prefHeight="32.0" prefWidth="87.0" text="Go back" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="home" prefHeight="538.0" prefWidth="1200.0" stylesheets="@../style_sheet/student.css">
+                     <children>
+                        <ImageView fx:id="profile" fitHeight="150.0" fitWidth="200.0" layoutX="154.0" layoutY="53.0" onMouseClicked="#gowindow" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../media/student/Profile.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="courses" fitHeight="150.0" fitWidth="200.0" layoutX="552.0" layoutY="53.0" onMouseClicked="#gowindow" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../media/student/Courses.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="notice" fitHeight="150.0" fitWidth="200.0" layoutX="135.0" layoutY="327.0" onMouseClicked="#gowindow" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../media/student/Notice.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="attendance_and_medical" fitHeight="150.0" fitWidth="200.0" layoutX="552.0" layoutY="327.0" onMouseClicked="#gowindow" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../media/student/Attendance-Medicals.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="time_table" fitHeight="134.0" fitWidth="137.0" layoutX="906.0" layoutY="313.0" onMouseClicked="#gowindow" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../media/student/Timetable.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="926.0" layoutY="436.0" prefHeight="27.0" prefWidth="101.0" text="Time table">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="grade_abd_gpa" fitHeight="150.0" fitWidth="200.0" layoutX="922.0" layoutY="53.0" onMouseClicked="#gowindow" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../media/student/Grades-GPA.png" />
+                           </image>
+                        </ImageView>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="courses_panal" layoutY="14.0" onMouseClicked="#gocourse_delails" prefHeight="536.0" prefWidth="1200.0" style="-fx-background-color: yellow;" visible="false">
+                     <children>
+                        <Label layoutX="410.0" layoutY="31.0" prefHeight="76.0" prefWidth="397.0" text="Your Courses">
+                           <font>
+                              <Font size="61.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="1020.0" layoutY="461.0" mnemonicParsing="false" onAction="#back" prefHeight="52.0" prefWidth="123.0" text="back" />
+                        <AnchorPane fx:id="oopp" layoutX="459.0" layoutY="355.0" prefHeight="158.0" prefWidth="233.0" style="-fx-background-color: red;">
+                           <children>
+                              <ImageView fx:id="image_oopp" fitHeight="125.0" fitWidth="238.0" onMouseClicked="#gocourse_delails">
+                                 <image>
+                                    <Image url="@../media/student/Object_Oriented_Prog_2.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="9.0" layoutY="129.0" prefHeight="29.0" prefWidth="235.0" text="Label" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="data" layoutX="72.0" layoutY="144.0" prefHeight="157.0" prefWidth="233.0" style="-fx-background-color: red;">
+                           <children>
+                              <ImageView fx:id="image_d" fitHeight="130.0" fitWidth="237.0" onMouseClicked="#gocourse_delails">
+                                 <image>
+                                    <Image url="@../media/student/Data_Structures_And.jpg" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="1.0" layoutY="130.0" prefHeight="29.0" prefWidth="235.0" text="Label" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="e_courmmerse" layoutX="449.0" layoutY="144.0" prefHeight="156.0" prefWidth="233.0" style="-fx-background-color: red;">
+                           <children>
+                              <ImageView fx:id="image_e" fitHeight="125.0" fitWidth="234.0" layoutY="1.0" onMouseClicked="#gocourse_delails">
+                                 <image>
+                                    <Image url="@../media/student/E-Commerce.jpeg" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="-1.0" layoutY="126.0" prefHeight="29.0" prefWidth="235.0" text="Label" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="oops" layoutX="72.0" layoutY="355.0" prefHeight="157.0" prefWidth="233.0" style="-fx-background-color: red;">
+                           <children>
+                              <ImageView fx:id="image_oop" fitHeight="130.0" fitWidth="239.0" layoutY="-2.0" onMouseClicked="#gocourse_delails">
+                                 <image>
+                                    <Image url="@../media/student/Object_Oriented_Prog.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutY="130.0" prefHeight="29.0" prefWidth="235.0" text="Label" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="ooa" layoutX="807.0" layoutY="144.0" prefHeight="157.0" prefWidth="234.0" style="-fx-background-color: red;">
+                           <children>
+                              <ImageView fx:id="image_ooa" fitHeight="130.0" fitWidth="234.0" layoutY="1.0" onMouseClicked="#gocourse_delails">
+                                 <image>
+                                    <Image url="@../media/student/Object_Oriented_Anal.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="7.0" layoutY="134.0" prefHeight="29.0" prefWidth="235.0" text="Label" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="cour_dll" prefHeight="535.0" prefWidth="1194.0" visible="false">
+                     <children>
+                        <Label layoutX="330.0" layoutY="67.0" text="Coureses Delails">
+                           <font>
+                              <Font name="System Bold Italic" size="48.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="291.0" layoutY="186.0" text="Course code :" />
+                        <Label fx:id="course_code" layoutX="293.0" layoutY="241.0" text="Course nane :" />
+                        <Label layoutX="292.0" layoutY="286.0" text="Course cradit :" />
+                        <Label layoutX="294.0" layoutY="340.0" text="Course hour :" />
+                        <Label layoutX="293.0" layoutY="392.0" text="Course type :" />
+                        <Label fx:id="courses_detalse_course_code" layoutX="431.0" layoutY="179.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
+                        <Label fx:id="course_name" layoutX="418.0" layoutY="238.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
+                        <Label fx:id="course_cradit" layoutX="418.0" layoutY="283.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
+                        <Label fx:id="course_hours" layoutX="405.0" layoutY="337.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
+                        <Label fx:id="course_type" layoutX="405.0" layoutY="389.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
+                        <Button layoutX="1026.0" layoutY="466.0" mnemonicParsing="false" onAction="#back_course" prefHeight="43.0" prefWidth="95.0" text="Back" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="grade_abd_gpa_panal" layoutY="-2.0" prefHeight="541.0" prefWidth="1200.0" style="-fx-background-color: blue;" visible="false">
+                     <children>
+                        <Label layoutX="350.0" layoutY="43.0" text="Grade_abd_Gpa">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="956.0" layoutY="419.0" mnemonicParsing="false" onAction="#back" prefHeight="63.0" prefWidth="186.0" text="back" />
+                        <Label layoutX="336.0" layoutY="197.0" text=" Your Grade :">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="336.0" layoutY="305.0" text="Your Gpa :">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="grade" layoutX="515.0" layoutY="202.0" text="Label" />
+                        <Label fx:id="gpa" layoutX="522.0" layoutY="310.0" text="Label" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="attendance_and_medical_panal" layoutX="15.0" layoutY="-2.0" prefHeight="537.0" prefWidth="1200.0" style="-fx-background-color: red;" visible="false">
+                     <children>
+                        <Label layoutX="482.0" layoutY="48.0" text="Attendance and Medical">
+                           <font>
+                              <Font size="43.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane fx:id="aad_new_medical" layoutX="109.0" layoutY="128.0" prefHeight="381.0" prefWidth="767.0" style="-fx-background-color: pink;">
+                           <children>
+                              <Label layoutX="306.0" layoutY="41.0" prefHeight="20.0" prefWidth="156.0" text="ADD NEW MEDICALE">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="92.0" layoutY="102.0" text="Description :" />
+                              <Label layoutX="92.0" layoutY="210.0" text="Start Date :" />
+                              <Label layoutX="92.0" layoutY="289.0" text="End Date:" />
+                              <Label layoutX="462.0" layoutY="102.0" text="Course code:" />
+                              <Label layoutX="462.0" layoutY="210.0" text="Student Id :" />
+                              <Label layoutX="462.0" layoutY="298.0" text="Medical report Path:" />
+                              <TextField layoutX="169.0" layoutY="98.0" />
+                              <TextField layoutX="169.0" layoutY="206.0" />
+                              <TextField layoutX="169.0" layoutY="285.0" />
+                              <TextField layoutX="588.0" layoutY="98.0" />
+                              <TextField layoutX="588.0" layoutY="206.0" />
+                              <TextField layoutX="588.0" layoutY="293.0" />
+                              <Button layoutX="358.0" layoutY="335.0" mnemonicParsing="false" text="AAD Medical" />
+                              <Button layoutX="611.0" layoutY="335.0" mnemonicParsing="false" onAction="#back_add_medical" text="Back" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="viwe_attendence" layoutX="108.0" layoutY="126.0" prefHeight="385.0" prefWidth="769.0" style="-fx-background-color: orange;" visible="false">
+                           <children>
+                              <TableView layoutX="84.0" layoutY="77.0" prefHeight="269.0" prefWidth="567.0">
+                                <columns>
+                                  <TableColumn fx:id="attendance_Course_code" prefWidth="205.3333282470703" text="Course code" />
+                                  <TableColumn fx:id="attendance_Date" prefWidth="199.99996948242188" text="Date" />
+                                    <TableColumn fx:id="attendance_Attendance_State" prefWidth="158.66668701171875" text="Attendance State" />
+                                </columns>
+                              </TableView>
+                              <Button layoutX="606.0" layoutY="359.0" mnemonicParsing="false" onAction="#backto_attendance" text="Back" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="attendence" layoutX="118.0" layoutY="134.0" prefHeight="376.0" prefWidth="925.0" style="-fx-background-color: yellow;" visible="false">
+                           <children>
+                              <TableView layoutX="92.0" layoutY="67.0" prefHeight="298.0" prefWidth="583.0">
+                                <columns>
+                                  <TableColumn fx:id="att_course_Course" prefWidth="387.33335876464844" text="Course" />
+                                  <TableColumn fx:id="att_course_view" prefWidth="194.66668701171875" text="Viwe" />
+                                </columns>
+                              </TableView>
+                              <Button layoutX="732.0" layoutY="226.0" mnemonicParsing="false" onAction="#Go_Medical" prefHeight="45.0" prefWidth="164.0" text="Medical" />
+                              <Button layoutX="735.0" layoutY="315.0" mnemonicParsing="false" onAction="#back" prefHeight="37.0" prefWidth="160.0" text="back" />
+                              <Button layoutX="587.0" layoutY="126.0" mnemonicParsing="false" onAction="#view" prefHeight="25.0" prefWidth="61.0" text="View" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="Medical_details" layoutX="111.0" layoutY="127.0" prefHeight="384.0" prefWidth="765.0" style="-fx-background-color: green;" visible="false">
+                           <children>
+                              <TableView layoutX="44.0" layoutY="79.0" prefHeight="239.0" prefWidth="685.0">
+                                <columns>
+                                  <TableColumn fx:id="medical_Desccription" prefWidth="105.33331298828125" text="Desccription" />
+                                  <TableColumn fx:id="medical_Start_Date" prefWidth="96.66668701171875" text="Start Date" />
+                                    <TableColumn fx:id="medical_End_Date" prefWidth="112.66665649414062" text="End Date" />
+                                    <TableColumn fx:id="medical_Course_Code" prefWidth="124.0" text="Course Code" />
+                                    <TableColumn fx:id="medical_Student_Id" prefWidth="115.33331298828125" text="Student Id" />
+                                    <TableColumn fx:id="medical_Report_Path" prefWidth="134.0" text="Report Path" />
+                                </columns>
+                              </TableView>
+                              <Label layoutX="394.0" layoutY="36.0" text="Medicale Details">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="626.0" layoutY="335.0" mnemonicParsing="false" onAction="#aad_medical" text="ADD Medicale" />
+                              <Button layoutX="470.0" layoutY="335.0" mnemonicParsing="false" onAction="#back_attendance" text="Back" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="notice_panal" layoutY="-3.0" prefHeight="539.0" prefWidth="1200.0" style="-fx-background-color: red;" visible="false">
+                     <children>
+                        <Label layoutX="508.0" layoutY="50.0" text="Notices">
+                           <font>
+                              <Font size="44.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="1026.0" layoutY="457.0" mnemonicParsing="false" onAction="#back" prefHeight="49.0" prefWidth="128.0" text="back" />
+                        <TableView layoutX="249.0" layoutY="169.0" prefHeight="327.0" prefWidth="669.0">
+                          <columns>
+                            <TableColumn fx:id="N_Descreption" prefWidth="177.33334350585938" text="Descreption" />
+                            <TableColumn fx:id="N_Date" prefWidth="144.6666259765625" text="Date" />
+                              <TableColumn fx:id="N_Titale" prefWidth="160.66668701171875" text="Titale" />
+                              <TableColumn fx:id="N_Notice_Parth" prefWidth="183.33331298828125" text="Notice Parth" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="Time_table_panal" layoutX="12.0" layoutY="-4.0" prefHeight="543.0" prefWidth="1206.0" style="-fx-background-color: yellow;" visible="false">
+                     <children>
+                        <Label layoutX="431.0" layoutY="174.0" prefHeight="65.0" prefWidth="293.0" text="Time table">
+                           <font>
+                              <Font size="44.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="431.0" layoutY="280.0" mnemonicParsing="false" onAction="#back" prefHeight="51.0" prefWidth="131.0" text="back" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </left>
+      </BorderPane>
+   </children>
+</AnchorPane>
