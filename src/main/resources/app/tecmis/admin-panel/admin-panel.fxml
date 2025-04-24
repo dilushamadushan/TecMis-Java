@@ -834,6 +834,93 @@
                               </Pane>
                            </children>
                         </AnchorPane>
+                        <AnchorPane fx:id="timeTable" layoutY="16.0" prefHeight="710.0" prefWidth="950.0" visible="false">
+                           <children>
+                              <Pane layoutY="32.0" prefHeight="100.0" prefWidth="946.0" style="-fx-background-color: #42a4f5;">
+                                 <children>
+                                    <Label layoutX="38.0" layoutY="30.0" text="TIME TABLE">
+                                       <font>
+                                          <Font name="System Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="ttSearchBar" layoutX="575.0" layoutY="31.0" onMouseClicked="#userSearchBar" prefHeight="35.0" prefWidth="335.0" promptText="Find Time Table" styleClass="searchBar" />
+                                    <FontAwesomeIconView glyphName="SEARCH" layoutX="885.0" layoutY="57.0" size="20" text="" wrappingWidth="18.571428298950195" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="417.0" layoutY="156.0" prefHeight="286.0" prefWidth="504.0" style="-fx-background-color: #F0F8FF; -fx-background-radius: 10px;" styleClass="shadow">
+                                 <children>
+                                    <ImageView fx:id="imgView" fitHeight="260.0" fitWidth="474.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children></Pane>
+                              <Pane layoutX="180.0" layoutY="457.0" prefHeight="227.0" prefWidth="586.0">
+                                 <children>
+                                    <ComboBox fx:id="tt_level" layoutX="170.0" layoutY="74.0" prefHeight="35.0" prefWidth="216.0" promptText="Select Level" />
+                                    <ComboBox fx:id="tt_dep" layoutX="170.0" layoutY="18.0" prefHeight="35.0" prefWidth="216.0" promptText="Select Department" />
+                                    <ComboBox fx:id="tt_sem" layoutX="170.0" layoutY="124.0" prefHeight="35.0" prefWidth="216.0" promptText="Select Semester" />
+                                    <Button layoutX="170.0" layoutY="174.0" mnemonicParsing="false" onAction="#tt_imgBtn" prefHeight="35.0" prefWidth="216.0" text="Attach Image">
+                                       <graphic>
+                                          <FontAwesomeIconView glyphName="PAPERCLIP" />
+                                       </graphic>
+                                    </Button>
+                                    <Label layoutX="20.0" layoutY="81.0" text="Level">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="20.0" layoutY="25.0" text="Department">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="20.0" layoutY="132.0" text="Semester">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="20.0" layoutY="181.0" text="Attach Time Table">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Button layoutX="428.0" layoutY="18.0" mnemonicParsing="false" onAction="#tt_addBtn" prefHeight="35.0" prefWidth="142.0" text="Add">
+                                       <styleClass>
+                                          <String fx:value="shadow" />
+                                          <String fx:value="addBtn" />
+                                          <String fx:value="lecBtn" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button layoutX="428.0" layoutY="74.0" mnemonicParsing="false" onAction="#tt_deleteBtn" prefHeight="35.0" prefWidth="142.0" text="Delete">
+                                       <styleClass>
+                                          <String fx:value="shadow" />
+                                          <String fx:value="lecBtn" />
+                                          <String fx:value="deleteBtn" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button layoutX="428.0" layoutY="174.0" mnemonicParsing="false" onAction="#tt_clearBtn" prefHeight="35.0" prefWidth="142.0" text="Clear">
+                                       <styleClass>
+                                          <String fx:value="shadow" />
+                                          <String fx:value="lecBtn" />
+                                          <String fx:value="clearBtn" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button layoutX="428.0" layoutY="125.0" mnemonicParsing="false" onAction="#tt_editBtn" prefHeight="35.0" prefWidth="142.0" text="Edit">
+                                       <styleClass>
+                                          <String fx:value="shadow" />
+                                          <String fx:value="lecBtn" />
+                                          <String fx:value="updateBtn" />
+                                       </styleClass>
+                                    </Button>
+                                    <Label fx:id="tt_id" layoutX="6.0" layoutY="6.0" visible="false" />
+                                 </children></Pane>
+                              <TableView fx:id="tt_view" layoutX="25.0" layoutY="156.0" onMouseClicked="#timeTableRowHandle" prefHeight="286.0" prefWidth="373.0">
+                                <columns>
+                                  <TableColumn fx:id="_ttNo" prefWidth="49.600006103515625" text="No" />
+                                  <TableColumn fx:id="_ttLevel" prefWidth="68.00000762939453" text="Level" />
+                                    <TableColumn fx:id="_ttDep" prefWidth="105.60000610351562" text="Department" />
+                                    <TableColumn fx:id="_ttSem" prefWidth="147.20000610351565" text="Semester" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
                      </children></AnchorPane>
                </center>
             </BorderPane>
