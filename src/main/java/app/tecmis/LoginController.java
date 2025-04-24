@@ -52,7 +52,7 @@ public class LoginController {
 //        loginController.studentWindow();
 //        loginController.lectureWindow();
 //        loginController.techOfficerWindow();
-//        loginController.adminWindow();
+        loginController.adminWindow();
 
         String userQuery = "SELECT * FROM user";
         Statement st = null;
@@ -84,6 +84,10 @@ public class LoginController {
 //            System.out.println("Error : " + e.getMessage());
 //        }
 //        System.out.println("Login button pressed");
+       // loginController.adminWindow();
+        //loginController.studentWindow();
+        loginController.techOfficerWindow();
+        //loginController.lectureWindow();
     }
 
     public void adminWindow(){

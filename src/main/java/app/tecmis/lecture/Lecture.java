@@ -540,6 +540,7 @@ public class Lecture implements Initializable {
             notice_window.setVisible(false);
 
     }
+<<<<<<< HEAD
 
     public ObservableList<LectureInformation> getLecture(){
         ObservableList<LectureInformation> lecList = FXCollections.observableArrayList();
@@ -679,6 +680,8 @@ public class Lecture implements Initializable {
     }
 
 
+=======
+>>>>>>> main
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
