@@ -409,7 +409,13 @@ public class Admin implements Initializable {
 
     // Time Table
     private File scFile;
-    private File imgPath;
+    private String imgPath = null;
+
+    @FXML
+    private TextField ttSearchBar;
+
+    @FXML
+    private Label tt_id;
 
     @FXML
     private ImageView imgView;
@@ -530,15 +536,15 @@ public class Admin implements Initializable {
     }
     @FXML
     void tt_clearBtn(ActionEvent event) {
-
+        clearTextValue();
     }
     @FXML
     void tt_deleteBtn(ActionEvent event) {
-
+        deleteTimeTable();
     }
     @FXML
     void tt_editBtn(ActionEvent event) {
-
+        updateTimeTable();
     }
     @FXML
     void tt_imgBtn(ActionEvent event) {
@@ -641,6 +647,7 @@ public class Admin implements Initializable {
         tt_dep.setValue(ttDet.getTtDepName());
         tt_sem.setValue(ttDet.getTtSem());
         imgView.setImage(new Image(new File(ttDet.getTtImgPath()).toURI().toString()));
+        tt_id.setText(String.valueOf(ttDet.getTtId()));
     }
     @FXML
     void userSearchBar(MouseEvent event) {
@@ -653,9 +660,12 @@ public class Admin implements Initializable {
         } else if(event.getSource() == courseSearchBar){
             courseSearch();
         } else  if(event.getSource() == noticeSearchBar){
+            System.out.println("ddd");
             noticeSearch();
+        } else if (event.getSource() == ttSearchBar){
+            System.out.println("done");
+            timeTableSearch();
         }
-
     }
 
     @FXML
@@ -2024,41 +2034,6 @@ public class Admin implements Initializable {
         }
         return list;
     }
-    public void addNewTimeTable(){
-        Connection con = Config.getConfig();
-        String depName = tt_dep.getSelectionModel().getSelectedItem();
-        String depId = setDepId(depName);
-        String semester = tt_sem.getSelectionModel().getSelectedItem();
-        String level = tt_level.getSelectionModel().getSelectedItem();
-
-        if(imgPath.equals("")){
-            System.out.println("Image Path is empty");
-            return;
-        }
-
-        String ttSql = "INSERT INTO timetable(level,dep_id,semester,pdf_path) VALUES(?,?,?,?)";
-        try{
-            PreparedStatement ps = con.prepareStatement(ttSql);
-            ps.setString(1, level);
-            ps.setString(2, depId);
-            ps.setString(3, semester);
-            ps.setString(4, String.valueOf(imgPath));
-            ps.executeUpdate();
-            System.out.println("Added time table");
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        showTimeTable();
-    }
-    public void showTimeTable(){
-        ObservableList<TimeTableDetails> ttList = getTimeTableList();
-        _ttNo.setCellValueFactory(new PropertyValueFactory<TimeTableDetails,Integer>("ttId"));
-        _ttLevel.setCellValueFactory(new PropertyValueFactory<TimeTableDetails,String>("ttLevel"));
-        _ttDep.setCellValueFactory(new PropertyValueFactory<TimeTableDetails,String>("ttDepName"));
-        _ttSem.setCellValueFactory(new PropertyValueFactory<TimeTableDetails,String>("ttSem"));
-
-         tt_view.setItems(ttList);
-    }
     public void takeImg(){
         FileChooser fc = new FileChooser();
         fc.setTitle("Choose Image");
@@ -2072,7 +2047,7 @@ public class Admin implements Initializable {
                 if(!uploadDir.exists()) uploadDir.mkdir();
 
                 File destFile = new File(uploadDir,scFile.getName());
-                imgPath = destFile;
+                imgPath = String.valueOf(destFile);
                 Files.copy(scFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
                 imgView.setImage(new Image(destFile.toURI().toString()));
@@ -2081,6 +2056,172 @@ public class Admin implements Initializable {
                 System.out.println("Error: " + e.getMessage());
             }
         }
+    }
+    public void addNewTimeTable(){
+        Connection con = Config.getConfig();
+        String depName = tt_dep.getSelectionModel().getSelectedItem();
+        String depId = setDepId(depName);
+        String semester = tt_sem.getSelectionModel().getSelectedItem();
+        String level = tt_level.getSelectionModel().getSelectedItem();
+
+        if(imgPath == null){
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Attach Document");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("TimeTable Doesn't Exist");
+            successAlert.showAndWait();
+
+            takeImg();
+        }
+
+        String ttSql = "INSERT INTO timetable(level,dep_id,semester,pdf_path) VALUES(?,?,?,?)";
+        try{
+            PreparedStatement ps = con.prepareStatement(ttSql);
+            ps.setString(1, level);
+            ps.setString(2, depId);
+            ps.setString(3, semester);
+            ps.setString(4, String.valueOf(imgPath));
+            ps.executeUpdate();
+            //System.out.println("Added time table");
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Attach Document");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("TimeTable Doesn't Exist");
+            successAlert.showAndWait();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        showTimeTable();
+        clearTextValue();
+    }
+    public void showTimeTable(){
+        ObservableList<TimeTableDetails> ttList = getTimeTableList();
+        _ttNo.setCellValueFactory(new PropertyValueFactory<TimeTableDetails,Integer>("ttId"));
+        _ttLevel.setCellValueFactory(new PropertyValueFactory<TimeTableDetails,String>("ttLevel"));
+        _ttDep.setCellValueFactory(new PropertyValueFactory<TimeTableDetails,String>("ttDepName"));
+        _ttSem.setCellValueFactory(new PropertyValueFactory<TimeTableDetails,String>("ttSem"));
+
+         tt_view.setItems(ttList);
+    }
+    public void deleteTimeTable(){
+        Connection con = Config.getConfig();
+        int id = Integer.parseInt(tt_id.getText());
+        String imgDeleteSql = "SELECT pdf_path FROM timetable WHERE ttid = ?";
+        String ttSql = "DELETE FROM timetable WHERE ttid= ? ";
+        try{
+            PreparedStatement psD = con.prepareStatement(imgDeleteSql);
+            psD.setInt(1, id);
+            ResultSet rsD = psD.executeQuery();
+            String dImgPath = null;
+            if(rsD.next()){
+                dImgPath = rsD.getString("pdf_path");
+            }
+            if(imgPath != null){
+                File deleteFile = new File(imgPath);
+                if(deleteFile.exists()){
+                    deleteFile.delete();
+                }
+            }
+
+            PreparedStatement ps = con.prepareStatement(ttSql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("TimeTable Deleted");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("TimeTable deleted successfully!");
+            successAlert.showAndWait();
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+        showTimeTable();
+        clearTextValue();
+    }
+    public void updateTimeTable(){
+        Connection con = Config.getConfig();
+        int id = Integer.parseInt(tt_id.getText());
+        String level = tt_level.getSelectionModel().getSelectedItem();
+        String depName = tt_dep.getSelectionModel().getSelectedItem();
+        String sem = tt_sem.getSelectionModel().getSelectedItem();
+        String depId = setDepId(depName);
+        String fetchSql = "SELECT pdf_path FROM timetable WHERE ttid = ?";
+        String updateSqlWithImg = "UPDATE timetable SET level = ?, dep_id = ?, semester = ?, pdf_path = ? WHERE ttid = ?";
+        String updateSqlWithoutImg = "UPDATE timetable SET level = ?, dep_id = ?, semester = ? WHERE ttid = ?";
+        try {
+            String oldImgPath = imgPath;
+
+            PreparedStatement psD = con.prepareStatement(fetchSql);
+            psD.setInt(1, id);
+            ResultSet rsD = psD.executeQuery();
+            String dImgPath = null;
+            if (rsD.next()) {
+                oldImgPath = rsD.getString("pdf_path");
+            }
+            if (imgPath != null && !imgPath.isEmpty()) {
+                if (oldImgPath != null && !oldImgPath.isEmpty()) {
+                    File deleteFile = new File(oldImgPath);
+                    if (deleteFile.exists()) {
+                        deleteFile.delete();
+                    }
+                }
+                PreparedStatement psUpdate = con.prepareStatement(updateSqlWithImg);
+                psUpdate.setString(1, level);
+                psUpdate.setString(2, depId);
+                psUpdate.setString(3, sem);
+                psUpdate.setString(4, imgPath);
+                psUpdate.setInt(5, id);
+                psUpdate.executeUpdate();
+            }else{
+                PreparedStatement psUpdate = con.prepareStatement(updateSqlWithoutImg);
+                psUpdate.setString(1, level);
+                psUpdate.setString(2, depId);
+                psUpdate.setString(3, sem);
+                psUpdate.setInt(4, id);
+                psUpdate.executeUpdate();
+            }
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("TimeTable Updated");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("TimeTable updated successfully!");
+            successAlert.showAndWait();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        showTimeTable();
+        clearTextValue();
+    }
+    public void clearTextValue(){
+        tt_id.setText("");
+        tt_level.setValue(null);
+        tt_dep.setValue(null);
+        tt_sem.setValue(null);
+        imgPath = null;
+        imgView.setImage(null);
+    }
+    public void timeTableSearch(){
+        FilteredList<TimeTableDetails> filter = new FilteredList<>(getTimeTableList(),e -> true);
+        ttSearchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filter.setPredicate(predicateTTData ->{
+                if(newValue == null || newValue.isEmpty()) return true;
+
+                String searchKey = newValue.toLowerCase();
+
+                if (predicateTTData.getTtDep().toLowerCase().contains(searchKey)) {
+                    return true;
+                }else if(String.valueOf(predicateTTData.getTtId()).contains(searchKey)){
+                    return true;
+                }else if(predicateTTData.getTtLevel().toLowerCase().contains(searchKey)){
+                    return true;
+                }else if(predicateTTData.getTtSem().toLowerCase().contains(searchKey)){
+                    return true;
+                }else{
+                    return false;
+                }
+            });
+        });
+        SortedList<TimeTableDetails> sortedList = new SortedList<>(filter);
+        sortedList.comparatorProperty().bind(tt_view.comparatorProperty());
+        tt_view.setItems(sortedList);
     }
 
     @Override
