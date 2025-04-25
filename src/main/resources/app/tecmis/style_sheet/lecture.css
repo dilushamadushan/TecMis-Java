@@ -40,12 +40,12 @@
 }
 
 
-#information_lebal,#security_lebal {
+#information_lebal,#security_lebal,#lbladd {
     -fx-text-fill: black; /* default color */
     -fx-cursor: default;  /* default cursor */
 }
 
-#information_lebal:hover,#security_lebal:hover{
+#information_lebal:hover,#security_lebal:hover,#lbladd:hover{
     -fx-text-fill: blue;  /* color on hover */
     -fx-cursor: hand;     /* hand cursor on hover */
 }
@@ -57,6 +57,8 @@
 
 
 }
+
+
 
 
 

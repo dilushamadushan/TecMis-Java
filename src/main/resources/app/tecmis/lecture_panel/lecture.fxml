@@ -92,7 +92,7 @@
                   </AnchorPane>
                   <AnchorPane fx:id="profile_window" prefHeight="595.0" prefWidth="1260.0" visible="false">
                      <children>
-                        <AnchorPane fx:id="profile_part2_infor_panel" layoutX="437.0" layoutY="-1.0" prefHeight="605.0" prefWidth="997.0" visible="false">
+                        <AnchorPane fx:id="profile_part2_infor_panel" layoutX="437.0" layoutY="-1.0" prefHeight="605.0" prefWidth="997.0">
                            <children>
                               <VBox layoutX="79.0" layoutY="66.0" prefHeight="394.0" prefWidth="304.0" spacing="45.0">
                                  <children>
@@ -213,59 +213,100 @@
                            </children></AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="courses_window" prefHeight="593.0" prefWidth="1342.0" visible="false">
+                  <AnchorPane fx:id="courses_window" layoutX="10.0" prefHeight="601.0" prefWidth="1338.0">
                      <children>
-                        <Button layoutX="1180.0" layoutY="514.0" mnemonicParsing="false" onAction="#backtoALLprofile" prefHeight="50.0" prefWidth="103.0" text="go back" />
+                        <Button layoutX="1005.0" layoutY="398.0" mnemonicParsing="false" onAction="#backtoALLprofile" prefHeight="50.0" prefWidth="103.0" text="go back" />
                         <Label layoutX="1128.0" layoutY="50.0" text="course window">
                            <font>
                               <Font size="28.0" />
                            </font>
                         </Label>
-                        <Label layoutX="26.0" layoutY="24.0" prefHeight="52.0" prefWidth="424.0" text="course name and course code">
+                        <AnchorPane fx:id="course_box" layoutY="2.0" prefHeight="599.0" prefWidth="576.0" style="-fx-background-color: #a3d1f7;">
+                           <children>
+                              <Label fx:id="lbl_course_name" layoutX="23.0" layoutY="25.0" text="Course name">
+                                 <font>
+                                    <Font size="51.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="43.0" layoutY="216.0" text="course code :">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbl_course_code" layoutX="272.0" layoutY="216.0" text="wxd">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="46.0" layoutY="281.0" text="course credit  :">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="43.0" layoutY="347.0" text="course houres :">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="46.0" layoutY="408.0" text="course type :">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbl_course_credit" layoutX="272.0" layoutY="281.0" text="wxd">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbl_course_type" layoutX="272.0" layoutY="408.0" text="wxd">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbl_course_hourses" layoutX="272.0" layoutY="341.0" text="wxd">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane fx:id="fieldAREAPanel" layoutX="-6.0" layoutY="-2.0" prefHeight="601.0" prefWidth="583.0" style="-fx-background-color: pink;">
+                                 <children>
+                                    <Label layoutX="20.0" layoutY="81.0" prefHeight="65.0" prefWidth="101.0" text="file">
+                                       <font>
+                                          <Font size="32.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="146.0" prefHeight="65.0" prefWidth="140.0" text="session">
+                                       <font>
+                                          <Font size="32.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="file_txt" layoutX="135.0" layoutY="101.0" prefHeight="25.0" prefWidth="217.0" />
+                                    <TextField fx:id="session_txt" layoutX="154.0" layoutY="166.0" prefHeight="25.0" prefWidth="197.0" />
+                                    <Button fx:id="delete_matiriyal_btn" layoutX="207.0" layoutY="388.0" mnemonicParsing="false" onAction="#Delete_Matiriyal_btn" prefHeight="50.0" prefWidth="113.0" text="Delete" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <TextField fx:id="session_textfeild" layoutX="663.0" layoutY="289.0" />
+                        <Label layoutX="592.0" layoutY="281.0" prefHeight="39.0" prefWidth="71.0" text="sessions:">
                            <font>
-                              <Font size="32.0" />
+                              <Font size="14.0" />
                            </font>
                         </Label>
-                        <VBox layoutX="54.0" layoutY="117.0" prefHeight="275.0" prefWidth="224.0" spacing="20.0">
-                           <children>
-                              <Label prefHeight="48.0" prefWidth="218.0" text="Lecture ID :">
-                                 <font>
-                                    <Font size="32.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="10.0" layoutY="10.0" prefHeight="48.0" prefWidth="218.0" text="Course Code :">
-                                 <font>
-                                    <Font size="32.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="10.0" layoutY="58.0" prefHeight="48.0" prefWidth="218.0" text="Session :">
-                                 <font>
-                                    <Font size="32.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="10.0" layoutY="106.0" prefHeight="48.0" prefWidth="218.0" text="Material type :">
-                                 <font>
-                                    <Font size="32.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </VBox>
-                        <Button layoutX="54.0" layoutY="412.0" mnemonicParsing="false" text="Upload Material">
+                        <Button fx:id="btn_upload_matroyal" layoutX="820.0" layoutY="288.0" mnemonicParsing="false" onAction="#addpdfaction" prefHeight="25.0" prefWidth="142.0" text="Upload Matiriyal" />
+                        <Label fx:id="lbl_sucsuzzzz" layoutX="678.0" layoutY="320.0" styleClass="lblsucs" text="suss" textFill="#72f547">
                            <font>
-                              <Font size="21.0" />
+                              <Font size="27.0" />
                            </font>
-                        </Button>
-                        <VBox layoutX="310.0" layoutY="131.0" prefHeight="298.0" prefWidth="215.0" spacing="45.0">
-                           <children>
-                              <TextField />
-                              <TextField layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="215.0" />
-                              <TextField layoutX="10.0" layoutY="35.0" />
-                              <TextField layoutX="10.0" layoutY="60.0" />
-                           </children>
-                        </VBox>
-                        <Button layoutX="310.0" layoutY="515.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="49.0" text="Save" />
-                        <Button layoutX="485.0" layoutY="515.0" mnemonicParsing="false" text="Update" />
-                        <Button layoutX="394.0" layoutY="515.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Delete" />
+                        </Label>
+                        <TableView fx:id="table_matrials" layoutX="592.0" layoutY="14.0" onMouseClicked="#handleMatiriyal" prefHeight="261.0" prefWidth="484.0">
+                          <columns>
+                            <TableColumn fx:id="col_course_code" prefWidth="75.0" text="code" />
+                            <TableColumn fx:id="col_lecture_id" prefWidth="75.0" text="lecture ID" />
+                              <TableColumn fx:id="col_sesion_number" prefWidth="136.0" text="session number" />
+                              <TableColumn fx:id="col_file" prefWidth="270.0" text="file" />
+                          </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="exam_window" layoutX="10.0" layoutY="10.0" prefHeight="585.0" prefWidth="1250.0" visible="false">
@@ -278,7 +319,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="undergraduate_window" layoutX="-5.0" layoutY="-2.0" prefHeight="599.0" prefWidth="1338.0">
+                  <AnchorPane fx:id="undergraduate_window" layoutX="-5.0" layoutY="-2.0" prefHeight="599.0" prefWidth="1338.0" visible="false">
                      <children>
                         <Button mnemonicParsing="false" onAction="#backtoALLprofile" prefHeight="50.0" prefWidth="103.0" text="go back" />
                         <Label layoutX="916.0" layoutY="50.0" text="undergraduate window">

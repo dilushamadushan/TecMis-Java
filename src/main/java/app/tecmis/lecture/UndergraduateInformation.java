@@ -9,16 +9,16 @@ public class UndergraduateInformation {
     private String     undergraduateLname;
     private String     undergraduateEmail;
     private String     undergraduateGender;
-    private Date         getUndergraduateDob;
     private String     undergraduateAddress;
+    private String undergraduateDob;
 
-    public UndergraduateInformation(String undergraduateId, String undergraduateFname, String undergraduateLname, String undergraduateEmail, String undergraduateGender, Date getUndergraduateDob, String undergraduateAddress) {
+    public UndergraduateInformation(String undergraduateId, String undergraduateFname, String undergraduateLname, String undergraduateEmail, String undergraduateGender, String getUndergraduateDob, String undergraduateAddress) {
         this.undergraduateId = undergraduateId;
         this.undergraduateFname = undergraduateFname;
         this.undergraduateLname = undergraduateLname;
         this.undergraduateEmail = undergraduateEmail;
         this.undergraduateGender = undergraduateGender;
-        this.getUndergraduateDob = getUndergraduateDob;
+        this.undergraduateDob = getUndergraduateDob;
         this.undergraduateAddress = undergraduateAddress;
     }
 
@@ -41,10 +41,14 @@ public class UndergraduateInformation {
     public String getUndergraduateGender() {
         return undergraduateGender;
     }
-
-    public Date getGetUndergraduateDob() {
-        return getUndergraduateDob;
+    public String getUndergraduateDob() {
+        return undergraduateDob;
     }
+
+    public void setUndergraduateDob(String undergraduateDob) {
+        this.undergraduateDob = undergraduateDob;
+    }
+
 
     public String getStuFullName() {
         return undergraduateFname + " " + undergraduateLname;

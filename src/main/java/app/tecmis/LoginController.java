@@ -50,7 +50,7 @@ public class LoginController {
         Connection conn = Config.getConfig();
         LoginController loginController = new LoginController();
 //        loginController.studentWindow();
-//        loginController.lectureWindow();
+//      loginController.lectureWindow();
 //        loginController.techOfficerWindow();
 //       loginController.adminWindow();
 

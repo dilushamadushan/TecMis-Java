@@ -18,6 +18,9 @@ import javafx .scene.layout.Pane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.PreparedStatement;
 
 
@@ -27,6 +30,7 @@ import java.sql.PreparedStatement;
 
 //notice window
 import javafx.scene.control.TableView;
+import javafx.stage.FileChooser;
 
 
 //======================
@@ -37,6 +41,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -90,7 +95,7 @@ public class Lecture implements Initializable {
                         rs.getString("l_name"),
                         rs.getString("email"),
                         rs.getString("gender"),
-                        rs.getDate("bod"),
+                        rs.getString("bod"),
                         rs.getString("address")
                 );
 
@@ -307,10 +312,291 @@ public class Lecture implements Initializable {
 
 
     //=========================
-    String username = "LEC001";
+    String username = "LEC003";
     String password ="pass1";
 
     //course
+
+    @FXML
+    private AnchorPane course_box;
+
+    @FXML
+    private Label lbl_course_name;
+
+    @FXML
+    private Label lbl_course_code;
+    @FXML
+    private Label lbl_course_credit;
+    @FXML
+    private Label lbl_course_hourses;
+    @FXML
+    private Label lbl_course_type;
+
+
+
+    @FXML
+    private Button btn_upload_matroyal;
+    @FXML
+    private TextField session_textfeild;
+
+    @FXML
+    private Label lbl_sucsuzzzz;
+
+
+    public  ObservableList<CourseInformation> getCourse(){
+        ObservableList<CourseInformation> courseList = FXCollections.observableArrayList();
+        Connection con = Config.getConfig();
+        String sql = "SELECT c.course_code, c.course_name, c.course_credit, c.course_houre, c.course_type, c.dep_id " +
+                "FROM lecture_course lc " +
+                "INNER JOIN course c ON lc.course_code = c.course_code " +
+                "WHERE lc.lecture_id = '" + username + "'";
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try{
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            CourseInformation course;
+            while (rs.next()){
+                course = new CourseInformation(
+                  rs.getString("course_name"),
+                        rs.getString("course_code"),
+                        rs.getInt("course_credit"),
+                        rs.getInt("course_houre"),
+                        rs.getString("course_type")
+                );
+                courseList.add(course);
+
+            }
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
+        return courseList;
+    }
+
+    public void ShowCourseDetils() {
+        ObservableList<CourseInformation> courseList = getCourse();
+            CourseInformation course = courseList.get(0);
+            lbl_course_name.setText(course.getCourse_name());
+            lbl_course_code.setText(course.getCourse_code());
+            lbl_course_credit.setText("" + course.getCourse_credit());
+            lbl_course_hourses.setText("" + course.getCourse_houres());
+            lbl_course_type.setText(course.getCourse_type());
+
+    }
+
+
+    public void addpdfaction(ActionEvent event) {
+        int sessionValue = 0;
+        if (!session_textfeild.getText().isEmpty()) {
+            try {
+                sessionValue = Integer.parseInt(session_textfeild.getText());
+                if (sessionValue >= 1 && sessionValue <= 15) {
+                    Connection con = Config.getConfig();
+                    FileChooser fileChooser = new FileChooser();
+                    fileChooser.setTitle("Select PDF Files");
+
+                    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF Files (*.pdf)", "*.pdf");
+                    fileChooser.getExtensionFilters().add(extFilter);
+
+                    List<File> selectedFiles = fileChooser.showOpenMultipleDialog(null);
+
+                    if (selectedFiles != null) {
+                        File uploadDir = new File("upload");
+                        if (!uploadDir.exists()) {
+                            uploadDir.mkdirs();
+                        }
+
+                        for (File file : selectedFiles) {
+                            try {
+                                File destFile = new File(uploadDir, file.getName());
+                                Files.copy(file.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                                System.out.println("Copied to: " + destFile.getAbsolutePath());
+                                String relativePath = File.separator + "upload" + File.separator + file.getName();
+
+                                // Save to database
+                                try {
+                                    String lec_name = "LEC001";
+                                    String coursecode = lbl_course_code.getText();
+
+                                    String sql = "INSERT INTO lecture_matrials (course_code, lecture_id, session_type, file_path) VALUES (?, ?, ?, ?)";
+                                    PreparedStatement ps = con.prepareStatement(sql);
+                                    ps.setString(1, coursecode);      // course_code
+                                    ps.setString(2, lec_name);        // lecture_id - must exist in lecture table
+                                    ps.setInt(3, sessionValue);       // session_type
+                                    ps.setString(4, relativePath);    // file_path
+
+
+                                    ps.executeUpdate();
+                                    lbl_sucsuzzzz.setText("File Uploaded Successfully");
+                                    showMatiriyaldetils();
+                                } catch (Exception e) {
+                                    System.out.println("Error: " + e.getMessage());
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                } else {
+                    // Value is not between 1 and 15
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Invalid Session Value");
+                    alert.setContentText("Please enter a session value between 1 and 15");
+                    alert.showAndWait();
+                }
+            } catch (NumberFormatException e) {
+                // Input is not an integer
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid Input");
+                alert.setContentText("Please enter a numeric value for session");
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("EMPTY SET");
+            alert.setContentText("Please enter session");
+            alert.showAndWait();
+        }
+    }
+    //lecture metiriyal
+
+
+    @FXML
+    private TableView<Lecture_matrials_Information> table_matrials;
+    @FXML
+    private TableColumn<Lecture_matrials_Information, String> col_course_code;
+    @FXML
+    private TableColumn<Lecture_matrials_Information, String> col_lecture_id;
+
+    @FXML
+    private TableColumn<Lecture_matrials_Information, String> col_sesion_number;
+    @FXML
+    private TableColumn<Lecture_matrials_Information, String> col_file;
+
+    public ObservableList<Lecture_matrials_Information> getmatrials() {
+        ObservableList<Lecture_matrials_Information> metiriyalList = FXCollections.observableArrayList();
+        Connection conn = Config.getConfig();
+        String sql = "SELECT * FROM lecture_matrials WHERE lecture_id = 'LEC001'";
+
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+            Lecture_matrials_Information matirialDetils;
+            while (rs.next()) {
+                matirialDetils = new Lecture_matrials_Information(
+                        rs.getString("course_code"),
+                        rs.getString("lecture_id"),
+                        rs.getString("session_type"),
+                        rs.getString("file_path")
+
+                );
+                metiriyalList.add(matirialDetils);
+
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
+        return metiriyalList;
+    }
+
+    public void showMatiriyaldetils() {
+        ObservableList<Lecture_matrials_Information> metiriyalList = getmatrials();
+
+        col_course_code.setCellValueFactory(new PropertyValueFactory<Lecture_matrials_Information,String>("course_code"));
+        col_lecture_id.setCellValueFactory(new PropertyValueFactory<Lecture_matrials_Information,String>("lecture_id"));
+        col_sesion_number.setCellValueFactory(new PropertyValueFactory<Lecture_matrials_Information,String>("session"));
+        col_file.setCellValueFactory(new PropertyValueFactory<Lecture_matrials_Information,String>("file_path"));
+
+        table_matrials.setItems(metiriyalList);
+    }
+
+
+
+    @FXML
+    private Button delete_matiriyal_btn;
+
+    @FXML
+    private Button update_matiriyal_btn;
+
+    @FXML
+    private AnchorPane fieldAREAPanel;
+
+    @FXML
+    private TextField file_txt;
+    @FXML
+    private TextField session_txt;
+    @FXML
+    void handleMatiriyal(MouseEvent event) {
+
+        file_txt.setEditable(false);
+        session_txt.setEditable(false);
+
+        fieldAREAPanel.setVisible(true);
+
+        Lecture_matrials_Information matiriyal = table_matrials.getSelectionModel().getSelectedItem();
+        file_txt.setText("" + matiriyal.getFile_path());
+        session_txt.setText(""+matiriyal.getSession());
+
+
+
+    }
+    @FXML
+    void Delete_Matiriyal_btn(ActionEvent event) {
+
+        String  file_path = file_txt.getText();
+        String  session = session_txt.getText();
+
+
+       try {
+           String sql = "DELETE FROM lecture_matrials WHERE file_path = ? AND session_type = ?";
+           PreparedStatement pst = Config.getConfig().prepareStatement(sql);
+           pst.setString(1, file_path);
+           pst.setString(2, session);
+
+           pst.executeUpdate();
+
+           showMatiriyaldetils();
+           Alert alert = new Alert(Alert.AlertType.INFORMATION);
+           alert.setTitle("Information");
+           alert.setHeaderText("File Deleted Successfully");
+           alert.setContentText("File Deleted Successfully");
+           alert.showAndWait();
+           fieldAREAPanel.setVisible(false);
+           file_txt.clear();
+           session_txt.clear();
+           lbl_sucsuzzzz.setText("");
+       } catch (Exception e) {
+           throw new RuntimeException(e);
+       }
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    //=============================
+
+
+
 
 
 
@@ -688,6 +974,8 @@ public class Lecture implements Initializable {
         setLecName();
         showNotice();
         showUndergraduate();
+        ShowCourseDetils();
+        showMatiriyaldetils();
 
     }
 
