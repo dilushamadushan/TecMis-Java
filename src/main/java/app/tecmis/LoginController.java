@@ -51,7 +51,7 @@ public class LoginController {
         LoginController loginController = new LoginController();
 //        loginController.studentWindow();
 //      loginController.lectureWindow();
-//        loginController.techOfficerWindow();
+//       loginController.techOfficerWindow();
 //       loginController.adminWindow();
 
         String userQuery = "SELECT * FROM user";
