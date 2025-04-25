@@ -82,6 +82,11 @@ public class Admin implements Initializable {
     private AnchorPane timeTable;
 
     // lecture
+
+
+    @FXML
+    private ComboBox<String> _lecCourse;
+
     @FXML
     private ComboBox<String> _lecDepartment;
 
@@ -126,6 +131,9 @@ public class Admin implements Initializable {
 
     @FXML
     private TableView<LecDetails> lecTableView;
+
+    @FXML
+    private TableColumn<LecDetails, String> lec_Course;
 
     @FXML
     private TableColumn<LecDetails, String> lec_Address;
@@ -689,6 +697,7 @@ public class Admin implements Initializable {
             course.setVisible(false);
             notise.setVisible(false);
             timeTable.setVisible(false);
+            setCourseName();
         }else if(event.getSource()==studentBtn){
             dashbord.setVisible(false);
             lecture.setVisible(false);
@@ -782,6 +791,52 @@ public class Admin implements Initializable {
         }
         return ld;
     }
+    public ObservableList<String> getCourseNameList() {
+        ObservableList<String> listCourseName = FXCollections.observableArrayList();
+        Connection con = Config.getConfig();
+        String depSql = "SELECT * FROM course";
+        Statement st = null;
+        ResultSet rs = null;
+        try{
+            st = con.createStatement();
+            rs = st.executeQuery(depSql);
+            while(rs.next()){
+                String c_Name = rs.getString("course_name");
+                listCourseName.add(c_Name);
+            }
+        } catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+        return listCourseName;
+    }
+    public void setCourseName(){
+        ObservableList<String> dep = getCourseNameList();
+        _lecCourse.setItems(dep);
+    }
+    public String setCourseId(Object courseName) {
+        Connection conn2 = Config.getConfig();
+        String ld = "";
+        if(courseName != null){
+            courseName = courseName.toString();
+        }
+        String depSql = "SELECT * FROM course";
+        Statement st = null;
+        ResultSet rs = null;
+        try{
+            st = conn2.createStatement();
+            rs = st.executeQuery(depSql);
+            while(rs.next()){
+                String cName = rs.getString("course_name");
+                if(cName.equals(courseName)){
+                    ld = rs.getString("course_code");
+                    break;
+                }
+            }
+        } catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+        return ld;
+    }
     public String courseType(){
         ObservableList<String> courseTypeList = FXCollections.observableArrayList("Theory","Practical","Theory & Practical");
         _cType.setItems(courseTypeList);
@@ -801,7 +856,7 @@ public class Admin implements Initializable {
     public ObservableList<LecDetails> getLecture(){
         ObservableList<LecDetails> lecList = FXCollections.observableArrayList();
         Connection conn = Config.getConfig();
-        String sql = "SELECT * FROM lecture l JOIN user u ON l.lecture_id = u.userId LEFT JOIN user_contact uc ON u.userId = uc.userId INNER JOIN department d ON d.dep_id = l.dep_id";
+        String sql = "SELECT * FROM lecture l JOIN user u ON l.lecture_id = u.userId LEFT JOIN user_contact uc ON u.userId = uc.userId INNER JOIN department d ON d.dep_id = l.dep_id INNER JOIN lecture_course lc ON lc.lecture_id  = l.lecture_id INNER JOIN course c ON c.course_code = lc.course_code";
         Statement stmt = null;
         ResultSet rs = null;
         try{
@@ -819,7 +874,9 @@ public class Admin implements Initializable {
                         rs.getString("contact_no"),
                         rs.getString("position"),
                         rs.getString("dep_name"),
-                        rs.getString("password")
+                        rs.getString("password"),
+                        rs.getString("course_code"),
+                        rs.getString("course_name")
                 );
                 lecList.add(lecDetails);
                 //System.out.println("user id" + rs.getString("userId"));
@@ -842,6 +899,7 @@ public class Admin implements Initializable {
         lec_Position.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecPosition"));
         lec_Department.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecDepName"));
         lec_Password.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecPassword"));
+        lec_Course.setCellValueFactory(new PropertyValueFactory<LecDetails,String>("lecCourseName"));
 
         lecTableView.setItems(List);
     }
@@ -860,6 +918,8 @@ public class Admin implements Initializable {
         String lecPassword = _lecPassword.getText();
         Object lecDepName = _lecDepartment.getSelectionModel().getSelectedItem();
         String ld = setDepId(lecDepName);
+        Object courseName = _lecCourse.getSelectionModel().getSelectedItem();
+        String cId = setCourseId(courseName);
 
         if (lecId.isEmpty()
                 || lecNIC.isEmpty()
@@ -871,7 +931,8 @@ public class Admin implements Initializable {
                 || lecContactNo.isEmpty()
                 || lecPosition.isEmpty()
                 || lecPassword.isEmpty()
-                || lecDepName == null) {
+                || lecDepName == null
+                || courseName == null) {
             Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
             errorAlert.setTitle("Missing Fields");
             errorAlert.setHeaderText(null);
@@ -887,6 +948,7 @@ public class Admin implements Initializable {
        String lecUserSql = "INSERT INTO user (userId,nic,password,user_type,f_name,l_name,address,email,gender,bod) VALUES (?,?,?,?,?,?,?,?,?,?)";
        String lectureSql = "INSERT INTO lecture (lecture_id, position,dep_id) VALUES (?, ?, ?)";
        String contactSql = "INSERT INTO user_contact (userId, contact_no) VALUES (?, ?)";
+       String clSql = "INSERT INTO lecture_course (lecture_id, course_code) VALUES (?, ?)";
 
        try{
            PreparedStatement userPs = conn.prepareStatement(lecUserSql);
@@ -912,6 +974,11 @@ public class Admin implements Initializable {
            contactStmt.setString(1, lecId);
            contactStmt.setString(2, lecContactNo);
            contactStmt.executeUpdate();
+
+           PreparedStatement clStmt = conn.prepareStatement(clSql);
+           clStmt.setString(1, lecId);
+           clStmt.setString(2, cId);
+           clStmt.executeUpdate();
 
            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
            successAlert.setTitle("Lecture Added");
@@ -939,11 +1006,14 @@ public class Admin implements Initializable {
         String lecPassword = _lecPassword.getText();
         Object lecDepName = _lecDepartment.getSelectionModel().getSelectedItem();
         String ld = setDepId(lecDepName);
+        Object courseName = _lecCourse.getSelectionModel().getSelectedItem();
+        String cId = setCourseId(courseName);
 
         String[] nameParts = lecFullName.split(" ");
         String first_name = nameParts[0];
         String last_name = nameParts.length > 1 ? nameParts[1] : "";
 
+        String lcSql = "UPDATE lecture_course SET course_code = ? WHERE lecture_id=? ";
         String ucUpdateSql = "UPDATE user_contact SET contact_no=? WHERE userId=?";
         String lecUpdateSql = "UPDATE lecture SET position=?, dep_id=? WHERE lecture_id=?";
         String userUpdateSql = "UPDATE user SET f_name = ?,l_name = ?, nic = ?, address = ?,email = ?,gender = ?,bod = ?, password = ? WHERE userId = ?";
@@ -973,6 +1043,11 @@ public class Admin implements Initializable {
             userPs.setString(9, lecId);
             userPs.executeUpdate();
 
+            PreparedStatement lcPs = conn.prepareStatement(lcSql);
+            lcPs.setString(1, cId);
+            lcPs.setString(2, lecId);
+            lcPs.executeUpdate();
+
             Alert updatedAlert = new Alert(Alert.AlertType.INFORMATION);
             updatedAlert.setTitle("Lecture Updated");
             updatedAlert.setHeaderText(null);
@@ -987,12 +1062,18 @@ public class Admin implements Initializable {
     public void lecDelete(){
         Connection conn = Config.getConfig();
         String lecId = _lecId.getText();
+        Object courseName = _lecCourse.getSelectionModel().getSelectedItem();
+        String cId = setCourseId(courseName);
 
+        String deleteSql = "DELETE FROM lecture_course WHERE lecture_id = ?";
         String deletlecContactSql = "DELETE FROM user_contact WHERE  userId =  ? ";
         String deleteLecSql = "DELETE FROM lecture WHERE lecture_id = ? ";
         String deleteUserSql = "DELETE FROM user WHERE userId = ? ";
 
         try{
+            PreparedStatement deletePs = conn.prepareStatement(deleteSql);
+            deletePs.setString(1, lecId);
+            deletePs.executeUpdate();
 
             PreparedStatement user_contactPs = conn.prepareStatement(deletlecContactSql);
             user_contactPs.setString(1, lecId);
@@ -1030,6 +1111,7 @@ public class Admin implements Initializable {
         _lecPositionTF.setText("");
         _lecPassword.setText("");
         _lecDepartment.setValue(null);
+        _lecCourse.setValue(null);
     }
     public void lecSearch(){
         FilteredList<LecDetails> filter = new FilteredList<>(getLecture(),e -> true);
@@ -2065,11 +2147,11 @@ public class Admin implements Initializable {
         String level = tt_level.getSelectionModel().getSelectedItem();
 
         if(imgPath == null){
-            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-            successAlert.setTitle("Attach Document");
-            successAlert.setHeaderText(null);
-            successAlert.setContentText("TimeTable Doesn't Exist");
-            successAlert.showAndWait();
+//            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+//            successAlert.setTitle("Attach Document");
+//            successAlert.setHeaderText(null);
+//            successAlert.setContentText("TimeTable Doesn't Exist");
+//            successAlert.showAndWait();
 
             takeImg();
         }
@@ -2233,6 +2315,7 @@ public class Admin implements Initializable {
         showNoticeToTable();
         showTimeTable();
         setDepName();
+        setCourseName();
         courseType();
         total_student.setText(getCountUser("student"));
         total_lec.setText(getCountUser("lecture"));

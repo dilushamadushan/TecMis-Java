@@ -15,13 +15,15 @@ public class LecDetails {
     private String lecPosition;
     private String lecDepName;
     private String lecPassword;
+    private String lecCourseCode;
+    private String lecCourseName;
 
     public LecDetails(String lecId, String lecNic,
                       String lecFname,String lecLname,
                       String lecAddress, String lecEmail,
                       String lecGender, Date lecBod,
                       String lecContactNo, String lecPosition,
-                      String lecDepName,String lecPassword) {
+                      String lecDepName,String lecPassword,String lecCourseCode,String lecCourseName) {
         this.lecId = lecId;
         this.lecNic = lecNic;
         this.lecFname = lecFname;
@@ -34,6 +36,16 @@ public class LecDetails {
         this.lecPosition = lecPosition;
         this.lecDepName = lecDepName;
         this.lecPassword = lecPassword;
+        this.lecCourseCode = lecCourseCode;
+        this.lecCourseName = lecCourseName;
+    }
+
+    public String getLecCourseName() {
+        return lecCourseName;
+    }
+
+    public String getLecCourseCode() {
+        return lecCourseCode;
     }
 
     public String getLecPassword() {
