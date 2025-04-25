@@ -39,7 +39,7 @@
          <left>
             <AnchorPane fx:id="newprofile" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="profile_panal" layoutX="12.0" layoutY="-2.0" prefHeight="539.0" prefWidth="1188.0" style="-fx-background-color: red;" visible="false">
+                  <AnchorPane fx:id="profile_panal" layoutX="12.0" layoutY="-2.0" prefHeight="539.0" prefWidth="1188.0" style="-fx-background-color: red;">
                      <children>
                         <BorderPane layoutY="-2.0" prefHeight="541.0" prefWidth="1200.0">
                            <left>
@@ -53,7 +53,7 @@
                                           <Glow />
                                        </effect>
                                     </ImageView>
-                                    <Label layoutX="53.0" layoutY="273.0" prefHeight="59.0" prefWidth="250.0" text="k.m.m.s.chathuranga">
+                                    <Label fx:id="profile_name" layoutX="53.0" layoutY="273.0" prefHeight="59.0" prefWidth="250.0" text="k.m.m.s.chathuranga">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -81,10 +81,10 @@
                                           <Font name="System Bold Italic" size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField layoutX="297.0" layoutY="118.0" prefHeight="25.0" prefWidth="255.0" />
-                                    <TextField layoutX="297.0" layoutY="210.0" prefHeight="25.0" prefWidth="245.0" />
-                                    <TextField layoutX="297.0" layoutY="303.0" prefHeight="25.0" prefWidth="239.0" />
-                                    <Button layoutX="353.0" layoutY="461.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="89.0" text="Update" />
+                                    <TextField fx:id="student_first_name" layoutX="297.0" layoutY="118.0" prefHeight="25.0" prefWidth="255.0" />
+                                    <TextField fx:id="student_last_name" layoutX="297.0" layoutY="210.0" prefHeight="25.0" prefWidth="245.0" />
+                                    <TextField fx:id="student_email" layoutX="297.0" layoutY="303.0" prefHeight="25.0" prefWidth="239.0" />
+                                    <Button layoutX="353.0" layoutY="461.0" mnemonicParsing="false" onAction="#studentUpdate" prefHeight="40.0" prefWidth="89.0" text="Update" />
                                     <Button layoutX="504.0" layoutY="461.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="90.0" text="Clear" />
                                  </children>
                               </AnchorPane>
@@ -127,19 +127,19 @@
                                     <Font name="System Bold Italic" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="293.0" layoutY="321.0" prefHeight="17.0" prefWidth="176.0" text="Label" />
-                              <Label layoutX="293.0" layoutY="413.0" prefHeight="17.0" prefWidth="149.0" text="Label" />
-                              <Label layoutX="742.0" layoutY="140.0" prefHeight="17.0" prefWidth="170.0" text="Label" />
-                              <Label layoutX="756.0" layoutY="246.0" prefHeight="17.0" prefWidth="169.0" text="Label" />
-                              <Label layoutX="770.0" layoutY="435.0" prefHeight="17.0" prefWidth="99.0" text="Label" />
-                              <Label layoutX="756.0" layoutY="348.0" prefHeight="17.0" prefWidth="146.0" text="Label" />
+                              <Label fx:id="fn" layoutX="293.0" layoutY="321.0" prefHeight="17.0" prefWidth="176.0" text="Label" />
+                              <Label fx:id="ln" layoutX="293.0" layoutY="413.0" prefHeight="17.0" prefWidth="149.0" text="Label" />
+                              <Label fx:id="nc" layoutX="742.0" layoutY="140.0" prefHeight="17.0" prefWidth="170.0" text="Label" />
+                              <Label fx:id="bod" layoutX="756.0" layoutY="246.0" prefHeight="17.0" prefWidth="169.0" text="Label" />
+                              <Label fx:id="em" layoutX="770.0" layoutY="435.0" prefHeight="17.0" prefWidth="99.0" text="Label" />
+                              <Label fx:id="ad" layoutX="756.0" layoutY="348.0" prefHeight="17.0" prefWidth="146.0" text="Label" />
                               <Button layoutX="448.0" layoutY="489.0" mnemonicParsing="false" onAction="#Editprofile" prefHeight="41.0" prefWidth="207.0" text="Edit Profile" />
                               <Button layoutX="1004.0" layoutY="482.0" mnemonicParsing="false" onAction="#back" prefHeight="32.0" prefWidth="87.0" text="Go back" />
                            </children>
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="home" prefHeight="538.0" prefWidth="1200.0" stylesheets="@../style_sheet/student.css">
+                  <AnchorPane fx:id="home" prefHeight="538.0" prefWidth="1200.0" stylesheets="@../style_sheet/student.css" visible="false">
                      <children>
                         <ImageView fx:id="profile" fitHeight="150.0" fitWidth="200.0" layoutX="154.0" layoutY="53.0" onMouseClicked="#gowindow" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -240,24 +240,25 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="cour_dll" prefHeight="535.0" prefWidth="1194.0" visible="false">
+                  <AnchorPane fx:id="cour_dll" prefHeight="509.0" prefWidth="1207.0">
                      <children>
-                        <Label layoutX="330.0" layoutY="67.0" text="Coureses Delails">
+                        <Label layoutX="107.0" layoutY="26.0" text="Coureses Delails">
                            <font>
                               <Font name="System Bold Italic" size="48.0" />
                            </font>
                         </Label>
-                        <Label layoutX="291.0" layoutY="186.0" text="Course code :" />
-                        <Label fx:id="course_code" layoutX="293.0" layoutY="241.0" text="Course nane :" />
-                        <Label layoutX="292.0" layoutY="286.0" text="Course cradit :" />
-                        <Label layoutX="294.0" layoutY="340.0" text="Course hour :" />
-                        <Label layoutX="293.0" layoutY="392.0" text="Course type :" />
-                        <Label fx:id="courses_detalse_course_code" layoutX="431.0" layoutY="179.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
-                        <Label fx:id="course_name" layoutX="418.0" layoutY="238.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
-                        <Label fx:id="course_cradit" layoutX="418.0" layoutY="283.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
-                        <Label fx:id="course_hours" layoutX="405.0" layoutY="337.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
-                        <Label fx:id="course_type" layoutX="405.0" layoutY="389.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
-                        <Button layoutX="1026.0" layoutY="466.0" mnemonicParsing="false" onAction="#back_course" prefHeight="43.0" prefWidth="95.0" text="Back" />
+                        <Label layoutX="123.0" layoutY="182.0" text="Course code :" />
+                        <Label fx:id="course_code" layoutX="123.0" layoutY="253.0" text="Course nane :" />
+                        <Label layoutX="123.0" layoutY="319.0" text="Course cradit :" />
+                        <Label layoutX="125.0" layoutY="380.0" text="Course hour :" />
+                        <Label layoutX="124.0" layoutY="447.0" text="Course type :" />
+                        <Label fx:id="courses_detalse_course_code" layoutX="260.0" layoutY="179.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
+                        <Label fx:id="course_name" layoutX="260.0" layoutY="250.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
+                        <Label fx:id="course_cradit" layoutX="260.0" layoutY="316.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
+                        <Label fx:id="course_hours" layoutX="260.0" layoutY="377.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
+                        <Label fx:id="course_type" layoutX="260.0" layoutY="444.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
+                        <Button layoutX="412.0" layoutY="465.0" mnemonicParsing="false" onAction="#back_course" prefHeight="43.0" prefWidth="95.0" text="Back" />
+                        <AnchorPane fx:id="course_metirials" layoutX="575.0" layoutY="105.0" prefHeight="388.0" prefWidth="554.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="grade_abd_gpa_panal" layoutY="-2.0" prefHeight="541.0" prefWidth="1200.0" style="-fx-background-color: blue;" visible="false">
@@ -289,7 +290,7 @@
                               <Font size="43.0" />
                            </font>
                         </Label>
-                        <AnchorPane fx:id="aad_new_medical" layoutX="109.0" layoutY="128.0" prefHeight="381.0" prefWidth="767.0" style="-fx-background-color: pink;">
+                        <AnchorPane fx:id="aad_new_medical" layoutX="109.0" layoutY="128.0" prefHeight="381.0" prefWidth="767.0" style="-fx-background-color: pink;" visible="false">
                            <children>
                               <Label layoutX="306.0" layoutY="41.0" prefHeight="20.0" prefWidth="156.0" text="ADD NEW MEDICALE">
                                  <font>
@@ -314,7 +315,7 @@
                         </AnchorPane>
                         <AnchorPane fx:id="viwe_attendence" layoutX="108.0" layoutY="126.0" prefHeight="385.0" prefWidth="769.0" style="-fx-background-color: orange;" visible="false">
                            <children>
-                              <TableView layoutX="84.0" layoutY="77.0" prefHeight="269.0" prefWidth="567.0">
+                              <TableView fx:id="attendance_new" layoutX="84.0" layoutY="77.0" prefHeight="269.0" prefWidth="567.0">
                                 <columns>
                                   <TableColumn fx:id="attendance_Course_code" prefWidth="205.3333282470703" text="Course code" />
                                   <TableColumn fx:id="attendance_Date" prefWidth="199.99996948242188" text="Date" />
@@ -326,27 +327,28 @@
                         </AnchorPane>
                         <AnchorPane fx:id="attendence" layoutX="118.0" layoutY="134.0" prefHeight="376.0" prefWidth="925.0" style="-fx-background-color: yellow;" visible="false">
                            <children>
-                              <TableView layoutX="92.0" layoutY="67.0" prefHeight="298.0" prefWidth="583.0">
+                              <TableView fx:id="course_attendance" layoutX="92.0" layoutY="67.0" prefHeight="298.0" prefWidth="583.0">
                                 <columns>
                                   <TableColumn fx:id="att_course_Course" prefWidth="387.33335876464844" text="Course" />
-                                  <TableColumn fx:id="att_course_view" prefWidth="194.66668701171875" text="Viwe" />
+                                  <TableColumn fx:id="att_course_view" prefWidth="194.66668701171875" text="Course_code" />
                                 </columns>
                               </TableView>
                               <Button layoutX="732.0" layoutY="226.0" mnemonicParsing="false" onAction="#Go_Medical" prefHeight="45.0" prefWidth="164.0" text="Medical" />
                               <Button layoutX="735.0" layoutY="315.0" mnemonicParsing="false" onAction="#back" prefHeight="37.0" prefWidth="160.0" text="back" />
-                              <Button layoutX="587.0" layoutY="126.0" mnemonicParsing="false" onAction="#view" prefHeight="25.0" prefWidth="61.0" text="View" />
+                              <Button layoutX="737.0" layoutY="162.0" mnemonicParsing="false" onAction="#view" prefHeight="25.0" prefWidth="143.0" text="View Attendance" />
+                              <Label layoutX="756.0" layoutY="75.0" text="Course code :" />
+                              <TextField fx:id="seach" layoutX="734.0" layoutY="112.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="Medical_details" layoutX="111.0" layoutY="127.0" prefHeight="384.0" prefWidth="765.0" style="-fx-background-color: green;" visible="false">
                            <children>
-                              <TableView layoutX="44.0" layoutY="79.0" prefHeight="239.0" prefWidth="685.0">
+                              <TableView fx:id="medical_details_table" layoutX="65.0" layoutY="80.0" prefHeight="239.0" prefWidth="685.0">
                                 <columns>
-                                  <TableColumn fx:id="medical_Desccription" prefWidth="105.33331298828125" text="Desccription" />
-                                  <TableColumn fx:id="medical_Start_Date" prefWidth="96.66668701171875" text="Start Date" />
-                                    <TableColumn fx:id="medical_End_Date" prefWidth="112.66665649414062" text="End Date" />
-                                    <TableColumn fx:id="medical_Course_Code" prefWidth="124.0" text="Course Code" />
-                                    <TableColumn fx:id="medical_Student_Id" prefWidth="115.33331298828125" text="Student Id" />
-                                    <TableColumn fx:id="medical_Report_Path" prefWidth="134.0" text="Report Path" />
+                                    <TableColumn fx:id="medical_Course_Code" prefWidth="154.0" text="Course Code" />
+                                    <TableColumn fx:id="medical_Student_Id" prefWidth="109.99993896484375" text="Student Id" />
+                                  <TableColumn fx:id="medical_Start_Date" prefWidth="131.33334350585938" text="Start Date" />
+                                    <TableColumn fx:id="medical_End" prefWidth="144.0" text="End Date" />
+                                  <TableColumn fx:id="medical_Desccription" prefWidth="142.6666259765625" text="Desccription" />
                                 </columns>
                               </TableView>
                               <Label layoutX="394.0" layoutY="36.0" text="Medicale Details">
@@ -368,12 +370,11 @@
                            </font>
                         </Label>
                         <Button layoutX="1026.0" layoutY="457.0" mnemonicParsing="false" onAction="#back" prefHeight="49.0" prefWidth="128.0" text="back" />
-                        <TableView layoutX="249.0" layoutY="169.0" prefHeight="327.0" prefWidth="669.0">
+                        <TableView fx:id="Notice_table" layoutX="249.0" layoutY="169.0" prefHeight="327.0" prefWidth="669.0">
                           <columns>
-                            <TableColumn fx:id="N_Descreption" prefWidth="177.33334350585938" text="Descreption" />
-                            <TableColumn fx:id="N_Date" prefWidth="144.6666259765625" text="Date" />
-                              <TableColumn fx:id="N_Titale" prefWidth="160.66668701171875" text="Titale" />
-                              <TableColumn fx:id="N_Notice_Parth" prefWidth="183.33331298828125" text="Notice Parth" />
+                            <TableColumn fx:id="N_Date" prefWidth="168.66671752929688" text="Date" />
+                              <TableColumn fx:id="N_Titale" prefWidth="132.0" text="Titale" />
+                            <TableColumn fx:id="N_Descreption" prefWidth="365.33331298828125" text="Descreption" />
                           </columns>
                         </TableView>
                      </children>
