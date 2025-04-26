@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.input.MouseEvent;
@@ -201,6 +202,20 @@ public class Lecture implements Initializable {
 
     }
 
+    @FXML
+
+    void showSecurity(){
+        Connection con = Config.getConfig();
+        String id = "LEC001";
+        String password ="pass1";
+        user_name_textfeild.setText(id);
+        password_text_feild.setText(password);
+        user_name_textfeild.setEditable(false);
+        password_text_feild.setEditable(false);
+
+
+    }
+
 
 
 
@@ -220,6 +235,100 @@ public class Lecture implements Initializable {
 
         }
     }
+
+
+    private File selectedFile;
+
+    @FXML
+    void edit_profile_btn_click(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
+
+        selectedFile = fileChooser.showOpenDialog(null);
+        Connection con = Config.getConfig();
+        if (selectedFile != null) {
+            try {
+                File uploadDir = new File("upload");
+                if (!uploadDir.exists()) uploadDir.mkdir();
+
+                File destFile = new File(uploadDir, selectedFile.getName());
+                Files.copy(selectedFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Copied to: " + destFile);
+
+                change_photo_icon.setImage(new Image(destFile.toURI().toString()));
+
+
+                String userId = "LEC001"; // your target user
+
+                // check if user already has photo
+                String checkSql = "SELECT user_img FROM user WHERE userId = ?";
+                PreparedStatement checkPs = con.prepareStatement(checkSql);
+                checkPs.setString(1, userId);
+                ResultSet rs = checkPs.executeQuery();
+
+                if (rs.next()) {
+                    // update photo
+                    String updateSql = "UPDATE user SET user_img = ? WHERE userId = ?";
+                    PreparedStatement updatePs = con.prepareStatement(updateSql);
+                    updatePs.setString(1, String.valueOf(destFile));
+                    updatePs.setString(2, userId);
+                    updatePs.executeUpdate();
+                    updatePs.close();
+                } else {
+                    // insert user + photo (only if needed)
+                    String insertSql = "INSERT INTO user (userId, user_img) VALUES (?, ?)";
+                    PreparedStatement insertPs = con.prepareStatement(insertSql);
+                    insertPs.setString(1, userId);
+                    insertPs.setString(2, String.valueOf(destFile));
+                    insertPs.executeUpdate();
+                    insertPs.close();
+                }
+
+                rs.close();
+                checkPs.close();
+
+            } catch (Exception e) {
+                System.out.println("Error handling profile photo: " + e.getMessage());
+            }
+        }
+    }
+
+
+    public void loadUserImage(String userId) {
+        try {
+            Connection con = Config.getConfig();
+            String sql = "SELECT user_img FROM user WHERE userId = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, userId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String user_img = rs.getString("user_img");
+                if (user_img != null && !user_img.isEmpty()) {
+                    File imageFile = new File(user_img);
+                    if (imageFile.exists()) {
+                        Image img = new Image(imageFile.toURI().toString());
+                        change_photo_icon.setImage(img);
+                    } else {
+                        System.out.println("Image file not found.");
+                    }
+                } else {
+                    System.out.println("No image path in database.");
+                }
+            } else {
+                System.out.println("No user found with ID: " + userId);
+            }
+
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println("Error loading user image: " + e.getMessage());
+        }
+    }
+
 
 
 
@@ -604,6 +713,160 @@ public class Lecture implements Initializable {
     //=================================================
 
 
+
+    //exam
+
+    @FXML
+    private TableView<Exam_Mark_Information> Mark_table;
+
+
+    @FXML
+    private TableColumn<Exam_Mark_Information, String> COL_tgnumber;
+    @FXML
+    private TableColumn<Exam_Mark_Information, String> COL_Course_code;
+    @FXML
+    private TableColumn<Exam_Mark_Information, String> COL_Mark_id;
+    @FXML
+    private TableColumn<Exam_Mark_Information, Float> COL_AS1;
+    @FXML
+    private TableColumn<Exam_Mark_Information, Float> COL_AS2;
+    @FXML
+    private TableColumn<Exam_Mark_Information, Float> COL_Q1;
+
+    @FXML
+    private TableColumn<Exam_Mark_Information, Float> COL_Q2;
+
+    @FXML
+    private TableColumn<Exam_Mark_Information, Float> COL_Q3;
+    @FXML
+    private TableColumn<Exam_Mark_Information, Float> COL_Q4;
+    @FXML
+    private TableColumn<Exam_Mark_Information, Float> COL_mid;
+
+    @FXML
+    private TableColumn<Exam_Mark_Information, Float> COL_end_T;
+    @FXML
+    private TableColumn<Exam_Mark_Information, Float> COL_ENd_P;
+
+
+    @FXML
+    private TextField tg_number_textField;
+    @FXML
+    private TextField CourseCode_textField;
+    @FXML
+    private TextField Mark_id_textField;
+    @FXML
+    private TextField AS1_textField;
+
+    @FXML
+    private TextField AS2_textField;
+
+
+    @FXML
+    private TextField Q1_textField;
+
+    @FXML
+    private TextField Q2_textField;
+
+    @FXML
+    private TextField Q3_textField;
+    @FXML
+    private TextField Q4_textField;
+    @FXML
+    private TextField Mid_exam_textField;
+    @FXML
+    private TextField End_Theory_textField;
+    @FXML
+    private TextField End_Practical_textField;
+
+@FXML
+    public ObservableList<Exam_Mark_Information> getMark(){
+    Connection conn = Config.getConfig();
+
+            ObservableList<Exam_Mark_Information> markList = FXCollections.observableArrayList();
+
+
+        String lectureId = "LEC001"; // example: user login lecture id
+
+        String sql = "SELECT * FROM mark JOIN lecture_course ON mark.course_code = lecture_course.course_code WHERE lecture_course.lecture_id = '"+lectureId+"'";
+        Statement st;
+        ResultSet rs;
+
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+
+            Exam_Mark_Information markDetils;
+
+            while (rs.next()) {
+                Exam_Mark_Information markDetails = new Exam_Mark_Information(
+                        rs.getString("student_id"),
+                        rs.getString("course_code"),
+                        rs.getString("mark_id"),
+                        rs.getFloat("assesment_1") ,
+                        rs.getFloat("assesment_2") ,
+                        rs.getFloat("quiz_1") ,
+                        rs.getFloat("quiz_2") ,
+                        rs.getFloat("quiz_3") ,
+                        rs.getFloat("quiz_4") ,
+                        rs.getFloat("mid_term") ,
+                        rs.getFloat("end_theory") ,
+                        rs.getFloat("end_practical")
+                );
+                markList.add(markDetails);
+                System.out.println(rs.getFloat("assesment_1"));
+            }
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+            return markList;
+
+
+
+    }
+    @FXML
+    public void showMark() {
+        ObservableList<Exam_Mark_Information> markList = getMark();
+
+
+        COL_tgnumber.setCellValueFactory(new PropertyValueFactory<Exam_Mark_Information,String>("tg_number"));
+        COL_Course_code.setCellValueFactory(new PropertyValueFactory<Exam_Mark_Information,String>("course_code"));
+        COL_Mark_id.setCellValueFactory(new PropertyValueFactory<Exam_Mark_Information,String>("markId"));
+        COL_AS1.setCellValueFactory(new PropertyValueFactory<>("aS1"));
+        COL_AS2.setCellValueFactory(new PropertyValueFactory<>("aS2"));
+        COL_Q1.setCellValueFactory(new PropertyValueFactory<Exam_Mark_Information,Float>("q1"));
+        COL_Q2.setCellValueFactory(new PropertyValueFactory<Exam_Mark_Information,Float>("q2"));
+        COL_Q3.setCellValueFactory(new PropertyValueFactory<Exam_Mark_Information,Float>("q3"));
+        COL_Q4.setCellValueFactory(new PropertyValueFactory<Exam_Mark_Information,Float>("q4"));
+
+
+        COL_mid.setCellValueFactory(new PropertyValueFactory<Exam_Mark_Information,Float>("mid"));
+        COL_end_T.setCellValueFactory(new PropertyValueFactory<Exam_Mark_Information,Float>("end_T"));
+        COL_ENd_P.setCellValueFactory(new PropertyValueFactory<Exam_Mark_Information,Float>("end_P"));
+
+        Mark_table.setItems(markList);
+    }
+
+    void handle_mark(MouseEvent event) {
+
+
+    }
+
+
+
+
+
+
+
+
+
+    //=================================================
+
+
     @FXML
     private ImageView logout_photo;
 
@@ -968,7 +1231,7 @@ public class Lecture implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        showSecurity();
         getLecture();
         showLecDetails();
         setLecName();
@@ -976,6 +1239,8 @@ public class Lecture implements Initializable {
         showUndergraduate();
         ShowCourseDetils();
         showMatiriyaldetils();
+        loadUserImage("LEC001");
+        showMark();
 
     }
 

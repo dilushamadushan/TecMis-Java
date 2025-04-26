@@ -18,7 +18,7 @@
    <children>
       <BorderPane prefHeight="700.0" prefWidth="1200.0">
          <top>
-            <AnchorPane prefHeight="164.0" prefWidth="1200.0" style="-fx-background-color: #44a7f1;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="164.0" prefWidth="1418.0" style="-fx-background-color: #44a7f1;" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -149,7 +149,7 @@
                                     <Image url="@../media/lecture/no_profile.png" />
                                  </image>
                               </ImageView>
-                              <Button id="edit_profile_btn" fx:id="edit_profile_btn" layoutX="175.0" layoutY="203.0" mnemonicParsing="false" style="-fx-background-color: #1ab41a;" text="Edit Profile" textAlignment="CENTER">
+                              <Button id="edit_profile_btn" fx:id="edit_profile_btn" layoutX="175.0" layoutY="203.0" mnemonicParsing="false" onAction="#edit_profile_btn_click" style="-fx-background-color: #1ab41a;" text="Edit Profile" textAlignment="CENTER">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -213,7 +213,7 @@
                            </children></AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="courses_window" layoutX="10.0" prefHeight="601.0" prefWidth="1338.0">
+                  <AnchorPane fx:id="courses_window" layoutX="10.0" prefHeight="601.0" prefWidth="1338.0" visible="false">
                      <children>
                         <Button layoutX="1005.0" layoutY="398.0" mnemonicParsing="false" onAction="#backtoALLprofile" prefHeight="50.0" prefWidth="103.0" text="go back" />
                         <Label layoutX="1128.0" layoutY="50.0" text="course window">
@@ -299,7 +299,7 @@
                               <Font size="27.0" />
                            </font>
                         </Label>
-                        <TableView fx:id="table_matrials" layoutX="592.0" layoutY="14.0" onMouseClicked="#handleMatiriyal" prefHeight="261.0" prefWidth="484.0">
+                        <TableView fx:id="table_matrials" layoutX="592.0" layoutY="14.0" onMouseClicked="#handleMatiriyal" prefHeight="261.0" prefWidth="578.0">
                           <columns>
                             <TableColumn fx:id="col_course_code" prefWidth="75.0" text="code" />
                             <TableColumn fx:id="col_lecture_id" prefWidth="75.0" text="lecture ID" />
@@ -309,14 +309,123 @@
                         </TableView>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="exam_window" layoutX="10.0" layoutY="10.0" prefHeight="585.0" prefWidth="1250.0" visible="false">
+                  <AnchorPane fx:id="exam_window" layoutX="5.0" layoutY="10.0" prefHeight="585.0" prefWidth="1250.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#backtoALLprofile" prefHeight="50.0" prefWidth="103.0" text="go back" />
-                        <Label layoutX="544.0" layoutY="278.0" text="Ecam window">
+                        <Button layoutX="1046.0" layoutY="456.0" mnemonicParsing="false" onAction="#backtoALLprofile" prefHeight="50.0" prefWidth="103.0" text="go back" />
+                        <Label layoutX="484.0" layoutY="461.0" text="Ecam window">
                            <font>
                               <Font size="28.0" />
                            </font>
                         </Label>
+                        <TableView fx:id="Mark_table" layoutX="436.0" layoutY="5.0" prefHeight="427.0" prefWidth="741.0">
+                          <columns>
+                            <TableColumn fx:id="COL_tgnumber" prefWidth="67.0" text="TG nymber" />
+                            <TableColumn fx:id="COL_Course_code" prefWidth="92.0" text="Course Code" />
+                              <TableColumn fx:id="COL_Mark_id" prefWidth="49.0" text="Mark id" />
+                              <TableColumn fx:id="COL_AS1" prefWidth="53.0" text="AS1" />
+                              <TableColumn fx:id="COL_AS2" prefWidth="62.0" text="AS2" />
+                              <TableColumn fx:id="COL_Q1" prefWidth="51.0" text="Q1" />
+                              <TableColumn fx:id="COL_Q2" prefWidth="46.0" text="Q2" />
+                              <TableColumn fx:id="COL_Q3" prefWidth="52.0" text="Q3" />
+                              <TableColumn fx:id="COL_Q4" prefWidth="57.0" text="Q4" />
+                              <TableColumn fx:id="COL_mid" prefWidth="69.0" text="Mid" />
+                              <TableColumn fx:id="COL_end_T" prefWidth="74.0" text="END(T)" />
+                              <TableColumn fx:id="COL_ENd_P" prefWidth="66.0" text="END(P)" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="727.0" layoutY="464.0" mnemonicParsing="false" text="ADD" />
+                        <AnchorPane layoutX="8.0" layoutY="5.0" prefHeight="586.0" prefWidth="409.0">
+                           <children>
+                              <VBox layoutX="14.0" prefHeight="575.0" prefWidth="142.0" spacing="50.0">
+                                 <children>
+                                    <Label prefHeight="48.0" prefWidth="152.0" text="TG number :">
+                                       <font>
+                                          <Font name="System Bold" size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="19.0" prefWidth="128.0" text="Course Code :">
+                                       <font>
+                                          <Font name="System Bold" size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="19.0" prefWidth="96.0" text="Mark ID :">
+                                       <font>
+                                          <Font name="System Bold" size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="19.0" prefWidth="121.0" text="Assesment :">
+                                       <font>
+                                          <Font name="System Bold" size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="19.0" prefWidth="100.0" text="Quez :">
+                                       <font>
+                                          <Font name="System Bold" size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="28.0" prefWidth="118.0" text="Mid Mark :">
+                                       <font>
+                                          <Font name="System Bold" size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="28.0" prefWidth="130.0" text="END theory :">
+                                       <font>
+                                          <Font name="System Bold" size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="28.0" prefWidth="143.0" text="END Practical :">
+                                       <font>
+                                          <Font name="System Bold" size="19.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <TextField fx:id="tg_number_textField" layoutX="162.0" layoutY="8.0" />
+                              <TextField fx:id="CourseCode_textField" layoutX="164.0" layoutY="80.0" />
+                              <TextField fx:id="Mark_id_textField" layoutX="162.0" layoutY="156.0" />
+                              <TextField fx:id="AS1_textField" layoutX="179.0" layoutY="240.0" prefHeight="25.0" prefWidth="35.0" />
+                              <Label layoutX="157.0" layoutY="235.0" prefHeight="34.0" prefWidth="12.0" text="1">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="AS2_textField" layoutX="250.0" layoutY="240.0" prefHeight="25.0" prefWidth="43.0" />
+                              <Label layoutX="227.0" layoutY="235.0" prefHeight="34.0" prefWidth="7.0" text="2">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="Q1_textField" layoutX="180.0" layoutY="320.0" prefHeight="25.0" prefWidth="31.0" />
+                              <Label layoutX="156.0" layoutY="315.0" prefHeight="34.0" prefWidth="13.0" text="1">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="Q2_textField" layoutX="249.0" layoutY="320.0" prefHeight="25.0" prefWidth="35.0" />
+                              <Label layoutX="225.0" layoutY="316.0" prefHeight="34.0" prefWidth="13.0" text="2">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="Q3_textField" layoutX="318.0" layoutY="320.0" prefHeight="25.0" prefWidth="30.0" />
+                              <Label layoutX="301.0" layoutY="317.0" prefHeight="34.0" prefWidth="17.0" text="3">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="Q4_textField" layoutX="375.0" layoutY="320.0" prefHeight="25.0" prefWidth="32.0" />
+                              <Label layoutX="358.0" layoutY="317.0" prefHeight="34.0" prefWidth="9.0" text="4">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="End_Theory_textField" layoutX="153.0" layoutY="475.0" prefHeight="25.0" prefWidth="103.0" />
+                              <TextField fx:id="Mid_exam_textField" layoutX="159.0" layoutY="394.0" prefHeight="25.0" prefWidth="105.0" />
+                              <TextField fx:id="End_Practical_textField" layoutX="151.0" layoutY="547.0" prefHeight="25.0" prefWidth="107.0" />
+                           </children>
+                        </AnchorPane>
+                        <Button layoutX="800.0" layoutY="464.0" mnemonicParsing="false" text="Delete" />
+                        <Button layoutX="880.0" layoutY="464.0" mnemonicParsing="false" text="Update" />
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="undergraduate_window" layoutX="-5.0" layoutY="-2.0" prefHeight="599.0" prefWidth="1338.0" visible="false">
