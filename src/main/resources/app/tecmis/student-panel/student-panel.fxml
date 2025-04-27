@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -28,24 +29,29 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="129.0" fitWidth="101.0" layoutX="1066.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="64.0" fitWidth="60.0" layoutX="1103.0" layoutY="48.0" onMouseClicked="#log_out" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../media/student/logout.png" />
                      </image>
                   </ImageView>
+                  <Label layoutX="1110.0" layoutY="117.0" text="Log Out">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </top>
          <left>
             <AnchorPane fx:id="newprofile" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="profile_panal" layoutX="12.0" layoutY="-2.0" prefHeight="539.0" prefWidth="1188.0" style="-fx-background-color: red;">
+                  <AnchorPane fx:id="profile_panal" layoutX="12.0" layoutY="-2.0" prefHeight="539.0" prefWidth="1188.0" visible="false">
                      <children>
-                        <BorderPane layoutY="-2.0" prefHeight="541.0" prefWidth="1200.0">
+                        <BorderPane layoutY="-2.0" prefHeight="541.0" prefWidth="1200.0" style="-fx-background-image: bc.png;">
                            <left>
-                              <AnchorPane fx:id="profile_image_panal" prefHeight="516.0" prefWidth="332.0" visible="false" BorderPane.alignment="CENTER">
+                              <AnchorPane fx:id="profile_image_panal" prefHeight="516.0" prefWidth="332.0" style="-fx-background-color: pink;" visible="false" BorderPane.alignment="CENTER">
                                  <children>
-                                    <ImageView blendMode="DARKEN" fitHeight="195.0" fitWidth="203.0" layoutX="66.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="profile_image" blendMode="DARKEN" fitHeight="195.0" fitWidth="203.0" layoutX="66.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../media/student/Profile.png" />
                                        </image>
@@ -55,17 +61,23 @@
                                     </ImageView>
                                     <Label fx:id="profile_name" layoutX="53.0" layoutY="273.0" prefHeight="59.0" prefWidth="250.0" text="k.m.m.s.chathuranga">
                                        <font>
-                                          <Font size="24.0" />
+                                          <Font name="System Bold Italic" size="24.0" />
                                        </font>
                                     </Label>
-                                    <Button layoutX="63.0" layoutY="399.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="175.0" text="Update image" />
+                                    <Button layoutX="63.0" layoutY="399.0" mnemonicParsing="false" onAction="#edit_profile_btn_click" prefHeight="31.0" prefWidth="175.0" style="-fx-background-color: #1ab41a;" text="Update image">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font></Button>
                                  </children>
                               </AnchorPane>
                            </left>
                            <center>
-                              <AnchorPane fx:id="edit_profile_panals" prefHeight="516.0" prefWidth="868.0" style="-fx-background-color: yellow;" visible="false" BorderPane.alignment="CENTER">
+                              <AnchorPane fx:id="edit_profile_panals" prefHeight="516.0" prefWidth="868.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Button layoutX="751.0" layoutY="482.0" mnemonicParsing="false" onAction="#back_p" prefHeight="38.0" prefWidth="81.0" text="Go back" />
+                                    <Button layoutX="751.0" layoutY="482.0" mnemonicParsing="false" onAction="#back_p" prefHeight="38.0" prefWidth="81.0" style="-fx-background-color: #f8b840;" text="Back">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font></Button>
                                     <Label layoutX="141.0" layoutY="117.0" text="First Name :">
                                        <font>
                                           <Font name="System Bold Italic" size="18.0" />
@@ -84,15 +96,18 @@
                                     <TextField fx:id="student_first_name" layoutX="297.0" layoutY="118.0" prefHeight="25.0" prefWidth="255.0" />
                                     <TextField fx:id="student_last_name" layoutX="297.0" layoutY="210.0" prefHeight="25.0" prefWidth="245.0" />
                                     <TextField fx:id="student_email" layoutX="297.0" layoutY="303.0" prefHeight="25.0" prefWidth="239.0" />
-                                    <Button layoutX="353.0" layoutY="461.0" mnemonicParsing="false" onAction="#studentUpdate" prefHeight="40.0" prefWidth="89.0" text="Update" />
+                                    <Button layoutX="353.0" layoutY="461.0" mnemonicParsing="false" onAction="#studentUpdate" prefHeight="40.0" prefWidth="89.0" style="-fx-background-color: #1ab41a;" text="Update">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font></Button>
                                     <Button layoutX="504.0" layoutY="461.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="90.0" text="Clear" />
                                  </children>
                               </AnchorPane>
                            </center>
                         </BorderPane>
-                        <AnchorPane fx:id="display_profile_panal" layoutX="1.0" prefHeight="538.0" prefWidth="1200.0" style="-fx-background-color: yellow;" visible="false">
+                        <AnchorPane fx:id="display_profile_panal" layoutX="1.0" prefHeight="538.0" prefWidth="1200.0" visible="false">
                            <children>
-                              <ImageView fitHeight="173.0" fitWidth="200.0" layoutX="117.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="myprofile" fitHeight="173.0" fitWidth="200.0" layoutX="117.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../media/student/Profile.png" />
                                  </image>
@@ -127,19 +142,43 @@
                                     <Font name="System Bold Italic" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="fn" layoutX="293.0" layoutY="321.0" prefHeight="17.0" prefWidth="176.0" text="Label" />
-                              <Label fx:id="ln" layoutX="293.0" layoutY="413.0" prefHeight="17.0" prefWidth="149.0" text="Label" />
-                              <Label fx:id="nc" layoutX="742.0" layoutY="140.0" prefHeight="17.0" prefWidth="170.0" text="Label" />
-                              <Label fx:id="bod" layoutX="756.0" layoutY="246.0" prefHeight="17.0" prefWidth="169.0" text="Label" />
-                              <Label fx:id="em" layoutX="770.0" layoutY="435.0" prefHeight="17.0" prefWidth="99.0" text="Label" />
-                              <Label fx:id="ad" layoutX="756.0" layoutY="348.0" prefHeight="17.0" prefWidth="146.0" text="Label" />
-                              <Button layoutX="448.0" layoutY="489.0" mnemonicParsing="false" onAction="#Editprofile" prefHeight="41.0" prefWidth="207.0" text="Edit Profile" />
-                              <Button layoutX="1004.0" layoutY="482.0" mnemonicParsing="false" onAction="#back" prefHeight="32.0" prefWidth="87.0" text="Go back" />
+                              <Label fx:id="fn" layoutX="286.0" layoutY="321.0" prefHeight="17.0" prefWidth="176.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label fx:id="ln" layoutX="286.0" layoutY="413.0" prefHeight="17.0" prefWidth="149.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label fx:id="nc" layoutX="735.0" layoutY="131.0" prefHeight="17.0" prefWidth="170.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label fx:id="bod" layoutX="735.0" layoutY="226.0" prefHeight="17.0" prefWidth="169.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label fx:id="em" layoutX="735.0" layoutY="413.0" prefHeight="17.0" prefWidth="99.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label fx:id="ad" layoutX="735.0" layoutY="321.0" prefHeight="17.0" prefWidth="146.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Button layoutX="448.0" layoutY="489.0" mnemonicParsing="false" onAction="#Editprofile" prefHeight="41.0" prefWidth="207.0" style="-fx-background-color: #ef3c3c;" text="Edit Profile">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Button>
+                              <Button layoutX="1004.0" layoutY="482.0" mnemonicParsing="false" onAction="#back" prefHeight="32.0" prefWidth="87.0" style="-fx-background-color: #f8b840;" text=" Back">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Button>
                            </children>
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="home" prefHeight="538.0" prefWidth="1200.0" stylesheets="@../style_sheet/student.css" visible="false">
+                  <AnchorPane fx:id="home" prefHeight="538.0" prefWidth="1200.0" stylesheets="@../style_sheet/student.css">
                      <children>
                         <ImageView fx:id="profile" fitHeight="150.0" fitWidth="200.0" layoutX="154.0" layoutY="53.0" onMouseClicked="#gowindow" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -180,114 +219,202 @@
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="courses_panal" layoutY="14.0" onMouseClicked="#gocourse_delails" prefHeight="536.0" prefWidth="1200.0" style="-fx-background-color: yellow;" visible="false">
+                  <AnchorPane fx:id="courses_panal" layoutY="14.0" onMouseClicked="#gocourse_delails" prefHeight="536.0" prefWidth="1200.0" visible="false">
                      <children>
-                        <Label layoutX="410.0" layoutY="31.0" prefHeight="76.0" prefWidth="397.0" text="Your Courses">
+                        <Label layoutX="410.0" layoutY="31.0" prefHeight="89.0" prefWidth="487.0" text="YOUR COURSES">
                            <font>
-                              <Font size="61.0" />
+                              <Font name="System Bold Italic" size="61.0" />
                            </font>
                         </Label>
-                        <Button layoutX="1020.0" layoutY="461.0" mnemonicParsing="false" onAction="#back" prefHeight="52.0" prefWidth="123.0" text="back" />
-                        <AnchorPane fx:id="oopp" layoutX="459.0" layoutY="355.0" prefHeight="158.0" prefWidth="233.0" style="-fx-background-color: red;">
+                        <Button layoutX="1020.0" layoutY="472.0" mnemonicParsing="false" onAction="#back" prefHeight="41.0" prefWidth="122.0" style="-fx-background-color: #f8b840;" text="Back">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
+                        <AnchorPane fx:id="oopp" layoutX="459.0" layoutY="355.0" prefHeight="158.0" prefWidth="233.0">
                            <children>
                               <ImageView fx:id="image_oopp" fitHeight="125.0" fitWidth="238.0" onMouseClicked="#gocourse_delails">
                                  <image>
                                     <Image url="@../media/student/Object_Oriented_Prog_2.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="9.0" layoutY="129.0" prefHeight="29.0" prefWidth="235.0" text="Label" />
+                              <Label layoutX="9.0" layoutY="129.0" prefHeight="29.0" prefWidth="235.0" text="Object Oriented Programming">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="data" layoutX="72.0" layoutY="144.0" prefHeight="157.0" prefWidth="233.0" style="-fx-background-color: red;">
+                        <AnchorPane fx:id="data" layoutX="72.0" layoutY="144.0" prefHeight="157.0" prefWidth="233.0">
                            <children>
                               <ImageView fx:id="image_d" fitHeight="130.0" fitWidth="237.0" onMouseClicked="#gocourse_delails">
                                  <image>
                                     <Image url="@../media/student/Data_Structures_And.jpg" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="1.0" layoutY="130.0" prefHeight="29.0" prefWidth="235.0" text="Label" />
+                              <Label layoutX="35.0" layoutY="130.0" prefHeight="29.0" prefWidth="201.0" text="Dat Structhures">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="e_courmmerse" layoutX="449.0" layoutY="144.0" prefHeight="156.0" prefWidth="233.0" style="-fx-background-color: red;">
+                        <AnchorPane fx:id="e_courmmerse" layoutX="449.0" layoutY="144.0" prefHeight="156.0" prefWidth="233.0">
                            <children>
                               <ImageView fx:id="image_e" fitHeight="125.0" fitWidth="234.0" layoutY="1.0" onMouseClicked="#gocourse_delails">
                                  <image>
                                     <Image url="@../media/student/E-Commerce.jpeg" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="-1.0" layoutY="126.0" prefHeight="29.0" prefWidth="235.0" text="Label" />
+                              <Label layoutX="45.0" layoutY="127.0" prefHeight="29.0" prefWidth="187.0" text="E-Commerce">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="oops" layoutX="72.0" layoutY="355.0" prefHeight="157.0" prefWidth="233.0" style="-fx-background-color: red;">
+                        <AnchorPane fx:id="oops" layoutX="72.0" layoutY="355.0" prefHeight="157.0" prefWidth="233.0">
                            <children>
                               <ImageView fx:id="image_oop" fitHeight="130.0" fitWidth="239.0" layoutY="-2.0" onMouseClicked="#gocourse_delails">
                                  <image>
                                     <Image url="@../media/student/Object_Oriented_Prog.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutY="130.0" prefHeight="29.0" prefWidth="235.0" text="Label" />
+                              <Label layoutY="130.0" prefHeight="29.0" prefWidth="235.0" text="Object Oriented Programming">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="ooa" layoutX="807.0" layoutY="144.0" prefHeight="157.0" prefWidth="234.0" style="-fx-background-color: red;">
+                        <AnchorPane fx:id="ooa" layoutX="807.0" layoutY="144.0" prefHeight="157.0" prefWidth="234.0">
                            <children>
                               <ImageView fx:id="image_ooa" fitHeight="130.0" fitWidth="234.0" layoutY="1.0" onMouseClicked="#gocourse_delails">
                                  <image>
                                     <Image url="@../media/student/Object_Oriented_Anal.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="7.0" layoutY="134.0" prefHeight="29.0" prefWidth="235.0" text="Label" />
+                              <Label layoutX="7.0" layoutY="134.0" prefHeight="29.0" prefWidth="235.0" text="Object Oroented Analysis And Design">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Label>
                            </children>
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="cour_dll" prefHeight="509.0" prefWidth="1207.0">
+                  <AnchorPane fx:id="cour_dll" prefHeight="509.0" prefWidth="1207.0" visible="false">
                      <children>
-                        <Label layoutX="107.0" layoutY="26.0" text="Coureses Delails">
+                        <Label layoutX="391.0" layoutY="24.0" text="Coureses Delails">
                            <font>
                               <Font name="System Bold Italic" size="48.0" />
                            </font>
                         </Label>
-                        <Label layoutX="123.0" layoutY="182.0" text="Course code :" />
-                        <Label fx:id="course_code" layoutX="123.0" layoutY="253.0" text="Course nane :" />
-                        <Label layoutX="123.0" layoutY="319.0" text="Course cradit :" />
-                        <Label layoutX="125.0" layoutY="380.0" text="Course hour :" />
-                        <Label layoutX="124.0" layoutY="447.0" text="Course type :" />
-                        <Label fx:id="courses_detalse_course_code" layoutX="260.0" layoutY="179.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
-                        <Label fx:id="course_name" layoutX="260.0" layoutY="250.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
-                        <Label fx:id="course_cradit" layoutX="260.0" layoutY="316.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
-                        <Label fx:id="course_hours" layoutX="260.0" layoutY="377.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
-                        <Label fx:id="course_type" layoutX="260.0" layoutY="444.0" prefHeight="24.0" prefWidth="83.0" text="Label" />
-                        <Button layoutX="412.0" layoutY="465.0" mnemonicParsing="false" onAction="#back_course" prefHeight="43.0" prefWidth="95.0" text="Back" />
-                        <AnchorPane fx:id="course_metirials" layoutX="575.0" layoutY="105.0" prefHeight="388.0" prefWidth="554.0" />
+                        <Label layoutX="123.0" layoutY="182.0" text="Course code :">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font></Label>
+                        <Label fx:id="course_code" layoutX="123.0" layoutY="253.0" text="Course nane :">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font></Label>
+                        <Label layoutX="123.0" layoutY="319.0" text="Course cradit :">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font></Label>
+                        <Label layoutX="125.0" layoutY="380.0" text="Course hour :">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font></Label>
+                        <Label layoutX="124.0" layoutY="447.0" text="Course type :">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font></Label>
+                        <Label fx:id="courses_detalse_course_code" layoutX="260.0" layoutY="184.0" prefHeight="24.0" prefWidth="83.0" text="Label">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                        <Label fx:id="course_name" layoutX="260.0" layoutY="250.0" prefHeight="24.0" prefWidth="205.0" text="Label">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                        <Label fx:id="course_cradit" layoutX="260.0" layoutY="321.0" prefHeight="24.0" prefWidth="83.0" text="Label">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                        <Label fx:id="course_hours" layoutX="260.0" layoutY="382.0" prefHeight="24.0" prefWidth="83.0" text="Label">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                        <Label fx:id="course_type" layoutX="260.0" layoutY="449.0" prefHeight="24.0" prefWidth="83.0" text="Label">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                        <Button layoutX="412.0" layoutY="465.0" mnemonicParsing="false" onAction="#back_course" prefHeight="43.0" prefWidth="95.0" style="-fx-background-color: #f8b840;" text="Back">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font></Button>
+                        <AnchorPane fx:id="course_metirials" layoutX="575.0" layoutY="105.0" prefHeight="388.0" prefWidth="554.0" style="-fx-background-color: #44a7f1;">
+                           <children>
+                              <TableView fx:id="sesion_table" layoutX="56.0" layoutY="77.0" onMouseClicked="#handle_session" prefHeight="200.0" prefWidth="460.0">
+                                <columns>
+                                  <TableColumn fx:id="session" prefWidth="208.0" text="Session" />
+                                    <TableColumn fx:id="file_path_course" maxWidth="275.33331298828125" prefWidth="245.33331298828125" text="File_path" />
+                                </columns>
+                              </TableView>
+                              <AnchorPane layoutX="74.0" layoutY="294.0" prefHeight="69.0" prefWidth="444.0" visible="false">
+                                 <children>
+                                    <Button fx:id="download" layoutX="274.0" layoutY="22.0" mnemonicParsing="false" onAction="#downloadPdf" prefHeight="25.0" prefWidth="122.0" style="-fx-background-color: #1ab41a;" text="Download">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <TextField fx:id="sessionl" layoutX="145.0" layoutY="22.0" prefHeight="25.0" prefWidth="48.0" />
+                                    <Label layoutX="70.0" layoutY="26.0" prefHeight="17.0" prefWidth="59.0" text="Session">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
+                              <TextField fx:id="sessionl" layoutX="90.0" layoutY="316.0" />
+                              <Button layoutX="349.0" layoutY="316.0" mnemonicParsing="false" onAction="#downloadPdf" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #1ab41a;" text="Download">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="grade_abd_gpa_panal" layoutY="-2.0" prefHeight="541.0" prefWidth="1200.0" style="-fx-background-color: blue;" visible="false">
+                  <AnchorPane fx:id="grade_abd_gpa_panal" layoutY="-2.0" prefHeight="541.0" prefWidth="1200.0" visible="false">
                      <children>
-                        <Label layoutX="350.0" layoutY="43.0" text="Grade_abd_Gpa">
+                        <Label layoutX="508.0" layoutY="43.0" text="GRADE AND GPA">
                            <font>
-                              <Font size="40.0" />
+                              <Font name="System Bold Italic" size="40.0" />
                            </font>
                         </Label>
-                        <Button layoutX="956.0" layoutY="419.0" mnemonicParsing="false" onAction="#back" prefHeight="63.0" prefWidth="186.0" text="back" />
-                        <Label layoutX="336.0" layoutY="197.0" text=" Your Grade :">
+                        <Button layoutX="978.0" layoutY="439.0" mnemonicParsing="false" onAction="#back" prefHeight="47.0" prefWidth="134.0" style="-fx-background-color: #f8b840;" text="Back">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="964.0" layoutY="236.0" text="Your Gpa :">
                            <font>
                               <Font name="System Bold Italic" size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="336.0" layoutY="305.0" text="Your Gpa :">
+                        <Label fx:id="gpa" layoutX="993.0" layoutY="315.0" text="Label">
                            <font>
-                              <Font name="System Bold Italic" size="18.0" />
+                              <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label fx:id="grade" layoutX="515.0" layoutY="202.0" text="Label" />
-                        <Label fx:id="gpa" layoutX="522.0" layoutY="310.0" text="Label" />
+                        <TableView fx:id="grades" layoutX="253.0" layoutY="210.0" prefHeight="209.0" prefWidth="484.0">
+                          <columns>
+                            <TableColumn fx:id="g_course_code" prefWidth="354.00001525878906" text="Courses Code" />
+                            <TableColumn fx:id="g_greads" prefWidth="129.33334350585938" text="Grades" />
+                          </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="attendance_and_medical_panal" layoutX="15.0" layoutY="-2.0" prefHeight="537.0" prefWidth="1200.0" style="-fx-background-color: red;" visible="false">
+                  <AnchorPane fx:id="attendance_and_medical_panal" layoutX="15.0" layoutY="-2.0" prefHeight="537.0" prefWidth="1200.0" visible="false">
                      <children>
-                        <Label layoutX="482.0" layoutY="48.0" text="Attendance and Medical">
+                        <Label layoutX="417.0" layoutY="41.0" text="ATTENDANCE AND MEDICAL">
                            <font>
-                              <Font size="43.0" />
+                              <Font name="System Bold Italic" size="43.0" />
                            </font>
                         </Label>
                         <AnchorPane fx:id="aad_new_medical" layoutX="109.0" layoutY="128.0" prefHeight="381.0" prefWidth="767.0" style="-fx-background-color: pink;" visible="false">
@@ -313,7 +440,7 @@
                               <Button layoutX="611.0" layoutY="335.0" mnemonicParsing="false" onAction="#back_add_medical" text="Back" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="viwe_attendence" layoutX="108.0" layoutY="126.0" prefHeight="385.0" prefWidth="769.0" style="-fx-background-color: orange;" visible="false">
+                        <AnchorPane fx:id="viwe_attendence" layoutX="108.0" layoutY="126.0" prefHeight="385.0" prefWidth="934.0" style="-fx-background-color: #44a7f1;" visible="false">
                            <children>
                               <TableView fx:id="attendance_new" layoutX="84.0" layoutY="77.0" prefHeight="269.0" prefWidth="567.0">
                                 <columns>
@@ -322,10 +449,20 @@
                                     <TableColumn fx:id="attendance_Attendance_State" prefWidth="158.66668701171875" text="Attendance State" />
                                 </columns>
                               </TableView>
-                              <Button layoutX="606.0" layoutY="359.0" mnemonicParsing="false" onAction="#backto_attendance" text="Back" />
+                              <Button layoutX="744.0" layoutY="329.0" mnemonicParsing="false" onAction="#backto_attendance" prefHeight="33.0" prefWidth="89.0" style="-fx-background-color: #f8b840;" text="Back" />
+                              <Label layoutX="736.0" layoutY="108.0" prefHeight="20.0" prefWidth="159.0" text="Attendance Presentage">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="attendance_presentage" layoutX="775.0" layoutY="162.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="attendence" layoutX="118.0" layoutY="134.0" prefHeight="376.0" prefWidth="925.0" style="-fx-background-color: yellow;" visible="false">
+                        <AnchorPane fx:id="attendence" layoutX="118.0" layoutY="134.0" prefHeight="376.0" prefWidth="925.0" style="-fx-background-color: #44a7f1;" visible="false">
                            <children>
                               <TableView fx:id="course_attendance" layoutX="92.0" layoutY="67.0" prefHeight="298.0" prefWidth="583.0">
                                 <columns>
@@ -333,14 +470,23 @@
                                   <TableColumn fx:id="att_course_view" prefWidth="194.66668701171875" text="Course_code" />
                                 </columns>
                               </TableView>
-                              <Button layoutX="732.0" layoutY="226.0" mnemonicParsing="false" onAction="#Go_Medical" prefHeight="45.0" prefWidth="164.0" text="Medical" />
-                              <Button layoutX="735.0" layoutY="315.0" mnemonicParsing="false" onAction="#back" prefHeight="37.0" prefWidth="160.0" text="back" />
-                              <Button layoutX="737.0" layoutY="162.0" mnemonicParsing="false" onAction="#view" prefHeight="25.0" prefWidth="143.0" text="View Attendance" />
-                              <Label layoutX="756.0" layoutY="75.0" text="Course code :" />
+                              <Button layoutX="732.0" layoutY="226.0" mnemonicParsing="false" onAction="#Go_Medical" prefHeight="45.0" prefWidth="164.0" style="-fx-background-color: #ef3c3c;" text="Medical">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Button>
+                              <Button layoutX="735.0" layoutY="315.0" mnemonicParsing="false" onAction="#back" prefHeight="37.0" prefWidth="160.0" style="-fx-background-color: #f8b840;" text="Back" />
+                              <Button layoutX="737.0" layoutY="162.0" mnemonicParsing="false" onAction="#view" prefHeight="25.0" prefWidth="143.0" style="-fx-background-color: #1ab41a;" text="View Attendance">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Button>
+                              <Label layoutX="756.0" layoutY="75.0" text="Course code :">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font></Label>
                               <TextField fx:id="seach" layoutX="734.0" layoutY="112.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="Medical_details" layoutX="111.0" layoutY="127.0" prefHeight="384.0" prefWidth="765.0" style="-fx-background-color: green;" visible="false">
+                        <AnchorPane fx:id="Medical_details" layoutX="111.0" layoutY="127.0" prefHeight="384.0" prefWidth="765.0" style="-fx-background-color: #44a7f1;" visible="false">
                            <children>
                               <TableView fx:id="medical_details_table" layoutX="65.0" layoutY="80.0" prefHeight="239.0" prefWidth="685.0">
                                 <columns>
@@ -351,25 +497,31 @@
                                   <TableColumn fx:id="medical_Desccription" prefWidth="142.6666259765625" text="Desccription" />
                                 </columns>
                               </TableView>
-                              <Label layoutX="394.0" layoutY="36.0" text="Medicale Details">
+                              <Label layoutX="429.0" layoutY="29.0" text="Medicale Details">
                                  <font>
-                                    <Font name="System Bold Italic" size="14.0" />
+                                    <Font name="System Bold Italic" size="18.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="626.0" layoutY="335.0" mnemonicParsing="false" onAction="#aad_medical" text="ADD Medicale" />
-                              <Button layoutX="470.0" layoutY="335.0" mnemonicParsing="false" onAction="#back_attendance" text="Back" />
+                              <Button layoutX="626.0" layoutY="335.0" mnemonicParsing="false" onAction="#aad_medical" style="-fx-background-color: #1ab41a;" text="ADD Medicale">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Button>
+                              <Button layoutX="470.0" layoutY="335.0" mnemonicParsing="false" onAction="#back_attendance" prefHeight="27.0" prefWidth="59.0" style="-fx-background-color: #f8b840;" text="Back">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Button>
                            </children>
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="notice_panal" layoutY="-3.0" prefHeight="539.0" prefWidth="1200.0" style="-fx-background-color: red;" visible="false">
+                  <AnchorPane fx:id="notice_panal" layoutY="-3.0" prefHeight="539.0" prefWidth="1200.0" visible="false">
                      <children>
-                        <Label layoutX="508.0" layoutY="50.0" text="Notices">
+                        <Label layoutX="508.0" layoutY="50.0" text="NOTICES">
                            <font>
-                              <Font size="44.0" />
+                              <Font name="System Bold Italic" size="44.0" />
                            </font>
                         </Label>
-                        <Button layoutX="1026.0" layoutY="457.0" mnemonicParsing="false" onAction="#back" prefHeight="49.0" prefWidth="128.0" text="back" />
+                        <Button layoutX="1038.0" layoutY="463.0" mnemonicParsing="false" onAction="#back" prefHeight="43.0" prefWidth="116.0" style="-fx-background-color: #f8b840;" text="Back" />
                         <TableView fx:id="Notice_table" layoutX="249.0" layoutY="169.0" prefHeight="327.0" prefWidth="669.0">
                           <columns>
                             <TableColumn fx:id="N_Date" prefWidth="168.66671752929688" text="Date" />
@@ -379,14 +531,42 @@
                         </TableView>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="Time_table_panal" layoutX="12.0" layoutY="-4.0" prefHeight="543.0" prefWidth="1206.0" style="-fx-background-color: yellow;" visible="false">
+                  <AnchorPane fx:id="Time_table_panal" layoutX="12.0" layoutY="-4.0" prefHeight="543.0" prefWidth="1206.0" visible="false">
                      <children>
-                        <Label layoutX="431.0" layoutY="174.0" prefHeight="65.0" prefWidth="293.0" text="Time table">
+                        <Label layoutX="436.0" layoutY="38.0" prefHeight="65.0" prefWidth="293.0" text="TIME TABLE">
                            <font>
-                              <Font size="44.0" />
+                              <Font name="System Bold Italic" size="44.0" />
                            </font>
                         </Label>
-                        <Button layoutX="431.0" layoutY="280.0" mnemonicParsing="false" onAction="#back" prefHeight="51.0" prefWidth="131.0" text="back" />
+                        <Button layoutX="1057.0" layoutY="483.0" mnemonicParsing="false" onAction="#back" prefHeight="45.0" prefWidth="119.0" style="-fx-background-color: #f8b840;" text="Back">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="59.0" layoutY="162.0" text="Department">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="59.0" layoutY="272.0" text="Level">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="59.0" layoutY="370.0" text="Semester">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="196.0" layoutY="431.0" mnemonicParsing="false" onAction="#TimetableDetailsfind" style="-fx-background-color: #1ab41a;" text="View Time tabale">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <ImageView fx:id="timetableimage" fitHeight="367.0" fitWidth="698.0" layoutX="380.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" />
+                        <ComboBox fx:id="tdepartment" editable="true" layoutX="159.0" layoutY="159.0" prefWidth="150.0" />
+                        <ComboBox fx:id="tlevel" layoutX="159.0" layoutY="259.0" prefWidth="150.0" />
+                        <ComboBox fx:id="tsemester" layoutX="153.0" layoutY="367.0" prefWidth="150.0" />
                      </children>
                   </AnchorPane>
                </children>
