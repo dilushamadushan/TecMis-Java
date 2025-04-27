@@ -14,7 +14,7 @@ public class Medical {
 
     public Medical(String student_id, String medical_id,
                    String course_code, Date s_date, Date e_date,
-                   String description, String tech_officer_id) {
+                   String description, String tech_officer_id, String m_report_path) {
         this.student_id = student_id;
         this.medical_id = medical_id;
         this.course_code = course_code;
@@ -22,6 +22,7 @@ public class Medical {
         this.e_date = e_date;
         this.description = description;
         this.tech_officer_id = tech_officer_id;
+        this.m_report_path = m_report_path;
     }
 
     public String getStudent_id() {
