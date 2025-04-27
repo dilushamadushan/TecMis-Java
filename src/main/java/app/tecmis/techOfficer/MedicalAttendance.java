@@ -2,7 +2,7 @@ package app.tecmis.techOfficer;
 
 import java.util.Date;
 
-public class Medical {
+public class MedicalAttendance {
     private String student_id;
     private String medical_id;
     private String course_code;
@@ -12,7 +12,7 @@ public class Medical {
     private String tech_officer_id;
     private String m_report_path;
 
-    public Medical(String student_id, String medical_id,
+    public MedicalAttendance(String student_id, String medical_id,
                    String course_code, Date s_date, Date e_date,
                    String description, String tech_officer_id, String m_report_path) {
         this.student_id = student_id;

@@ -2,8 +2,9 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -25,11 +26,6 @@
          <children>
             <Pane style="-fx-background-color: #44a7f1;">
                <children>
-                  <ImageView id="profileImage" fitHeight="252.0" fitWidth="269.0" layoutX="40.0" pickOnBounds="true" preserveRatio="true" styleClass="title-label">
-                     <image>
-                        <Image url="@../media/techOfficer/profile.png" />
-                     </image>
-                  </ImageView>
                   <Pane layoutY="246.0" prefHeight="454.0" prefWidth="330.0">
                      <children>
                         <Button fx:id="details_btn" contentDisplay="CENTER" layoutY="14.0" mnemonicParsing="false" onAction="#switchPage" prefHeight="50.0" prefWidth="340.0" style="-fx-background-color: #f8b840;" text="Account Details">
@@ -52,18 +48,38 @@
                               <Font name="Book Antiqua Bold" size="12.0" />
                            </font>
                         </Button>
-                        <Button fx:id="logout" contentDisplay="CENTER" layoutY="383.0" mnemonicParsing="false" onAction="#logOutBtn" prefHeight="50.0" prefWidth="340.0" style="-fx-background-color: #f8b840;" text="Log Out">
+                        <Button fx:id="logout" contentDisplay="CENTER" layoutY="383.0" mnemonicParsing="false" onAction="#logout" prefHeight="50.0" prefWidth="340.0" style="-fx-background-color: #f8b840;" text="Log Out">
                            <font>
                               <Font name="Book Antiqua Bold" size="12.0" />
                            </font>
                         </Button>
-                        <Button fx:id="notice_btn1" contentDisplay="CENTER" layoutY="309.0" mnemonicParsing="false" onAction="#switchPage" prefHeight="50.0" prefWidth="340.0" style="-fx-background-color: #f8b840;" text="TimeTable">
+                        <Button fx:id="timetable_btn" contentDisplay="CENTER" layoutY="309.0" mnemonicParsing="false" onAction="#switchPage" prefHeight="50.0" prefWidth="340.0" style="-fx-background-color: #f8b840;" text="TimeTable">
                            <font>
                               <Font name="Book Antiqua Bold" size="12.0" />
                            </font>
                         </Button>
                      </children>
                   </Pane>
+                  <ImageView id="profileImage" fx:id="profile_img" fitHeight="170.0" fitWidth="230.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="title-label">
+                     <image>
+                        <Image url="@../media/techOfficer/profile.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="profile_img_edit" fitHeight="91.0" fitWidth="93.0" layoutX="101.0" layoutY="78.0" onMouseClicked="#edite_imgeBtn_profile" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../media/techOfficer/edit_image_pincel.png" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="30.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome !" wrappingWidth="142.93670272827148">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="profile_name" layoutX="30.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hashan thiwanka" wrappingWidth="250.0">
+                     <font>
+                        <Font name="Consolas" size="18.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
             <Pane fx:id="stage1" layoutX="327.0" prefHeight="700.0" prefWidth="874.0">
@@ -147,40 +163,56 @@
                <children>
                   <Pane fx:id="attendence_stage2" layoutX="-2.0" layoutY="297.0" prefHeight="405.0" prefWidth="874.0">
                      <children>
-                        <TableView layoutX="20.0" layoutY="13.0" prefHeight="373.0" prefWidth="842.0">
+                        <TableView fx:id="Attendence_table" layoutX="20.0" layoutY="13.0" onMouseClicked="#att_tableRowHandle" prefHeight="373.0" prefWidth="466.0">
                           <columns>
-                            <TableColumn prefWidth="60.800018310546875" text="Index Number" />
-                            <TableColumn prefWidth="84.79998779296875" text="Reg.No " />
-                              <TableColumn minWidth="0.0" prefWidth="94.39999389648438" text="Date" />
-                              <TableColumn prefWidth="191.20001220703125" text="Name" />
-                              <TableColumn prefWidth="127.2000732421875" text="Course Code" />
-                              <TableColumn prefWidth="125.60009765625" text="Session Type" />
-                              <TableColumn prefWidth="157.60003662109375" text="Status" />
+                              <TableColumn fx:id="_Attendence_Student_ID" prefWidth="84.0" text="Student ID" />
+                              <TableColumn fx:id="_Attendence_Course_code" prefWidth="81.59991455078125" text="Course Code" />
+                            <TableColumn fx:id="_Attendence_Date" minWidth="0.0" prefWidth="95.199951171875" text="Date" />
+                              <TableColumn fx:id="_Attendence_Session_type" minWidth="0.0" prefWidth="92.0" text="Session Type" />
+                              <TableColumn fx:id="_Attendence_Status" prefWidth="94.39996337890625" text="Status" />
                           </columns>
                         </TableView>
+                        <Text layoutX="604.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Approval Panel">
+                           <font>
+                              <Font name="Calibri Bold" size="22.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="635.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Medical report" />
+                        <TableView fx:id="medicalAttendanceTable" layoutX="494.0" layoutY="83.0" onMouseClicked="#medicalattendenceevent" prefHeight="228.0" prefWidth="372.0">
+                          <columns>
+                            <TableColumn fx:id="colMedicalId" prefWidth="64.0" text="Medical ID" />
+                            <TableColumn fx:id="colCourseCode" prefWidth="71.20001220703125" text="Course Code" />
+                              <TableColumn fx:id="colStudentId" prefWidth="70.4000244140625" text="Student ID" />
+                              <TableColumn fx:id="colSDate" prefWidth="72.0" text="Start Date" />
+                              <TableColumn fx:id="colEDate" prefWidth="73.5999755859375" text="End Date" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="confirmMedicalBtn" layoutX="617.0" layoutY="333.0" mnemonicParsing="false" onAction="#confirmMedical" prefHeight="36.0" prefWidth="126.0" text="Approval" />
                      </children>
                   </Pane>
-                  <Pane layoutX="-6.0" layoutY="-1.0" prefHeight="314.0" prefWidth="874.0">
+                  <Pane layoutX="-6.0" layoutY="-1.0" onMouseClicked="#att_tableRowHandle" prefHeight="314.0" prefWidth="874.0">
                      <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="291.0" layoutX="25.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" styleClass="fancy-rectangle" width="842.0" />
-                        <ImageView fitHeight="262.0" fitWidth="300.0" layoutX="604.0" layoutY="87.0">
+                        <ImageView fitHeight="262.0" fitWidth="300.0" layoutX="552.0" layoutY="23.0">
                            <image>
                               <Image url="@../media/techOfficer/Confirmed-attendance-rafiki.png" />
                            </image>
                         </ImageView>
-                        <Text layoutX="50.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID" />
-                        <TextField layoutX="78.0" layoutY="44.0" prefHeight="30.0" prefWidth="240.0" promptText="Student ID" />
-                        <Text layoutX="51.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
-                        <DatePicker layoutX="77.0" layoutY="122.0" prefHeight="30.0" prefWidth="240.0" />
-                        <Text layoutX="465.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course code" />
-                        <TextField layoutX="494.0" layoutY="45.0" prefHeight="30.0" prefWidth="240.0" promptText="Course code" />
-                        <Text layoutX="467.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Session type" />
-                        <ChoiceBox layoutX="494.0" layoutY="122.0" prefHeight="30.0" prefWidth="240.0" />
-                        <Text layoutX="51.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" />
-                        <ChoiceBox layoutX="78.0" layoutY="201.0" prefHeight="30.0" prefWidth="240.0" />
-                        <Button fx:id="submit_attendence_btn11" layoutX="197.0" layoutY="262.0" mnemonicParsing="false" onAction="#submitAttendenceBtn" prefHeight="29.0" prefWidth="115.0" text="Add" />
-                        <Button fx:id="submit_attendence_btn1" layoutX="350.0" layoutY="262.0" mnemonicParsing="false" onAction="#submitAttendenceBtn" prefHeight="29.0" prefWidth="115.0" text="Update" />
-                        <Button fx:id="submit_attendence_btn" layoutX="494.0" layoutY="262.0" mnemonicParsing="false" onAction="#submitAttendenceBtn" prefHeight="29.0" prefWidth="115.0" text="Delete" />
+                        <TextField fx:id="Attendence_stdID" layoutX="147.0" layoutY="31.0" prefHeight="30.0" prefWidth="240.0" promptText="Student ID" />
+                        <Text layoutX="50.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
+                        <DatePicker fx:id="Attendence_Date" layoutX="147.0" layoutY="80.0" prefHeight="30.0" prefWidth="240.0" />
+                        <Text layoutX="413.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course code" />
+                        <TextField fx:id="Attendence_Ccode" layoutX="501.0" layoutY="29.0" prefHeight="30.0" prefWidth="240.0" promptText="Course code" />
+                        <Text layoutX="50.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Session type" />
+                        <Text layoutX="50.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" />
+                        <Button fx:id="add_attendence_btn" layoutX="90.0" layoutY="260.0" mnemonicParsing="false" onAction="#AddAttendenceDetails" prefHeight="29.0" prefWidth="115.0" text="Add" />
+                        <Button fx:id="update_att_btn" layoutX="280.0" layoutY="260.0" mnemonicParsing="false" onAction="#updateAttendenceBtn" prefHeight="29.0" prefWidth="115.0" text="Update" />
+                        <Button fx:id="delete_attendence_btn" layoutX="460.0" layoutY="260.0" mnemonicParsing="false" onAction="#deleteAttendenceBtn" prefHeight="29.0" prefWidth="115.0" text="Delete" />
+                        <Text layoutX="50.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID" />
+                        <ComboBox fx:id="Attendence_Status" editable="true" layoutX="147.0" layoutY="131.0" prefHeight="30.0" prefWidth="240.0" promptText="Select Status" />
+                        <ComboBox fx:id="Attendence_Stype" editable="true" layoutX="147.0" layoutY="181.0" prefHeight="30.0" prefWidth="240.0" promptText="Select Session Type" />
+                        <Label fx:id="Attendence_ID" layoutX="215.0" layoutY="220.0" text="Label" visible="false" />
+                        <Button fx:id="clear_attendence_btn" layoutX="650.0" layoutY="260.0" mnemonicParsing="false" onAction="#clearAttendenceBtn" prefHeight="29.0" prefWidth="115.0" text="Clear" />
                      </children>
                   </Pane>
                </children>
@@ -205,6 +237,35 @@
                   <String fx:value="column-header" />
                   <String fx:value="table-row-cell" />
                </styleClass>
+            </Pane>
+            <Pane fx:id="stage5" layoutX="331.0" prefHeight="700.0" prefWidth="870.0" visible="false">
+               <children>
+                  <Pane layoutX="262.0" layoutY="14.0" prefHeight="243.0" prefWidth="347.0">
+                     <children>
+                        <Text layoutX="22.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <ComboBox fx:id="TimeTableDepartmentComboBoxBtn" editable="true" layoutX="155.0" layoutY="14.0" prefHeight="29.0" prefWidth="167.0" promptText="Select Department" />
+                        <ComboBox fx:id="TimeTableSemesterComboBoxBtn" editable="true" layoutX="155.0" layoutY="135.0" prefHeight="29.0" prefWidth="167.0" promptText="Select Semester" />
+                        <ComboBox fx:id="TimeTableLevelComboBoxBtn" editable="true" layoutX="155.0" layoutY="72.0" prefHeight="29.0" prefWidth="167.0" promptText="Select Level" />
+                        <Text layoutX="22.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="22.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Semester">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Button fx:id="findatt_btn" layoutX="108.0" layoutY="201.0" mnemonicParsing="false" onAction="#TimetableDetailsfind" prefHeight="18.0" prefWidth="132.0" text="View Time Table" />
+                     </children>
+                  </Pane>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="419.0" layoutX="31.0" layoutY="267.0" stroke="#dcdcdc" strokeType="OUTSIDE" strokeWidth="3.0" width="824.0" />
+                  <ImageView fx:id="imgView" fitHeight="384.0" fitWidth="735.0" layoutX="77.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
             </Pane>
          </children>
       </AnchorPane>
@@ -239,7 +300,7 @@
                               <Font name="Book Antiqua Bold" size="12.0" />
                            </font>
                         </Button>
-                        <Button fx:id="Medical_logout_btn" contentDisplay="CENTER" layoutY="309.0" mnemonicParsing="false" onAction="#logOutBtn" prefHeight="50.0" prefWidth="340.0" style="-fx-background-color: #f8b840;" text="Log Out">
+                        <Button fx:id="Medical_logout_btn" contentDisplay="CENTER" layoutY="309.0" mnemonicParsing="false" onAction="#logout" prefHeight="50.0" prefWidth="340.0" style="-fx-background-color: #f8b840;" text="Log Out">
                            <font>
                               <Font name="Book Antiqua Bold" size="12.0" />
                            </font>
