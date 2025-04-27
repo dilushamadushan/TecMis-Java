@@ -1,5 +1,6 @@
 package app.tecmis.lecture;
 
+import app.tecmis.App;
 import app.tecmis.LoginController;
 import app.tecmis.admin.TimeTableDetails;
 import app.tecmis.connection.Config;
@@ -8,7 +9,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,6 +39,8 @@ import java.sql.*;
 //notice window
 import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 //======================
@@ -48,7 +55,18 @@ public class Lecture implements Initializable {
 
     @FXML
     void logoutClick(MouseEvent event) {
-
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("login.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(root, 700,450));
+            stage.show();
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
+        }catch (Exception e){
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
 

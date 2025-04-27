@@ -1,11 +1,16 @@
 package app.tecmis.student;
 
+import app.tecmis.App;
 import app.tecmis.LoginController;
 import app.tecmis.connection.Config;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -27,6 +32,7 @@ import java.util.ResourceBundle;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class Student implements Initializable {
@@ -36,7 +42,18 @@ public class Student implements Initializable {
 
     @FXML
     void log_out(MouseEvent event) {
-
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("login.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(root, 700,450));
+            stage.show();
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
+        }catch (Exception e){
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
 

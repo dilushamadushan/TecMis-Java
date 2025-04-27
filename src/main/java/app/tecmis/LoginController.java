@@ -1,18 +1,26 @@
 package app.tecmis;
 
+import app.tecmis.admin.Admin;
 import app.tecmis.connection.Config;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.scene.image.Image;
 
+import java.awt.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,6 +31,10 @@ public class LoginController {
     private String _userName;
     private String _pass;
     private String user_type;
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     public static String uID,uPass,stuTg,lecTg,techOfficerTg;
 
@@ -47,95 +59,127 @@ public class LoginController {
         _userName = username.getText();
         _pass = password.getText();
 
+        if(_userName.equals("") || _pass.equals("")){
+            loginError.setText("Username or Password is Empty");
+        }
+
         Connection conn = Config.getConfig();
         LoginController loginController = new LoginController();
-//        loginController.studentWindow();
-      loginController.lectureWindow();
-//       loginController.techOfficerWindow();
-//       loginController.adminWindow();
 
         String userQuery = "SELECT * FROM user";
         Statement st = null;
         ResultSet rs = null;
 
-//        try{
-//            st = conn.createStatement();
-//            rs = st.executeQuery(userQuery);
-//
-//            while(rs.next()){
-//                user_type = rs.getString("user_type");
-//                uID = rs.getString("userId");
-//                uPass = rs.getString("password");
-//
-//                if(_userName.equals(uID) && _pass.equals(uPass) && user_type.equals("admin")){
-//                    loginController.adminWindow();
-//                }else if(_userName.equals(uID) && _pass.equals(uPass) && user_type.equals("lecture")){
-//                    lecTg = _userName;
-//                    loginController.lectureWindow();
-//                }else if(_userName.equals(uID) && _pass.equals(uPass) && user_type.equals("tech")){
-//                    techOfficerTg = _userName;
-//                    loginController.techOfficerWindow();
-//                }else if(_userName.equals(uID) && _pass.equals(uPass) && user_type.equals("student")){
-//                    stuTg = _userName;
-//                    loginController.studentWindow();
-//                }
-//            }
-//        } catch (Exception e) {
-//            System.out.println("Error : " + e.getMessage());
-//        }
-//        System.out.println("Login button pressed");
-    }
+        try{
+            st = conn.createStatement();
+            rs = st.executeQuery(userQuery);
 
-    public void adminWindow(){
-            FXMLLoader loaderAdmin = new FXMLLoader(getClass().getResource("admin-panel/admin-panel.fxml"));
-            Scene sceneAdmin = null;
-            try {
-                sceneAdmin = new Scene(loaderAdmin.load(),1200,700);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            while(rs.next()){
+                user_type = rs.getString("user_type");
+                uID = rs.getString("userId");
+                uPass = rs.getString("password");
+
+                if(_userName.equals(uID) && _pass.equals(uPass) && user_type.equals("admin")){
+                    alertMsg();
+                    loginAdminDashBord(event);
+                }else if(_userName.equals(uID) && _pass.equals(uPass) && user_type.equals("lecture")){
+                    lecTg = _userName;
+                    alertMsg();
+                    loginLectureDashBord(event);
+                }else if(_userName.equals(uID) && _pass.equals(uPass) && user_type.equals("tech") ){
+                    techOfficerTg = _userName;
+                    alertMsg();
+                    if(techOfficerTg.equals("TEC001")) {
+                        loginTechOfficerDashBordM(event);
+                    } else if(techOfficerTg.equals("TEC004")) {
+                        loginTechOfficerDashBordA(event);
+                    }else{
+                        loginTechOfficerDashBordA(event);
+                    }
+                }else if(_userName.equals(uID) && _pass.equals(uPass) && user_type.equals("student")){
+                    stuTg = _userName;
+                    alertMsg();
+                    loginStudentDashBord(event);
+                }
             }
-            Stage stageAdmin = new Stage();
-            stageAdmin.setScene(sceneAdmin);
-            stageAdmin.show();
+        } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
+        }
+        System.out.println("Login button pressed");
     }
 
-    public void studentWindow(){
-        FXMLLoader loaderStu = new FXMLLoader(getClass().getResource("student-panel/student-panel.fxml"));
-        Scene sceneStu = null;
-        try {
-            sceneStu = new Scene(loaderStu.load(),1200,700);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Stage stageStu = new Stage();
-        stageStu.setScene(sceneStu);
-        stageStu.show();
+    public void alertMsg(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Login Successful");
+        alert.setHeaderText("Welcome to the System!");
+        DialogPane dialogPane = alert.getDialogPane();
+        alert.showAndWait();
     }
 
-    public void techOfficerWindow(){
-        FXMLLoader loaderTO = new FXMLLoader(getClass().getResource("techOfficer-panel/techofficer_panel.fxml"));
-        Scene sceneTO = null;
-        try {
-            sceneTO = new Scene(loaderTO.load(),1200,700);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Stage stageTO = new Stage();
-        stageTO.setScene(sceneTO);
-        stageTO.show();
+    void loginAdminDashBord(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("admin-panel/admin-panel.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(),1200,700);
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        Image img = new Image(getClass().getResourceAsStream("media/user.png"));
+        stage.getIcons().add(img);
+        stage.setScene(scene);
+        stage.show();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
-    public void lectureWindow(){
-        FXMLLoader loaderLec = new FXMLLoader(getClass().getResource("lecture_panel/lecture.fxml"));
-        Scene sceneLec = null;
-        try {
-            sceneLec = new Scene(loaderLec.load(),1200,700);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Stage stageLec = new Stage();
-        stageLec.setScene(sceneLec);
-        stageLec.show();
+    void loginLectureDashBord(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("lecture_panel/lecture.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(),1200,700);
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        Image img = new Image(getClass().getResourceAsStream("media/user.png"));
+        stage.getIcons().add(img);
+        stage.setScene(scene);
+        stage.show();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    void loginStudentDashBord(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("student-panel/student-panel.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(),1200,700);
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        stage.setTitle("Faculty of Technology, Management System");
+        Image img = new Image(getClass().getResourceAsStream("media/user.png"));
+        stage.getIcons().add(img);
+        stage.setScene(scene);
+        stage.show();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    void loginTechOfficerDashBordM(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("techOfficer-panel/techofficer_medical.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(),1200,700);
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        Image img = new Image(getClass().getResourceAsStream("media/user.png"));
+        stage.getIcons().add(img);
+        stage.setScene(scene);
+        stage.show();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    void loginTechOfficerDashBordA(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("techOfficer-panel/techofficer_Attendence.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(),1200,700);
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        Image img = new Image(getClass().getResourceAsStream("media/user.png"));
+        stage.getIcons().add(img);
+        stage.setScene(scene);
+        stage.show();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     @FXML
