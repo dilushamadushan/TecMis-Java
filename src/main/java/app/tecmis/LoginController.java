@@ -121,6 +121,7 @@ public class LoginController {
         Scene scene = new Scene(fxmlLoader.load(),1200,700);
         Stage stage = new Stage();
         stage.setResizable(false);
+        stage.setTitle(" Faculty of Technology, Management System");
         Image img = new Image(getClass().getResourceAsStream("media/user.png"));
         stage.getIcons().add(img);
         stage.setScene(scene);
@@ -134,6 +135,7 @@ public class LoginController {
         Scene scene = new Scene(fxmlLoader.load(),1200,700);
         Stage stage = new Stage();
         stage.setResizable(false);
+        stage.setTitle(" Faculty of Technology, Management System");
         Image img = new Image(getClass().getResourceAsStream("media/user.png"));
         stage.getIcons().add(img);
         stage.setScene(scene);
@@ -147,7 +149,7 @@ public class LoginController {
         Scene scene = new Scene(fxmlLoader.load(),1200,700);
         Stage stage = new Stage();
         stage.setResizable(false);
-        stage.setTitle("Faculty of Technology, Management System");
+        stage.setTitle(" Faculty of Technology, Management System");
         Image img = new Image(getClass().getResourceAsStream("media/user.png"));
         stage.getIcons().add(img);
         stage.setScene(scene);
@@ -161,6 +163,7 @@ public class LoginController {
         Scene scene = new Scene(fxmlLoader.load(),1200,700);
         Stage stage = new Stage();
         stage.setResizable(false);
+        stage.setTitle(" Faculty of Technology, Management System");
         Image img = new Image(getClass().getResourceAsStream("media/user.png"));
         stage.getIcons().add(img);
         stage.setScene(scene);
@@ -174,6 +177,7 @@ public class LoginController {
         Scene scene = new Scene(fxmlLoader.load(),1200,700);
         Stage stage = new Stage();
         stage.setResizable(false);
+        stage.setTitle(" Faculty of Technology, Management System");
         Image img = new Image(getClass().getResourceAsStream("media/user.png"));
         stage.getIcons().add(img);
         stage.setScene(scene);
