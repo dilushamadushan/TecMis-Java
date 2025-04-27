@@ -142,7 +142,6 @@
                                           <Font name="System Bold" size="28.0" />
                                        </font>
                                     </Label>
-                                    <AnchorPane layoutX="290.0" layoutY="-61.0" prefHeight="186.0" prefWidth="439.0" />
                                     <ImageView fitHeight="93.0" fitWidth="97.0" layoutX="789.0" layoutY="4.0">
                                        <image>
                                           <Image url="@../media/lecture/logo1.png" />
@@ -195,9 +194,9 @@
                                     <FontAwesomeIconView glyphName="USER_SECRET" layoutX="29.0" layoutY="88.0" size="40" />
                                  </children>
                               </Pane>
-                              <AnchorPane layoutX="21.0" layoutY="511.0" prefHeight="174.0" prefWidth="438.0" style="-fx-background-color: #F0F8FF;">
+                              <AnchorPane layoutX="21.0" layoutY="511.0" prefHeight="174.0" prefWidth="438.0" style="-fx-background-color: #F0F8FF;" styleClass="shadow">
                                  <children>
-                                    <LineChart fx:id="chart_2" layoutX="-85.0" layoutY="-79.0" prefHeight="321.6" prefWidth="438.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <LineChart fx:id="chart_2" layoutX="-85.0" layoutY="-79.0" prefHeight="321.6" prefWidth="438.4" title="Notice Details" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
@@ -207,14 +206,14 @@
                                     </LineChart>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="475.0" layoutY="311.0" prefHeight="380.0" prefWidth="438.0" style="-fx-background-color: #F0F8FF;">
+                              <AnchorPane layoutX="475.0" layoutY="311.0" prefHeight="380.0" prefWidth="438.0" style="-fx-background-color: #F0F8FF;" styleClass="shadow">
                                  <children>
-                                    <PieChart fx:id="pi_chart" layoutX="-44.0" layoutY="-34.0" prefHeight="380.0" prefWidth="456.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <PieChart fx:id="pi_chart" layoutX="-44.0" layoutY="-34.0" prefHeight="380.0" prefWidth="456.0" title="Courses" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="20.0" layoutY="312.0" prefHeight="189.0" prefWidth="438.0" style="-fx-background-color: #F0F8FF;">
+                              <AnchorPane layoutX="20.0" layoutY="312.0" prefHeight="189.0" prefWidth="438.0" style="-fx-background-color: #F0F8FF;" styleClass="shadow">
                                  <children>
-                                    <BarChart fx:id="chart_1" layoutX="-120.0" layoutY="-145.0" prefHeight="255.2" prefWidth="438.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <BarChart fx:id="chart_1" layoutX="-120.0" layoutY="-145.0" prefHeight="255.2" prefWidth="438.4" title="User Details" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
