@@ -57,7 +57,27 @@
 
 
 }
+#go_back_btn{
 
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);
+    -fx-padding: 4 8 4 8;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-text-fill: white;
+
+
+}
+
+#no_profile_image{
+
+    -fx-background-radius: 70;
+
+}
+
+#table_color{
+    -fx-background-color: #d8f6fe;
+}
 
 
 
