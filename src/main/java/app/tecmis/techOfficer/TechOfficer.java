@@ -1,5 +1,6 @@
 package app.tecmis.techOfficer;
 
+import app.tecmis.App;
 import app.tecmis.LoginController;
 import app.tecmis.connection.Config;
 import app.tecmis.lecture.UndergraduateInformation;
@@ -7,8 +8,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -27,6 +31,7 @@ import java.sql.*;
 import java.time.LocalDate;
 
 import javafx.scene.image.ImageView;
+import javafx.stage.StageStyle;
 
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -298,7 +303,13 @@ public class TechOfficer implements Initializable {
         @FXML
         void logout(ActionEvent event) {
             try{
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("login.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initStyle(StageStyle.UNDECORATED);
+                stage.setScene(new Scene(root, 700,450));
+                stage.show();
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.close();
             }catch (Exception e){
                 System.out.println("Error " + e.getMessage());

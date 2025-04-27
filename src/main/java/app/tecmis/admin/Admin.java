@@ -1,5 +1,6 @@
 package app.tecmis.admin;
 
+import app.tecmis.App;
 import app.tecmis.connection.Config;
 
 import javafx.collections.FXCollections;
@@ -9,8 +10,11 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -24,8 +28,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.StageStyle;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -571,6 +577,7 @@ public class Admin implements Initializable {
         _lecPassword.setText(String.valueOf(lecDetails.getLecPassword()));
         _lecContactNo.setText(String.valueOf(lecDetails.getLecContactNo()));
         _lecDepartment.setValue(lecDetails.getLecDepName());
+        _lecCourse.setValue(lecDetails.getLecCourseName());
 
         String lecGender = String.valueOf(lecDetails.getLecGender());
         if("M".equalsIgnoreCase(lecGender)){
@@ -689,6 +696,9 @@ public class Admin implements Initializable {
             total_student.setText(getCountUser("student"));
             total_lec.setText(getCountUser("lecture"));
             total_tecOfficer.setText(getCountUser("tech"));
+            loadCourseEnrollmentBarChart();
+            loadCourseTypePieChart();
+            dashboardLineChart();
         }else if(event.getSource()==lectureBtn){
             dashbord.setVisible(false);
             lecture.setVisible(true);
@@ -2068,19 +2078,19 @@ public class Admin implements Initializable {
         Connection con = Config.getConfig();
         chart_1.getData().clear(); // Clear previous data
 
-        String sql = "SELECT course_code, COUNT(student_id) AS student_count FROM student_course GROUP BY course_code";
+        String sql = "SELECT user_type, COUNT(userId) AS user_count FROM user GROUP BY user_type";
 
         try {
             XYChart.Series<String, Number> series = new XYChart.Series<>();
-            series.setName("Enrollments per Course");
+            series.setName("User Type Distribution");
 
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                String courseCode = rs.getString("course_code");
-                int studentCount = rs.getInt("student_count");
-                series.getData().add(new XYChart.Data<>(courseCode, studentCount));
+                String userType = rs.getString("user_type");
+                int userCount = rs.getInt("user_count");
+                series.getData().add(new XYChart.Data<>(userType, userCount));
             }
 
             chart_1.getData().add(series);
@@ -2330,7 +2340,13 @@ public class Admin implements Initializable {
     @FXML
     void logout(ActionEvent event) {
         try{
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("login.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(root, 700,450));
+            stage.show();
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
         }catch (Exception e){
             System.out.println("Error " + e.getMessage());
